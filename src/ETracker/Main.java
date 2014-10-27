@@ -6,10 +6,15 @@
 
 package ETracker;
 
+import views.MainView;
+
 /**
  *
  * @author Rawsome
  */
 public class Main {
-    
+    public static void main(String[] args){
+        MainView theView = new MainView();
+        
+    }
 }
