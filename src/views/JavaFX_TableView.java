@@ -1,4 +1,4 @@
-package javafx_tableview;
+package views;
  
 import java.util.Arrays;
 import javafx.application.Application;

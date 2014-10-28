@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+package model;
 
 /**
  *
