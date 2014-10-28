@@ -4,12 +4,15 @@
  * and open the template in the editor.
  */
 
-package model;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
- * @author Rawsome
+ * @author Ben
  */
+//String exerices;
 public class ExerciseHolder {
-    
+   
 }
