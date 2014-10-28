@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-package workoutapp;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
