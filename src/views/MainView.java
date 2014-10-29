@@ -87,6 +87,8 @@ public class MainView {
      */    
     public void btnProgressAndGoalListener(ActionListener listener){
         progressAndGoalViewButton.addActionListener(listener);
+        //call JavaFX_TableView 
+            
     }
     
     /**

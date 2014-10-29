@@ -95,18 +95,8 @@ public class JavaFX_TableView extends Application {
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Type of Exercise");
         xAxis.setCategories(FXCollections.<String> observableArrayList(Arrays.asList(
-                "Abs", 
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December")));
+                "Sets", 
+                "Reps")));
         yAxis.setLabel("How Many");
         final StackedBarChart<String,Number> stackedBarChart = new StackedBarChart<>(xAxis,yAxis);
         stackedBarChart.setTitle("Your Progress and Goals");
