@@ -23,18 +23,8 @@ public class JavaFX_TableView extends Application {
      
     private ObservableList<XYChart.Data> dataList =
             FXCollections.observableArrayList(
-                new XYChart.Data("Abs", 100),
-                new XYChart.Data("February", 200),
-                new XYChart.Data("March", 50),
-                new XYChart.Data("April", 75),
-                new XYChart.Data("May", 110),
-                new XYChart.Data("June", 300),
-                new XYChart.Data("July", 111),
-                new XYChart.Data("August", 30),
-                new XYChart.Data("September", 75),
-                new XYChart.Data("October", 55),
-                new XYChart.Data("November", 225),
-                new XYChart.Data("December", 99));
+                new XYChart.Data("Sets", 7),
+                new XYChart.Data("Reps", 9));
      
     /**
     * @param args the command line arguments
@@ -107,18 +97,8 @@ public class JavaFX_TableView extends Application {
         XYChart.Series<String,Number> series2 = new XYChart.Series();
         series2.setName("Goals");
             
-        series2.getData().add(new XYChart.Data("Abs", 150));
-        series2.getData().add(new XYChart.Data("February", 100));
-        series2.getData().add(new XYChart.Data("March", 60));
-        series2.getData().add(new XYChart.Data("April", 40));
-        series2.getData().add(new XYChart.Data("May", 30));
-        series2.getData().add(new XYChart.Data("June", 100));
-        series2.getData().add(new XYChart.Data("July", 100));
-        series2.getData().add(new XYChart.Data("August", 10));
-        series2.getData().add(new XYChart.Data("September", 175));
-        series2.getData().add(new XYChart.Data("October", 155));
-        series2.getData().add(new XYChart.Data("November", 125));
-        series2.getData().add(new XYChart.Data("December", 150));
+        series2.getData().add(new XYChart.Data("Sets", 15));
+        series2.getData().add(new XYChart.Data("Reps", 15));
          
         stackedBarChart.getData().addAll(series1, series2);
          
