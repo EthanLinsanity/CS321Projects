@@ -12,4 +12,32 @@ package controller;
  */
 public class OverallController {
     
+    public OverallController()
+    {
+        //Main
+        
+       //MainView.close();     
+    }
+
+    //open and close views!
+    //Main View-----------------------------------
+    private void StartExerciseClicked()
+    {
+        
+    }
+    private void ProgressGoalClicked()
+    {
+        
+    }
+    //Individaul Workout View----------------------
+    private void SaveSetRepClicked()
+    {
+        
+    }
+    //Progress and Goals View----------------------
+    private void BackToMainClicked()
+    {
+        
+        
+    }
 }
