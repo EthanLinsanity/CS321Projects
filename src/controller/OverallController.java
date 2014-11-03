@@ -6,28 +6,35 @@
 
 package controller;
 
+import javafx.application.Platform;
+import views.JavaFXTableView;
+import views.MainView;
+
 /**
  *
  * @author Rawsome
  */
 public class OverallController {
     
-    public OverallController()
+    MainView theMainView;
+    JavaFXTableView theProgressView;
+    
+    public OverallController(MainView inputMainView, JavaFXTableView inputProgressView)
     {
-        //Main
-        
-       //MainView.close();     
-    }
+        theMainView = inputMainView;
+        theProgressView = inputProgressView;
+        theMainView.btnProgressAndGoalListener( clicked -> Platform.runLater(()->ProgressGoalClicked()));
 
-    //open and close views!
-    //Main View-----------------------------------
+       
+    }
+    
     private void StartExerciseClicked()
     {
         
     }
     private void ProgressGoalClicked()
     {
-        
+        theProgressView.showProgressView();
     }
     //Individaul Workout View----------------------
     private void SaveSetRepClicked()
