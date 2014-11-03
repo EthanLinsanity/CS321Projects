@@ -6,10 +6,30 @@
 
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rawsome
  */
 public class Exercises {
-    
+        String exerciseName;
+	public void setName()
+        {
+            
+        }
+	public String getPicturePath()
+        {
+            return null;
+        }
+	public String getDesciption()
+        {
+            return null;
+        }
+	
+	int GoalSets;
+	int ActualSets;
+	int GoalReps;
+	int ActualReps;
+
 }
