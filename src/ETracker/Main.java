@@ -7,8 +7,10 @@
 package ETracker;
 
 import controller.OverallController;
-import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import views.JavaFXTableView;
 import views.MainView;
 
@@ -16,19 +18,35 @@ import views.MainView;
  *
  * @author Rawsome
  */
-public class Main extends Application{
-    private static JavaFXTableView progressView = new JavaFXTableView();
+public class Main{
+    
+    
+    private static JFrame progressFrame;
+    
+    private static void initFXGUI()
+    {
+        progressFrame = new JFrame("Progress and Goal");
+        final JFXPanel fxPanel = new JFXPanel();
+        progressFrame.add(fxPanel);
+        progressFrame.setSize(760,450);
+        progressFrame.setVisible(false);
+        progressFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        
+        Platform.runLater(() -> {
+            JavaFXTableView progressView = new JavaFXTableView();
+            progressView.initialize(fxPanel);
+        });
+    }
+    
     
     public static void main(String[] args){
+        SwingUtilities.invokeLater(() -> {
+            initFXGUI();
+        });
         MainView theView = new MainView();
-        OverallController theController = new OverallController(theView,progressView);
-        launch(args);
+//        WorkoutSelectionView selectionView = new WorkoutSelectionView();
+        OverallController theController = new OverallController(theView,progressFrame);
     }
     
-
-    @Override
-    public void start(Stage primaryStage){
-        
-        progressView.initialize(primaryStage);
-    }
+    
 }

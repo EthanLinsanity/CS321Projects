@@ -1,9 +1,9 @@
 package views;
  
 import java.util.Arrays;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import javafx.util.Callback;
  
 
@@ -21,15 +20,12 @@ public class JavaFXTableView
 {
      
     private TableView<XYChart.Data> tableView = new TableView<>();
-    private Stage primaryStage = new Stage();
     private ObservableList<XYChart.Data> dataList =
             FXCollections.observableArrayList(
                 new XYChart.Data("Sets", 7),
                 new XYChart.Data("Reps", 9));
 
-    public void initialize(Stage inputStage) {
-        primaryStage = inputStage;
-        primaryStage.setTitle("This WorkOut Program");
+    public void initialize(JFXPanel inputPanel) {
         Group root = new Group();
          
         tableView.setEditable(true);
@@ -106,19 +102,7 @@ public class JavaFXTableView
          
         root.getChildren().add(hBox);
          
-        primaryStage.setScene(new Scene(root, 750, 400));
-        
-        primaryStage.setOnCloseRequest(closeRequest -> 
-                                        {
-                                            closeRequest.consume();
-                                            primaryStage.hide();
-                                        });
-        
-    }
-    
-    public void showProgressView()
-    {
-        primaryStage.show();
+        inputPanel.setScene(new Scene(root,750,400));
     }
     
     class EditingCell extends TableCell<XYChart.Data, Number> {
