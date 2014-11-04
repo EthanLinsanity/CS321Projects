@@ -5,6 +5,7 @@
  */
 
 package views;
+import controller.OverallController;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,22 +33,22 @@ public class WorkoutSelectionView implements ActionListener
     private final JComboBox exercises;
     private final JLabel viewname;
   
-   public WorkoutSelectionView()
+   public WorkoutSelectionView(OverallController myController)
    {
       //create components
       appFrame = new JFrame("Workout Selection View");
-      appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      appFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
       viewname = new JLabel("Select Exercise");
       topPanel = new JPanel();
       exercisePanel = new JPanel();
            
 
-exercises = new JComboBox();
+      exercises = new JComboBox();
 
       //initialize menu and register action listeners
       //exercises.addEventHandler();
-      exercises.setVisible(true);
+
       //add Components to the panel
       exercisePanel.setLayout(new BorderLayout());
       topPanel.add(viewname, BorderLayout.NORTH);  
@@ -67,9 +68,18 @@ exercises = new JComboBox();
       appFrame.pack();
       
       appFrame.setSize(300, 200);
-     appFrame.setVisible(true);//Display the window
+      appFrame.setVisible(true);//Display the window
+      
+      appFrame.addWindowListener(new java.awt.event.WindowAdapter()
+      {
+          @Override
+          public void windowClosing(java.awt.event.WindowEvent windowEvent)
+          {
+              myController.selectionViewClosing();
+          }
+      });
    }
-
+   
    /**
       display the exercises in the ETracker application
       @param output the text that will be "spoken"

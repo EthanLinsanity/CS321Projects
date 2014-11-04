@@ -6,9 +6,9 @@
 
 package controller;
 
-import javafx.application.Platform;
-import views.JavaFXTableView;
+import javax.swing.JFrame;
 import views.MainView;
+import views.WorkoutSelectionView;
 
 /**
  *
@@ -17,34 +17,41 @@ import views.MainView;
 public class OverallController {
     
     MainView theMainView;
-    JavaFXTableView theProgressView;
+    JFrame theProgressView;
     
-    public OverallController(MainView inputMainView, JavaFXTableView inputProgressView)
+    public OverallController(MainView inputMainView, JFrame inputProgressView)
     {
         theMainView = inputMainView;
         theProgressView = inputProgressView;
-        theMainView.btnProgressAndGoalListener( clicked -> Platform.runLater(()->ProgressGoalClicked()));
-
-       
+        theMainView.btnProgressAndGoalListener( clicked ->progressGoalClicked());
+        theMainView.btnStartExerciseListener(clicked ->startExerciseClicked());
     }
     
-    private void StartExerciseClicked()
+    public void selectionViewClosing()
     {
-        
+        backToMainClicked();
     }
-    private void ProgressGoalClicked()
+    
+    private void startExerciseClicked()
     {
-        theProgressView.showProgressView();
+        WorkoutSelectionView theSelectionView = new WorkoutSelectionView(this);
+        theMainView.setVisibility(false);
+    }
+    private void progressGoalClicked()
+    {
+        theProgressView.setVisible(true);
     }
     //Individaul Workout View----------------------
-    private void SaveSetRepClicked()
+    private void saveSetRepClicked()
     {
         
     }
     //Progress and Goals View----------------------
-    private void BackToMainClicked()
+    private void backToMainClicked()
     {
-        
+        theMainView.setVisibility(true);
         
     }
+    
+    
 }
