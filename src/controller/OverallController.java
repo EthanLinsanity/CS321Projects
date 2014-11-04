@@ -23,28 +23,35 @@ public class OverallController {
     {
         theMainView = inputMainView;
         theProgressView = inputProgressView;
-        theMainView.btnProgressAndGoalListener( clicked ->ProgressGoalClicked());
-        theMainView.btnStartExerciseListener(clicked ->StartExerciseClicked());
+        theMainView.btnProgressAndGoalListener( clicked ->progressGoalClicked());
+        theMainView.btnStartExerciseListener(clicked ->startExerciseClicked());
     }
     
-    private void StartExerciseClicked()
+    public void selectionViewClosing()
     {
-        WorkoutSelectionView theSelectionView = new WorkoutSelectionView();
+        backToMainClicked();
+    }
+    
+    private void startExerciseClicked()
+    {
+        WorkoutSelectionView theSelectionView = new WorkoutSelectionView(this);
         theMainView.setVisibility(false);
     }
-    private void ProgressGoalClicked()
+    private void progressGoalClicked()
     {
         theProgressView.setVisible(true);
     }
     //Individaul Workout View----------------------
-    private void SaveSetRepClicked()
+    private void saveSetRepClicked()
     {
         
     }
     //Progress and Goals View----------------------
-    private void BackToMainClicked()
+    private void backToMainClicked()
     {
-        
+        theMainView.setVisibility(true);
         
     }
+    
+    
 }
