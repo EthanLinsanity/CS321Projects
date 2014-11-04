@@ -30,6 +30,7 @@ public class OverallController {
     private void StartExerciseClicked()
     {
         WorkoutSelectionView theSelectionView = new WorkoutSelectionView();
+        theMainView.setVisibility(false);
     }
     private void ProgressGoalClicked()
     {
