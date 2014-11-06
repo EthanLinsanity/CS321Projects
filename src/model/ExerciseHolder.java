@@ -20,6 +20,7 @@ public class ExerciseHolder {
     //this method initializes all exercies and puts them in the array list
     private void startComponents(){
         ArrayList<Exercises> allExercises = new ArrayList<Exercises>();
+        
     }
     
     

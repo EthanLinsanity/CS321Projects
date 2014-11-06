@@ -22,8 +22,8 @@ public class JavaFXTableView
     private TableView<XYChart.Data> tableView = new TableView<>();
     private ObservableList<XYChart.Data> dataList =
             FXCollections.observableArrayList(
-                new XYChart.Data("Sets", 7),
-                new XYChart.Data("Reps", 9));
+                new XYChart.Data("Sets", 700),
+                new XYChart.Data("Reps", 900));
 
     public void initialize(JFXPanel inputPanel) {
         Group root = new Group();
@@ -73,22 +73,21 @@ public class JavaFXTableView
         //--- Prepare StackedBarChart
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Type of Exercise");
+        xAxis.setLabel("A Screen Like This For Every Type of Exercise");
         xAxis.setCategories(FXCollections.<String> observableArrayList(Arrays.asList(
                 "Sets", 
                 "Reps")));
         yAxis.setLabel("How Many");
         final StackedBarChart<String,Number> stackedBarChart = new StackedBarChart<>(xAxis,yAxis);
-        stackedBarChart.setTitle("Your Progress and Goals");
+        stackedBarChart.setTitle("Exercise: Ab Crunches");
         XYChart.Series series1 = new XYChart.Series(dataList);
         series1.setName("Actual");
          
-        //Series 2
+        //Series 2--the goals of the workout; the bar graph in the back
         XYChart.Series<String,Number> series2 = new XYChart.Series();
         series2.setName("Goals");
-            
-        series2.getData().add(new XYChart.Data("Sets", 15));
-        series2.getData().add(new XYChart.Data("Reps", 15));
+        series2.getData().add(new XYChart.Data("Sets", 1500));
+        series2.getData().add(new XYChart.Data("Reps", 1500));
          
         stackedBarChart.getData().addAll(series1, series2);
          

@@ -26,7 +26,7 @@ public class Main{
     
     private static void initFXGUI()
     {
-        progressFrame = new JFrame("Progress and Goal");
+        progressFrame = new JFrame("Progress and Goal View");
         final JFXPanel fxPanel = new JFXPanel();
         progressFrame.add(fxPanel);
         progressFrame.setSize(760,450);
