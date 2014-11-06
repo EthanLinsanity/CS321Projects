@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import views.ExerciseDescriptionView;
 import views.JavaFXTableView;
 import views.MainView;
 
@@ -44,7 +45,6 @@ public class Main{
             initFXGUI();
         });
         MainView theView = new MainView();
-//        WorkoutSelectionView selectionView = new WorkoutSelectionView();
         OverallController theController = new OverallController(theView,progressFrame);
     }
     

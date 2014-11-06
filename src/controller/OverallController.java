@@ -6,7 +6,10 @@
 
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import views.ExerciseDescriptionView;
 import views.MainView;
 import views.WorkoutSelectionView;
 
@@ -14,10 +17,12 @@ import views.WorkoutSelectionView;
  *
  * @author Rawsome
  */
-public class OverallController {
+public class OverallController implements ActionListener {
     
     MainView theMainView;
     JFrame theProgressView;
+    WorkoutSelectionView theSelectionView;
+    ExerciseDescriptionView theDescriptionView;
     
     public OverallController(MainView inputMainView, JFrame inputProgressView)
     {
@@ -34,13 +39,20 @@ public class OverallController {
     
     private void startExerciseClicked()
     {
-        WorkoutSelectionView theSelectionView = new WorkoutSelectionView(this);
+        theSelectionView = new WorkoutSelectionView(this);
+        theSelectionView.addListener( selected -> startDescriptionView());
         theMainView.setVisibility(false);
     }
     private void progressGoalClicked()
     {
         theProgressView.setVisible(true);
     }
+    
+    private void startDescriptionView()
+    {
+        theDescriptionView = new ExerciseDescriptionView();
+    }
+    
     //Individaul Workout View----------------------
     private void saveSetRepClicked()
     {
@@ -50,6 +62,11 @@ public class OverallController {
     private void backToMainClicked()
     {
         theMainView.setVisibility(true);
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
         
     }
     

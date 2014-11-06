@@ -6,19 +6,58 @@
 
 package views;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author imm0022
  */
-public class ExerciseDescrptionView extends javax.swing.JPanel {
+public class ExerciseDescriptionView extends javax.swing.JFrame {
 
+    
+    private JFrame descriptionFrame;
     /**
      * Creates new form ExerciseDescrptionView
      */
-    public ExerciseDescrptionView() {
+    public ExerciseDescriptionView() {
         initComponents();
+        descriptionFrame = new JFrame();
+        descriptionFrame.add(ExerciseDescriptionPanel);
+        descriptionFrame.setSize(760,450);
+        descriptionFrame.setLocationRelativeTo(null);
+        descriptionFrame.setVisible(true);
+        PicturePanel = new ImagePanel();
+        
+        
     }
 
+    private class ImagePanel extends JPanel
+    {
+        private BufferedImage image;
+        public ImagePanel()
+        {
+            try{
+                image = ImageIO.read(new File("Sit_Up.jpg"));
+            } catch (IOException ex){
+                
+            }
+        }
+        @Override
+        protected void paintComponent(Graphics g)
+        {
+            super.paintComponent(g);
+            g.drawImage(image,0,0,null);
+        }
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -108,8 +147,8 @@ public class ExerciseDescrptionView extends javax.swing.JPanel {
         UpdateWorkOutButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         UpdateWorkOutButton.setText("UPDATE WORKOUT");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -160,7 +199,7 @@ public class ExerciseDescrptionView extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -187,7 +226,7 @@ public class ExerciseDescrptionView extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(SetsComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(RepsComboBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(UpdateWorkOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );

@@ -9,6 +9,8 @@ import controller.OverallController;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,12 +70,21 @@ public class WorkoutSelectionView implements ActionListener
       appFrame.pack();
       
       appFrame.setSize(300, 200);
+      appFrame.setLocationRelativeTo(null);
       appFrame.setVisible(true);//Display the window
       
-      appFrame.addWindowListener(new java.awt.event.WindowAdapter()
+//      appFrame.addWindowListener(new java.awt.event.WindowAdapter()
+//      {
+//          @Override
+//          public void windowClosing(java.awt.event.WindowEvent windowEvent)
+//          {
+//              myController.selectionViewClosing();
+//          }
+//      });
+      appFrame.addWindowListener(new WindowAdapter()
       {
           @Override
-          public void windowClosing(java.awt.event.WindowEvent windowEvent)
+          public void windowClosing(WindowEvent windowEvent)
           {
               myController.selectionViewClosing();
           }
@@ -92,6 +103,10 @@ public class WorkoutSelectionView implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void addListener(ActionListener listener) {
+        exercises.addActionListener(listener);
     }
 
    /**
