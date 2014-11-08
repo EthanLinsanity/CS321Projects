@@ -40,7 +40,10 @@ public class OverallController implements ActionListener {
     private void startExerciseClicked()
     {
         theSelectionView = new WorkoutSelectionView(this);
-        theSelectionView.addListener( selected -> startDescriptionView());
+        theSelectionView.addListener( selected -> {
+            startDescriptionView();
+            theSelectionView.closeThisView();
+                });
         theMainView.setVisibility(false);
     }
     private void progressGoalClicked()

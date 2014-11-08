@@ -32,7 +32,7 @@ public class WorkoutSelectionView implements ActionListener
     private final JFrame appFrame;
     private final JPanel topPanel;
      private final JPanel exercisePanel;
-    private final JComboBox exercises;
+    private final JComboBox comBoxExercises;
     private final JLabel viewname;
   
    public WorkoutSelectionView(OverallController myController)
@@ -46,7 +46,7 @@ public class WorkoutSelectionView implements ActionListener
       exercisePanel = new JPanel();
            
 
-      exercises = new JComboBox();
+      comBoxExercises = new JComboBox();
 
       //initialize menu and register action listeners
       //exercises.addEventHandler();
@@ -54,14 +54,9 @@ public class WorkoutSelectionView implements ActionListener
       //add Components to the panel
       exercisePanel.setLayout(new BorderLayout());
       topPanel.add(viewname, BorderLayout.NORTH);  
-      exercisePanel.add(exercises, BorderLayout.SOUTH);
+      exercisePanel.add(comBoxExercises, BorderLayout.SOUTH);
           
-       exercises.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Exercise", "Pushups", "Crunches", "Pullups", "Squats" }));
-        exercises.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                //exercisesActionPerformed(evt);
-            }
-        });
+      comBoxExercises.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Exercise", "Pushups", "Crunches", "Pullups", "Squats" }));
         
       
       appFrame.add(topPanel, BorderLayout.NORTH);
@@ -99,6 +94,12 @@ public class WorkoutSelectionView implements ActionListener
    {
        //
    }
+   
+   public void closeThisView()
+   {
+       appFrame.setVisible(false);
+       appFrame.dispose();
+   }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -106,7 +107,7 @@ public class WorkoutSelectionView implements ActionListener
     }
 
     public void addListener(ActionListener listener) {
-        exercises.addActionListener(listener);
+        comBoxExercises.addActionListener(listener);
     }
 
    /**

@@ -6,32 +6,56 @@
 
 package views;
 
-import javax.swing.JFrame;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author imm0022
  */
 public class ExerciseDescriptionView extends javax.swing.JFrame {
-
-    
-    private JFrame descriptionFrame;
     /**
      * Creates new form ExerciseDescrptionView
      */
     public ExerciseDescriptionView() {
         initComponents();
-        descriptionFrame = new JFrame();
-        descriptionFrame.add(ExerciseDescriptionPanel);
-        descriptionFrame.setSize(760,450);
-        descriptionFrame.setLocationRelativeTo(null);
-        descriptionFrame.setVisible(true);
+        this.setSize(this.getPreferredSize());
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         fillContents();
     }
     
     private void fillContents()
-    {
+    {        
+        String imageFilePath = "ExerciseImages/SitUp.jpg";
         
+        try {
+            ImageIcon ii=new ImageIcon(
+                    scaleImage(lblExercisePic.getSize().height, 
+                               lblExercisePic.getSize().width, 
+                               ImageIO.read(
+                                    ClassLoader.getSystemResource(imageFilePath)
+                                )
+                    )
+            );
+            lblExercisePic.setIcon(ii);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private BufferedImage scaleImage(int w, int h, BufferedImage img) throws Exception {
+        BufferedImage bi;
+        bi = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
+        Graphics2D g2d = (Graphics2D) bi.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+        g2d.drawImage(img, 0, 0, w, h, null);
+        g2d.dispose();
+        return bi;
     }
     
     /**
@@ -44,9 +68,6 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     private void initComponents() {
 
         DescriptionLabel = new javax.swing.JLabel();
-        ExerciseNameTextField = new javax.swing.JTextField();
-        ExerciseDescriptionPanel = new javax.swing.JPanel();
-        PicturePanel = new javax.swing.JPanel();
         PreviousWorkOutLabel = new javax.swing.JLabel();
         PreviousSetLabel = new javax.swing.JLabel();
         PreviousRepsLabel = new javax.swing.JLabel();
@@ -58,39 +79,14 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         SetsComboBox = new javax.swing.JComboBox();
         RepsComboBox = new javax.swing.JComboBox();
         UpdateWorkOutButton = new javax.swing.JButton();
+        lblExercisePic = new javax.swing.JLabel();
+        lblExerciseName = new javax.swing.JLabel();
+        lblExerciseDescription = new javax.swing.JLabel();
 
         setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         DescriptionLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         DescriptionLabel.setText("Description:");
-
-        ExerciseNameTextField.setText("jTextField1");
-
-        ExerciseDescriptionPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout ExerciseDescriptionPanelLayout = new javax.swing.GroupLayout(ExerciseDescriptionPanel);
-        ExerciseDescriptionPanel.setLayout(ExerciseDescriptionPanelLayout);
-        ExerciseDescriptionPanelLayout.setHorizontalGroup(
-            ExerciseDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        ExerciseDescriptionPanelLayout.setVerticalGroup(
-            ExerciseDescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 198, Short.MAX_VALUE)
-        );
-
-        PicturePanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        javax.swing.GroupLayout PicturePanelLayout = new javax.swing.GroupLayout(PicturePanel);
-        PicturePanel.setLayout(PicturePanelLayout);
-        PicturePanelLayout.setHorizontalGroup(
-            PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        PicturePanelLayout.setVerticalGroup(
-            PicturePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         PreviousWorkOutLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         PreviousWorkOutLabel.setText("Previous WorkOut");
@@ -123,6 +119,12 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         UpdateWorkOutButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         UpdateWorkOutButton.setText("UPDATE WORKOUT");
 
+        lblExercisePic.setToolTipText("");
+
+        lblExerciseName.setText("Exercise Name");
+
+        lblExerciseDescription.setText("Exercise Description");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,11 +134,11 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ExerciseNameTextField)
                             .addComponent(DescriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(ExerciseDescriptionPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblExerciseName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblExerciseDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblExercisePic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,14 +178,14 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PicturePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(ExerciseNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblExerciseName, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(DescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ExerciseDescriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblExerciseDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblExercisePic, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PreviousWorkOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +204,7 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(SetsComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                     .addComponent(RepsComboBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(UpdateWorkOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -213,9 +215,6 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     private javax.swing.JLabel CurrentRepsLabel1;
     private javax.swing.JLabel CurrentSetLabel;
     private javax.swing.JLabel DescriptionLabel;
-    private javax.swing.JPanel ExerciseDescriptionPanel;
-    private javax.swing.JTextField ExerciseNameTextField;
-    private javax.swing.JPanel PicturePanel;
     private javax.swing.JLabel PreviousRepsLabel;
     private javax.swing.JTextField PreviousRepsTextField;
     private javax.swing.JLabel PreviousSetLabel;
@@ -225,5 +224,8 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     private javax.swing.JComboBox RepsComboBox;
     private javax.swing.JComboBox SetsComboBox;
     private javax.swing.JButton UpdateWorkOutButton;
+    private javax.swing.JLabel lblExerciseDescription;
+    private javax.swing.JLabel lblExerciseName;
+    private javax.swing.JLabel lblExercisePic;
     // End of variables declaration//GEN-END:variables
 }
