@@ -6,13 +6,7 @@
 
 package views;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 /**
  *
@@ -32,31 +26,13 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         descriptionFrame.setSize(760,450);
         descriptionFrame.setLocationRelativeTo(null);
         descriptionFrame.setVisible(true);
-        PicturePanel = new ImagePanel();
-        
-        
+        fillContents();
     }
-
-    private class ImagePanel extends JPanel
+    
+    private void fillContents()
     {
-        private BufferedImage image;
-        public ImagePanel()
-        {
-            try{
-                image = ImageIO.read(new File("Sit_Up.jpg"));
-            } catch (IOException ex){
-                
-            }
-        }
-        @Override
-        protected void paintComponent(Graphics g)
-        {
-            super.paintComponent(g);
-            g.drawImage(image,0,0,null);
-        }
+        
     }
-    
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
