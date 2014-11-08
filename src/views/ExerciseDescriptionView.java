@@ -6,11 +6,17 @@
 
 package views;
 
+import controller.OverallControllerCallback;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
@@ -20,18 +26,35 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     /**
      * Creates new form ExerciseDescrptionView
      */
-    public ExerciseDescriptionView() {
+    private OverallControllerCallback controllerCallback;
+    
+    public ExerciseDescriptionView(OverallControllerCallback ctl) {
         initComponents();
+        controllerCallback = ctl;
         this.setSize(this.getPreferredSize());
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
         fillContents();
+        txtExerciseDescription.setEditable(false);
+        txtExerciseDescription.setLineWrap(true);
+        txtExerciseDescription.setWrapStyleWord(true);
+        
+        
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent windowEvent)
+            {
+                controllerCallback.showMainView();
+            }
+        });
     }
     
     private void fillContents()
     {        
         String imageFilePath = "ExerciseImages/SitUp.jpg";
-        
+        String descriptionPath = "ExerciseDescriptions/SitUp.txt";
         try {
             ImageIcon ii=new ImageIcon(
                     scaleImage(lblExercisePic.getSize().height, 
@@ -45,6 +68,29 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        
+        
+        try(BufferedReader br = new BufferedReader(
+                                    new InputStreamReader(ClassLoader.getSystemResourceAsStream(descriptionPath))
+                                )
+            ) 
+        {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append(System.lineSeparator());
+                line = br.readLine();
+            }
+            String everything = sb.toString();
+            txtExerciseDescription.setText(everything);
+        }
+        catch(Exception e){
+            System.out.println("bufferedReader in ExerciseDescription has crashed.... oh NOOOOOOOOOOO");
+            
+        }
+        
     }
 
     private BufferedImage scaleImage(int w, int h, BufferedImage img) throws Exception {
@@ -81,7 +127,8 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         UpdateWorkOutButton = new javax.swing.JButton();
         lblExercisePic = new javax.swing.JLabel();
         lblExerciseName = new javax.swing.JLabel();
-        lblExerciseDescription = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtExerciseDescription = new javax.swing.JTextArea();
 
         setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -123,7 +170,9 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
 
         lblExerciseName.setText("Exercise Name");
 
-        lblExerciseDescription.setText("Exercise Description");
+        txtExerciseDescription.setColumns(20);
+        txtExerciseDescription.setRows(5);
+        jScrollPane1.setViewportView(txtExerciseDescription);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,10 +182,10 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(DescriptionLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
-                            .addComponent(lblExerciseName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblExerciseDescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                            .addComponent(DescriptionLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblExerciseName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblExercisePic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
@@ -178,15 +227,15 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblExerciseName, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                        .addComponent(lblExerciseName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblExerciseDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(DescriptionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblExercisePic, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PreviousWorkOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PreviousSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,8 +273,9 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     private javax.swing.JComboBox RepsComboBox;
     private javax.swing.JComboBox SetsComboBox;
     private javax.swing.JButton UpdateWorkOutButton;
-    private javax.swing.JLabel lblExerciseDescription;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExerciseName;
     private javax.swing.JLabel lblExercisePic;
+    private javax.swing.JTextArea txtExerciseDescription;
     // End of variables declaration//GEN-END:variables
 }

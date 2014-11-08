@@ -17,7 +17,7 @@ import views.WorkoutSelectionView;
  *
  * @author Rawsome
  */
-public class OverallController implements ActionListener {
+public class OverallController implements ActionListener, OverallControllerCallback {
     
     MainView theMainView;
     JFrame theProgressView;
@@ -30,11 +30,6 @@ public class OverallController implements ActionListener {
         theProgressView = inputProgressView;
         theMainView.btnProgressAndGoalListener( clicked ->progressGoalClicked());
         theMainView.btnStartExerciseListener(clicked ->startExerciseClicked());
-    }
-    
-    public void selectionViewClosing()
-    {
-        backToMainClicked();
     }
     
     private void startExerciseClicked()
@@ -53,7 +48,7 @@ public class OverallController implements ActionListener {
     
     private void startDescriptionView()
     {
-        theDescriptionView = new ExerciseDescriptionView();
+        theDescriptionView = new ExerciseDescriptionView(this);
     }
     
     //Individaul Workout View----------------------
@@ -61,16 +56,15 @@ public class OverallController implements ActionListener {
     {
         
     }
-    //Progress and Goals View----------------------
-    private void backToMainClicked()
-    {
-        theMainView.setVisibility(true);
-        
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
+    }
+
+    @Override
+    public void showMainView() {
+        theMainView.setVisibility(true);
     }
     
     

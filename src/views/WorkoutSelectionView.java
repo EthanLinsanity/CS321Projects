@@ -5,7 +5,7 @@
  */
 
 package views;
-import controller.OverallController;
+import controller.OverallControllerCallback;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +35,7 @@ public class WorkoutSelectionView implements ActionListener
     private final JComboBox comBoxExercises;
     private final JLabel viewname;
   
-   public WorkoutSelectionView(OverallController myController)
+   public WorkoutSelectionView(OverallControllerCallback myController)
    {
       //create components
       appFrame = new JFrame("Workout Selection View");
@@ -81,7 +81,7 @@ public class WorkoutSelectionView implements ActionListener
           @Override
           public void windowClosing(WindowEvent windowEvent)
           {
-              myController.selectionViewClosing();
+              myController.showMainView();
           }
       });
    }
