@@ -6,6 +6,8 @@
 
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Rawsome
@@ -25,6 +27,7 @@ public enum ExerciseNames {
     private final String exerciseName;
     private final String picturePath;
     private final String descriptionPath;
+    private static final int size = ExerciseNames.values().length;
     
     ExerciseNames(String inName, String inPicPath, String inDesPath)
     {
@@ -35,4 +38,14 @@ public enum ExerciseNames {
     public String getName(){ return exerciseName;}
     public String getPicPath() {return picturePath;}
     public String getDesPath() {return descriptionPath;}
+    public static int getNumEl() {return size;}
+    public static ArrayList<String> getAllNames()
+    {
+        ArrayList<String> names = new ArrayList<>(size);
+        for(ExerciseNames n : ExerciseNames.values())
+        {
+            names.add(n.getName());
+        }
+        return names;
+    }
 }

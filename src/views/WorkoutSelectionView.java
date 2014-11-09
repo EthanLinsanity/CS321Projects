@@ -11,11 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import model.ExerciseHolder;
+import model.ExerciseNames;
 /**
  *
  * @author Ben
@@ -28,16 +29,17 @@ public class WorkoutSelectionView implements ActionListener
 {
     
     //declare container variables
-    private ExerciseHolder h;
     private final JFrame appFrame;
     private final JPanel topPanel;
      private final JPanel exercisePanel;
     private final JComboBox comBoxExercises;
     private final JLabel viewname;
+    private final OverallControllerCallback myController;
   
-   public WorkoutSelectionView(OverallControllerCallback myController)
+   public WorkoutSelectionView(OverallControllerCallback inputController)
    {
       //create components
+       myController = inputController;
       appFrame = new JFrame("Workout Selection View");
       appFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
@@ -56,8 +58,8 @@ public class WorkoutSelectionView implements ActionListener
       topPanel.add(viewname, BorderLayout.NORTH);  
       exercisePanel.add(comBoxExercises, BorderLayout.SOUTH);
           
-      comBoxExercises.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Exercise", "Pushups", "Crunches", "Pullups", "Squats" }));
-        
+//      comBoxExercises.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Exercise", "Pushups", "Crunches", "Pullups", "Squats" }));
+      initComboBox();
       
       appFrame.add(topPanel, BorderLayout.NORTH);
       //appFrame.add(exercisePanel, BorderLayout.);
@@ -93,6 +95,19 @@ public class WorkoutSelectionView implements ActionListener
    public void displayView(String output)
    {
        //
+   }
+   
+   public String whichComboSelected()
+   {
+       return comBoxExercises.getSelectedItem().toString();
+   }
+   
+   private void initComboBox()
+   {
+       ArrayList<String> names = ExerciseNames.getAllNames();
+       names.stream().forEach((n) -> {
+            comBoxExercises.addItem(n);
+        });
    }
    
    public void closeThisView()

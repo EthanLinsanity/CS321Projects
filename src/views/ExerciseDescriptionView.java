@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import model.Exercises;
 
 /**
  *
@@ -27,10 +28,12 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
      * Creates new form ExerciseDescrptionView
      */
     private OverallControllerCallback controllerCallback;
+    private Exercises exerToDisp;
     
-    public ExerciseDescriptionView(OverallControllerCallback ctl) {
-        initComponents();
+    public ExerciseDescriptionView(OverallControllerCallback ctl, Exercises inExercise) {
         controllerCallback = ctl;
+        exerToDisp = inExercise;
+        initComponents();
         this.setSize(this.getPreferredSize());
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -39,8 +42,6 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         txtExerciseDescription.setEditable(false);
         txtExerciseDescription.setLineWrap(true);
         txtExerciseDescription.setWrapStyleWord(true);
-        
-        
         this.addWindowListener(new WindowAdapter()
         {
             @Override
@@ -53,8 +54,8 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     
     private void fillContents()
     {        
-        String imageFilePath = "ExerciseImages/SitUp.jpg";
-        String descriptionPath = "ExerciseDescriptions/SitUp.txt";
+        String imageFilePath = exerToDisp.getPicturePath();
+        String descriptionPath = exerToDisp.getDesciption();
         try {
             ImageIcon ii=new ImageIcon(
                     scaleImage(lblExercisePic.getSize().height, 
@@ -70,10 +71,7 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         }
         
         
-        try(BufferedReader br = new BufferedReader(
-                                    new InputStreamReader(ClassLoader.getSystemResourceAsStream(descriptionPath))
-                                )
-            ) 
+        try(BufferedReader br = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream(descriptionPath)))) 
         {
             StringBuilder sb = new StringBuilder();
             String line = br.readLine();

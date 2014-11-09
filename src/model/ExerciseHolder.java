@@ -11,19 +11,41 @@ import java.util.ArrayList;
 
 //This class holds the exercies
 public class ExerciseHolder {
-   
-    //this method returns the Exercise object to the caller
-    public Exercises getExercise(String exerciseName){
-        
-        return null;
+       
+    private ArrayList<Exercises> allExercises;
+    
+    public ExerciseHolder()
+    {
+        startComponents();
     }
-    //this method initializes all exercies and puts them in the array list
+    
+    //this method initializes all exercies and puts them in an array list
     private void startComponents(){
-        ArrayList<Exercises> allExercises = new ArrayList<Exercises>();
         
+        allExercises = new ArrayList<>(ExerciseNames.getNumEl());
+        for(ExerciseNames n : ExerciseNames.values())
+        {
+            Exercises newExer= new Exercises(n);
+            allExercises.add(newExer);
+        }
+    }
+        //this method returns the Exercise object to the caller
+    public Exercises getExercise(String exerciseName){
+        Exercises output = null;
+        for(Exercises e : allExercises)
+        {
+            if(e.getName().equals(exerciseName))
+            {
+                output = e;
+                break;
+            }
+        }
+        return output;
     }
     
-    
-    String exerciseName = "ab Machine";
+    public ArrayList<String> getAllNames()
+    {
+        return ExerciseNames.getAllNames();
+    }
     
 }

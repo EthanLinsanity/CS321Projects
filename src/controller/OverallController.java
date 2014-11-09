@@ -9,6 +9,9 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import model.ExerciseHolder;
+import model.Exercises;
+import model.TraineeHolder;
 import views.ExerciseDescriptionView;
 import views.MainView;
 import views.WorkoutSelectionView;
@@ -23,32 +26,37 @@ public class OverallController implements ActionListener, OverallControllerCallb
     JFrame theProgressView;
     WorkoutSelectionView theSelectionView;
     ExerciseDescriptionView theDescriptionView;
+    ExerciseHolder curExerHolder;
+    TraineeHolder allNameHolder;
     
-    public OverallController(MainView inputMainView, JFrame inputProgressView)
+    public OverallController(MainView inputMainView, JFrame inputProgressView, TraineeHolder inNameHolder)
     {
         theMainView = inputMainView;
         theProgressView = inputProgressView;
-        theMainView.btnProgressAndGoalListener( clicked ->progressGoalClicked());
-        theMainView.btnStartExerciseListener(clicked ->startExerciseClicked());
+        allNameHolder = inNameHolder;
+        theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
+        theMainView.btnStartExerciseListener(clicked ->startExerciseSelection());
     }
     
-    private void startExerciseClicked()
+    private void startExerciseSelection()
     {
         theSelectionView = new WorkoutSelectionView(this);
         theSelectionView.addListener( selected -> {
-            startDescriptionView();
+            String exerName = theSelectionView.whichComboSelected();
+            startDescriptionView(exerName);
             theSelectionView.closeThisView();
                 });
         theMainView.setVisibility(false);
     }
-    private void progressGoalClicked()
+    private void showProgressGoal()
     {
         theProgressView.setVisible(true);
     }
     
-    private void startDescriptionView()
+    private void startDescriptionView(String inName)
     {
-        theDescriptionView = new ExerciseDescriptionView(this);
+        Exercises exerToDisp = curExerHolder.getExercise(inName);
+        theDescriptionView = new ExerciseDescriptionView(this, exerToDisp);
     }
     
     //Individaul Workout View----------------------
@@ -56,6 +64,7 @@ public class OverallController implements ActionListener, OverallControllerCallb
     {
         
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {

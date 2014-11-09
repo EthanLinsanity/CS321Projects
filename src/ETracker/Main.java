@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import model.TraineeHolder;
 import views.JavaFXTableView;
 import views.MainView;
 
@@ -43,8 +44,9 @@ public class Main{
         SwingUtilities.invokeLater(() -> {
             initFXGUI();
         });
+        TraineeHolder nameHolder = new TraineeHolder();
         MainView theView = new MainView();
-        OverallController theController = new OverallController(theView,progressFrame);
+        OverallController theController = new OverallController(theView,progressFrame, nameHolder);
     }
     
     
