@@ -59,6 +59,7 @@ public class MainView {
     public void setController(OverallControllerCallback inController)
     {
         myController = inController;
+        update();
     }
     
     public void update()

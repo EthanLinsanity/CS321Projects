@@ -36,8 +36,6 @@ public class OverallController implements ActionListener, OverallControllerCallb
         theProgressView = inputProgressView;
         allNameHolder = inNameHolder;
         theMainView = inputMainView;
-        
-        theMainView.setController(this);
         theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
         theMainView.btnStartExerciseListener(clicked ->startExerciseSelection());
         theMainView.cboNameSelectionListener(selected -> 
@@ -54,10 +52,8 @@ public class OverallController implements ActionListener, OverallControllerCallb
             {
                 allNameHolder.addATrainee(response);
                 theMainView.update();
-            }
-            
+            } 
         });
-        theMainView.update();
     }
     
     private void startExerciseSelection()

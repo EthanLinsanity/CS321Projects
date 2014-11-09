@@ -47,6 +47,7 @@ public class Main{
         TraineeHolder nameHolder = new TraineeHolder();
         MainView theView = new MainView();
         OverallController theController = new OverallController(theView, progressFrame, nameHolder);
+        theView.setController(theController);
     }
     
     
