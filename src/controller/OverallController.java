@@ -8,6 +8,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.JFrame;
 import model.ExerciseHolder;
 import model.Exercises;
@@ -29,13 +30,17 @@ public class OverallController implements ActionListener, OverallControllerCallb
     ExerciseHolder curExerHolder;
     TraineeHolder allNameHolder;
     
-    public OverallController(MainView inputMainView, JFrame inputProgressView, TraineeHolder inNameHolder)
+    public OverallController(JFrame inputProgressView, TraineeHolder inNameHolder)
     {
-        theMainView = inputMainView;
         theProgressView = inputProgressView;
         allNameHolder = inNameHolder;
+        theMainView = new MainView(this);
         theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
         theMainView.btnStartExerciseListener(clicked ->startExerciseSelection());
+        theMainView.cboNameSelectionListener(selected -> 
+        {
+            curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
+        });
     }
     
     private void startExerciseSelection()
@@ -74,6 +79,11 @@ public class OverallController implements ActionListener, OverallControllerCallb
     @Override
     public void showMainView() {
         theMainView.setVisibility(true);
+    }
+
+    @Override
+    public List<String> getAllTraineeNames() {
+        return allNameHolder.getTraineeNames();
     }
     
     

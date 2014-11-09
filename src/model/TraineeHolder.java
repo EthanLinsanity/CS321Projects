@@ -31,4 +31,15 @@ public class TraineeHolder {
         });
         return output;
     }
+    
+    public Trainee getThisTrainee(String inName)
+    {
+        Trainee output = null;
+        for(Trainee e : overallNameHolder)
+        {
+            if(e.getName().equals(inName)) {output = e;}
+        }
+        return output;
+    }
+    
 }

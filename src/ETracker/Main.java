@@ -45,8 +45,8 @@ public class Main{
             initFXGUI();
         });
         TraineeHolder nameHolder = new TraineeHolder();
-        MainView theView = new MainView();
-        OverallController theController = new OverallController(theView,progressFrame, nameHolder);
+//        MainView theView = new MainView();
+        OverallController theController = new OverallController(progressFrame, nameHolder);
     }
     
     

@@ -6,10 +6,14 @@
 
 package controller;
 
+import java.util.List;
+
 /**
  *
  * @author Rawsome
  */
 public interface OverallControllerCallback {
     void showMainView();
+
+    public List<String> getAllTraineeNames();
 }
