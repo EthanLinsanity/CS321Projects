@@ -62,6 +62,12 @@ public class MainView {
         
     }
     
+    public void update()
+    {
+        populateNameComboBox();
+    }
+    
+    
     /**
      * get all existing user names from the model and set it to the NameComboBox
      *
@@ -71,7 +77,6 @@ public class MainView {
         List<String> allNames = myController.getAllTraineeNames();
         allNames.stream().forEach((String name) -> {
             nameComboBox.addItem(name);
-            System.out.println(name);
         });
         
     }

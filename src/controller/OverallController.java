@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.ExerciseHolder;
 import model.Exercises;
 import model.TraineeHolder;
@@ -40,6 +41,19 @@ public class OverallController implements ActionListener, OverallControllerCallb
         theMainView.cboNameSelectionListener(selected -> 
         {
             curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
+        });
+        theMainView.btnNewUserListener(clicked -> 
+        {
+            String response = JOptionPane.showInputDialog(null,
+            "What is your name?", 
+            "Enter your name",
+            JOptionPane.QUESTION_MESSAGE);
+            if(response != null)
+            {
+                allNameHolder.addATrainee(response);
+                theMainView.update();
+            }
+            
         });
     }
     

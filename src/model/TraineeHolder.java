@@ -41,5 +41,9 @@ public class TraineeHolder {
         }
         return output;
     }
+
+    public void addATrainee(String inTraineeName) {
+        overallNameHolder.add(new Trainee(inTraineeName));
+    }
     
 }
