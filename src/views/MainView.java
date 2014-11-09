@@ -28,20 +28,14 @@ public class MainView {
     private final JButton progressAndGoalViewButton;
     private final JButton createNameButton;
     private final JLabel lblName;
-    private final OverallControllerCallback myController;
-    /**
-     * MainView constructor.
-     *
-     * @param inController
-     */
-    public MainView(OverallControllerCallback inController)
+    private OverallControllerCallback myController;
+
+    public MainView()
     {
-        myController = inController;
+
         JPanel traineePanel = new JPanel();
         traineePanel.setLayout(new GridLayout(1,3));
         nameComboBox = new JComboBox<>();
-        populateNameComboBox();
-//        nameComboBox.addItem("Name?");
         createNameButton = new JButton("Create New User");
         lblName = new JLabel("Name: ");
         traineePanel.add(lblName);
@@ -62,11 +56,15 @@ public class MainView {
         
     }
     
+    public void setController(OverallControllerCallback inController)
+    {
+        myController = inController;
+    }
+    
     public void update()
     {
         populateNameComboBox();
     }
-    
     
     /**
      * get all existing user names from the model and set it to the NameComboBox

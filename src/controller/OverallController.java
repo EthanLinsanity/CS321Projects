@@ -31,11 +31,13 @@ public class OverallController implements ActionListener, OverallControllerCallb
     ExerciseHolder curExerHolder;
     TraineeHolder allNameHolder;
     
-    public OverallController(JFrame inputProgressView, TraineeHolder inNameHolder)
+    public OverallController(MainView inputMainView, JFrame inputProgressView, TraineeHolder inNameHolder)
     {
         theProgressView = inputProgressView;
         allNameHolder = inNameHolder;
-        theMainView = new MainView(this);
+        theMainView = inputMainView;
+        
+        theMainView.setController(this);
         theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
         theMainView.btnStartExerciseListener(clicked ->startExerciseSelection());
         theMainView.cboNameSelectionListener(selected -> 
@@ -55,6 +57,7 @@ public class OverallController implements ActionListener, OverallControllerCallb
             }
             
         });
+        theMainView.update();
     }
     
     private void startExerciseSelection()
