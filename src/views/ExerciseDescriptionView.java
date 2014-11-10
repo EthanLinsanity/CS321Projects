@@ -54,6 +54,13 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     
     private void fillContents()
     {        
+        lblExerciseName.setText(exerToDisp.getName());
+        lblPrevReps.setText(Integer.toString(exerToDisp.getGoalRep()));
+        lblPrevSets.setText(Integer.toString(exerToDisp.getGoalSet()));
+        
+        txtCurReps.setText(Integer.toString(exerToDisp.getActualRep()));
+        txtCurSets.setText(Integer.toString(exerToDisp.getActualSet()));
+        
         String imageFilePath = exerToDisp.getPicturePath();
         String descriptionPath = exerToDisp.getDesciption();
         try {
@@ -70,7 +77,6 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         
-        
         try(BufferedReader br = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream(descriptionPath)))) 
         {
             StringBuilder sb = new StringBuilder();
@@ -83,10 +89,10 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
             }
             String everything = sb.toString();
             txtExerciseDescription.setText(everything);
+            txtExerciseDescription.setCaretPosition(0);
         }
         catch(Exception e){
-            System.out.println("bufferedReader in ExerciseDescription has crashed.... oh NOOOOOOOOOOO");
-            
+            System.out.println("bufferedReader in ExerciseDescription has crashed.... oh NOOOOOOOOOOO");   
         }
         
     }
@@ -118,15 +124,15 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         CurrentRepsLabel1 = new javax.swing.JLabel();
         CurrentSetLabel = new javax.swing.JLabel();
         PreviousWorkOutLabel1 = new javax.swing.JLabel();
-        PreviousSetTextField = new javax.swing.JTextField();
-        PreviousRepsTextField = new javax.swing.JTextField();
-        SetsComboBox = new javax.swing.JComboBox();
-        RepsComboBox = new javax.swing.JComboBox();
+        txtCurSets = new javax.swing.JTextField();
+        txtCurReps = new javax.swing.JTextField();
         UpdateWorkOutButton = new javax.swing.JButton();
         lblExercisePic = new javax.swing.JLabel();
         lblExerciseName = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtExerciseDescription = new javax.swing.JTextArea();
+        lblPrevSets = new javax.swing.JLabel();
+        lblPrevReps = new javax.swing.JLabel();
 
         setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -151,15 +157,13 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         PreviousWorkOutLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         PreviousWorkOutLabel1.setText("Current WorkOut");
 
-        PreviousSetTextField.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        PreviousSetTextField.setText("3");
+        txtCurSets.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtCurSets.setText("3");
+        txtCurSets.setPreferredSize(new java.awt.Dimension(25, 25));
 
-        PreviousRepsTextField.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        PreviousRepsTextField.setText("20");
-
-        SetsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        RepsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtCurReps.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtCurReps.setText("20");
+        txtCurReps.setPreferredSize(new java.awt.Dimension(25, 25));
 
         UpdateWorkOutButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         UpdateWorkOutButton.setText("UPDATE WORKOUT");
@@ -171,6 +175,12 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         txtExerciseDescription.setColumns(20);
         txtExerciseDescription.setRows(5);
         jScrollPane1.setViewportView(txtExerciseDescription);
+
+        lblPrevSets.setText("jLabel1");
+        lblPrevSets.setPreferredSize(new java.awt.Dimension(25, 25));
+
+        lblPrevReps.setText("jLabel1");
+        lblPrevReps.setPreferredSize(new java.awt.Dimension(45, 45));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -188,37 +198,36 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
                         .addComponent(lblExercisePic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 96, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PreviousSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PreviousSetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(341, 341, 341)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(PreviousRepsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PreviousRepsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(UpdateWorkOutButton)
+                                            .addComponent(PreviousWorkOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(CurrentSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(PreviousWorkOutLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(65, 65, 65)
+                                .addComponent(CurrentRepsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                                        .addComponent(CurrentSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtCurSets, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(354, 354, 354)
+                                        .addComponent(txtCurReps, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(SetsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(RepsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(9, 9, 9))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(98, 98, 98)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(UpdateWorkOutButton)
-                                            .addComponent(PreviousWorkOutLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(PreviousWorkOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(65, 65, 65)
-                                        .addComponent(CurrentRepsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(PreviousSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblPrevSets, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(341, 341, 341)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(PreviousRepsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lblPrevReps, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(135, 135, 135))))
         );
         layout.setVerticalGroup(
@@ -233,27 +242,27 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblExercisePic, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PreviousWorkOutLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PreviousSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PreviousRepsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPrevSets, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPrevReps, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PreviousSetTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PreviousRepsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CurrentSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PreviousWorkOutLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CurrentRepsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CurrentRepsLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CurrentSetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SetsComboBox, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
-                    .addComponent(RepsComboBox))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(UpdateWorkOutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCurSets, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCurReps, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(UpdateWorkOutButton))
+                .addGap(16, 16, 16))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -263,17 +272,17 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     private javax.swing.JLabel CurrentSetLabel;
     private javax.swing.JLabel DescriptionLabel;
     private javax.swing.JLabel PreviousRepsLabel;
-    private javax.swing.JTextField PreviousRepsTextField;
     private javax.swing.JLabel PreviousSetLabel;
-    private javax.swing.JTextField PreviousSetTextField;
     private javax.swing.JLabel PreviousWorkOutLabel;
     private javax.swing.JLabel PreviousWorkOutLabel1;
-    private javax.swing.JComboBox RepsComboBox;
-    private javax.swing.JComboBox SetsComboBox;
     private javax.swing.JButton UpdateWorkOutButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblExerciseName;
     private javax.swing.JLabel lblExercisePic;
+    private javax.swing.JLabel lblPrevReps;
+    private javax.swing.JLabel lblPrevSets;
+    private javax.swing.JTextField txtCurReps;
+    private javax.swing.JTextField txtCurSets;
     private javax.swing.JTextArea txtExerciseDescription;
     // End of variables declaration//GEN-END:variables
 }

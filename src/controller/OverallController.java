@@ -37,10 +37,10 @@ public class OverallController implements ActionListener, OverallControllerCallb
         allNameHolder = inNameHolder;
         theMainView = inputMainView;
         theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
-        theMainView.btnStartExerciseListener(clicked ->startExerciseSelection());
-        theMainView.cboNameSelectionListener(selected -> 
+        theMainView.btnStartExerciseListener(clicked ->
         {
-            curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
+                startExerciseSelection();
+                curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
         });
         theMainView.btnNewUserListener(clicked -> 
         {
@@ -51,7 +51,7 @@ public class OverallController implements ActionListener, OverallControllerCallb
             if(response != null)
             {
                 allNameHolder.addATrainee(response);
-                theMainView.update();
+                theMainView.update(response);
             } 
         });
     }

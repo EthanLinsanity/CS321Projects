@@ -59,12 +59,13 @@ public class MainView {
     public void setController(OverallControllerCallback inController)
     {
         myController = inController;
-        update();
+        update(null);
     }
     
-    public void update()
+    public void update(String focusName)
     {
         populateNameComboBox();
+        focusNameComboBox(focusName);
     }
     
     /**
@@ -73,21 +74,24 @@ public class MainView {
      */
     private void populateNameComboBox()
     {
+        nameComboBox.removeAllItems();
         List<String> allNames = myController.getAllTraineeNames();
         allNames.stream().forEach((String name) -> {
             nameComboBox.addItem(name);
         });
-        
     }
     
     /**
      * focus to a specific name
      *
-     * @param name as an String.
+     * @param inFocusName as an String.
      */  
-    public void focusNameComboBox(String name)
+    public void focusNameComboBox(String inFocusName)
     {
-        
+        if(inFocusName!=null)
+        {
+            nameComboBox.setSelectedItem(inFocusName);
+        }
     }
    /**
      *
@@ -96,16 +100,6 @@ public class MainView {
     public String cboNameSelected()
     {
         return nameComboBox.getSelectedItem().toString();
-    }
-    
-   /**
-     * Add a listener to the "Name" Selection ComboBox
-     *
-     * @param listener as an ActionListener.
-     */     
-    public void cboNameSelectionListener(ActionListener listener)
-    {
-        nameComboBox.addActionListener(listener);
     }
     
     /**

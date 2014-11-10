@@ -22,4 +22,21 @@ public class Trainee {
     public String getName() {return myName;}
     public ExerciseHolder getExerciseHolder() {return myExerHolder;}
     
+    @Override
+    public int hashCode()
+    {
+        return myName.toLowerCase().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Trainee other = (Trainee) obj;
+        return this.myName.equalsIgnoreCase(other.myName);
+    }
 }

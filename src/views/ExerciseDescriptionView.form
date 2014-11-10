@@ -38,47 +38,46 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="PreviousSetLabel" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
-                                  <Component id="PreviousSetTextField" alignment="0" min="-2" pref="42" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="341" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="PreviousRepsTextField" min="-2" pref="42" max="-2" attributes="0"/>
-                                  <Component id="PreviousRepsLabel" min="-2" pref="55" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <EmptySpace pref="93" max="32767" attributes="0"/>
-                                      <Component id="CurrentSetLabel" min="-2" pref="55" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="SetsComboBox" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="RepsComboBox" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
                                           <Component id="UpdateWorkOutButton" min="-2" max="-2" attributes="0"/>
-                                          <Component id="PreviousWorkOutLabel1" min="-2" pref="167" max="-2" attributes="0"/>
                                           <Component id="PreviousWorkOutLabel" alignment="1" min="-2" pref="167" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                                      <Component id="CurrentRepsLabel1" min="-2" pref="55" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="CurrentSetLabel" min="-2" pref="55" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="PreviousWorkOutLabel1" min="-2" pref="167" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                              <Component id="CurrentRepsLabel1" min="-2" pref="55" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtCurSets" min="-2" pref="42" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="354" max="-2" attributes="0"/>
+                                      <Component id="txtCurReps" min="-2" pref="42" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="PreviousSetLabel" min="-2" pref="55" max="-2" attributes="0"/>
+                                          <Component id="lblPrevSets" min="-2" pref="45" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="341" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="PreviousRepsLabel" min="-2" pref="55" max="-2" attributes="0"/>
+                                          <Component id="lblPrevReps" min="-2" pref="45" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="135" max="-2" attributes="0"/>
@@ -101,31 +100,32 @@
                   </Group>
                   <Component id="lblExercisePic" min="-2" pref="332" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" pref="18" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" pref="47" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="PreviousWorkOutLabel" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="PreviousSetLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="PreviousRepsLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPrevSets" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="lblPrevReps" alignment="3" min="-2" pref="45" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="PreviousSetTextField" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="PreviousRepsTextField" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="CurrentSetLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="PreviousWorkOutLabel1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   <Component id="CurrentRepsLabel1" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="CurrentSetLabel" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="SetsComboBox" pref="44" max="32767" attributes="0"/>
-                  <Component id="RepsComboBox" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txtCurSets" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="txtCurReps" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="UpdateWorkOutButton" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="UpdateWorkOutButton" min="-2" pref="64" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -187,43 +187,25 @@
         <Property name="text" type="java.lang.String" value="Current WorkOut"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="PreviousSetTextField">
+    <Component class="javax.swing.JTextField" name="txtCurSets">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="3"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[25, 25]"/>
+        </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="PreviousRepsTextField">
+    <Component class="javax.swing.JTextField" name="txtCurReps">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="20"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="SetsComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="RepsComboBox">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[25, 25]"/>
         </Property>
       </Properties>
     </Component>
@@ -260,5 +242,21 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="lblPrevSets">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[25, 25]"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPrevReps">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[45, 45]"/>
+        </Property>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

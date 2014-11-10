@@ -15,5 +15,9 @@ import java.util.List;
 public interface OverallControllerCallback {
     void showMainView();
 
-    public List<String> getAllTraineeNames();
+    /**
+     *
+     * @return
+     */
+    List<String> getAllTraineeNames();
 }

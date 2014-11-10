@@ -19,7 +19,7 @@ public class TraineeHolder {
     public TraineeHolder()
     {
         overallNameHolder = new HashSet<>();
-        overallNameHolder.add(new Trainee("Ethan"));
+        overallNameHolder.add(new Trainee("Guest"));
     }
     
     public ArrayList<String> getTraineeNames()
