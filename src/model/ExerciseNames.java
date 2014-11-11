@@ -15,15 +15,16 @@ import java.util.ArrayList;
 public enum ExerciseNames {
     BARBELLCURL         ("Barbell Curl","ExerciseImages/barbellCurl.jpg","ExerciseDescriptions/barbellCurl.txt"),
     BARBELLDEADLIFT     ("Barbell Deadlift","ExerciseImages/BarbellDeadlift.jpg","ExerciseDescriptions/BarbellDeadlift.txt"),
-    BENTOVERBARBELROW   ("BentOver Barbell Row","ExerciseImages/BentoverBarbellRow.jpg","ExerciseDescriptions/BentoverBarbellRow.txt");
-//    CALFRAISE           ("")
-//    CRUNCHES
-//    FRONTDUMBELLRAISE
-//    FULLSQUAT
-//    ONEARMTRICEP
-//    SHOULDERPRESS
-//    SITUP
-//    WALKINGLUNGE
+    BENTOVERBARBELROW   ("BentOver Barbell Row","ExerciseImages/BentoverBarbellRow.jpg","ExerciseDescriptions/BentoverBarbellRow.txt"),
+    CALFRAISE           ("Calf Raises","ExerciseImages/CalfRaise.jpg","ExerciseDescriptions/CalfRaise.txt"),
+    CRUNCHES            ("Crunches","ExerciseImages/Crunches.jpg","ExerciseDescriptions/Crunches.txt"),
+    FRONTDUMBELLRAISE   ("Front Dumbell Raises","ExerciseImages/FrontDumbbellRaise.jpg","ExerciseDescriptions/FrontDumbbellRaise.txt"),
+    FULLSQUAT           ("Full Squats","ExerciseImages/FullSquat.jpg","ExerciseDescriptions/FullSquat.txt"),
+    ONEARMTRICEP        ("Triceps","ExerciseImages/OneArmTricep.jpg","ExerciseDescriptions/OneArmTricep.txt"),
+    SHOULDERPRESS       ("Shoulder Press","ExerciseImages/ShoulderPress.jpg","ExerciseDescriptions/ShoulderPress.txt"),
+    SITUP               ("Situps","ExerciseImages/SitUp.jpg","ExerciseDescriptions/SitUp.txt"),
+    WALKINGLUNGE        ("Walking Lunges","ExerciseImages/WalkingLunge.jpg","ExerciseDescriptions/WalkingLunge.txt");
+    
     private final String exerciseName;
     private final String picturePath;
     private final String descriptionPath;
