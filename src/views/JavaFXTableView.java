@@ -14,21 +14,37 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+
  
 
 public class JavaFXTableView 
 {
+    int i_barbell = 8;
      
     private TableView<XYChart.Data> tableView = new TableView<>();
     private ObservableList<XYChart.Data> dataList =
             FXCollections.observableArrayList(
-                new XYChart.Data("Sets", 700),
-                new XYChart.Data("Reps", 900));
+                new XYChart.Data("BARBELLCURL", i_barbell),         //exerToDisp.getActualSet()  Changes the Sets ROW in the table
+                new XYChart.Data("BARBELL DEADLIFT", i_barbell),
+                new XYChart.Data("BARBELL ROW", i_barbell),
+                new XYChart.Data("CALF RAISES", i_barbell),
+                new XYChart.Data("CRUNCHES", i_barbell),
+                new XYChart.Data("DUMBELL RAISES", i_barbell),
+                new XYChart.Data("FULL SQUAT", i_barbell),
+                new XYChart.Data("TRICEPS", i_barbell),
+                new XYChart.Data("CALF RAISES", i_barbell),
+                new XYChart.Data("SHOULDER PRESS", i_barbell),
+                new XYChart.Data("SITUPS", i_barbell),
+                new XYChart.Data("LUNGES", 15),
+                new XYChart.Data("Sets",5),
+                new XYChart.Data("Reps",7));                    //Changs the Reps ROW in the table
 
     public void initialize(JFXPanel inputPanel) {
         Group root = new Group();
          
         tableView.setEditable(true);
+        tableView.setFixedCellSize(30);     //sets the size of the cell downward
+        
         Callback<TableColumn, TableCell> cellFactory =
             new Callback<TableColumn, TableCell>() {
                 @Override
@@ -51,6 +67,7 @@ public class JavaFXTableView
          
         //--- Add for Editable Cell of Value field, in Number
         columnSets.setCellFactory(cellFactory);
+        columnReps.setCellFactory(cellFactory);
          
         columnSets.setOnEditCommit(
             new EventHandler<TableColumn.CellEditEvent<XYChart.Data, Number>>() {
@@ -84,10 +101,12 @@ public class JavaFXTableView
         series1.setName("Actual");
          
         //Series 2--the goals of the workout; the bar graph in the back
+        int i_barbellGoal = (15-i_barbell);
+        
         XYChart.Series<String,Number> series2 = new XYChart.Series();
         series2.setName("Goals");
-        series2.getData().add(new XYChart.Data("Sets", 1500));
-        series2.getData().add(new XYChart.Data("Reps", 1500));
+        series2.getData().add(new XYChart.Data("Sets", i_barbellGoal));  //Changes the goal graph CONSTANT
+        series2.getData().add(new XYChart.Data("Reps", 30));
          
         stackedBarChart.getData().addAll(series1, series2);
          
@@ -96,7 +115,7 @@ public class JavaFXTableView
         tableView.getColumns().addAll(columnWorkout, columnSets, columnReps);
          
         HBox hBox = new HBox();
-        hBox.setSpacing(10);
+        hBox.setSpacing(8);
         hBox.getChildren().addAll(tableView, stackedBarChart);
          
         root.getChildren().add(hBox);

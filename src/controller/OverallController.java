@@ -69,6 +69,7 @@ public class OverallController implements ActionListener, OverallControllerCallb
     private void showProgressGoal()
     {
         theProgressView.setVisible(true);
+        
     }
     
     private void startDescriptionView(String inName)
