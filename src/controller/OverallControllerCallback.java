@@ -14,12 +14,10 @@ import java.util.List;
  */
 public interface OverallControllerCallback {
     void showMainView();
-
-    /**
-     *
-     * @return
-     */
+    
     List<String> getAllTraineeNames();
 
-    public void addATrainee(String response);
+    void addATrainee(String response);
+
+    void exerSelectionComplete(String toString);
 }

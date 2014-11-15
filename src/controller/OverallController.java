@@ -44,11 +44,6 @@ public class OverallController implements OverallControllerCallback {
     private void startExerciseSelection()
     {
         theSelectionView = new WorkoutSelectionView(this);
-        theSelectionView.addListener( selected -> {
-            String exerName = theSelectionView.whichComboSelected();
-            startDescriptionView(exerName);
-            theSelectionView.closeThisView();
-                });
         theMainView.setVisibility(false);
     }
     private void showProgressGoal()
@@ -83,6 +78,12 @@ public class OverallController implements OverallControllerCallback {
     public void addATrainee(String response) {
         allNameHolder.addATrainee(response);
         theMainView.update(response);
+    }
+
+    @Override
+    public void exerSelectionComplete(String exerName) {
+        startDescriptionView(exerName);
+        theSelectionView.closeThisView();
     }
     
     

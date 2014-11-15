@@ -25,7 +25,7 @@ import model.ExerciseNames;
 /**
    Workout selection view provides user with exercises to pick from
 */
-public class WorkoutSelectionView implements ActionListener
+public class WorkoutSelectionView
 {
     
     //declare container variables
@@ -38,28 +38,25 @@ public class WorkoutSelectionView implements ActionListener
   
    public WorkoutSelectionView(OverallControllerCallback inputController)
    {
-      //create components
-       myController = inputController;
+      myController = inputController;
       appFrame = new JFrame("Workout Selection View");
       appFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       
       viewname = new JLabel("Select Exercise");
       topPanel = new JPanel();
       exercisePanel = new JPanel();
-           
-
       comBoxExercises = new JComboBox();
+      initComboBox();
+      comBoxExercises.addActionListener(new ActionListener() {
 
-      //initialize menu and register action listeners
-      //exercises.addEventHandler();
-
-      //add Components to the panel
+          @Override
+          public void actionPerformed(ActionEvent selected) {
+              myController.exerSelectionComplete(comBoxExercises.getSelectedItem().toString());
+          }
+      });
       exercisePanel.setLayout(new BorderLayout());
       topPanel.add(viewname, BorderLayout.NORTH);  
       exercisePanel.add(comBoxExercises, BorderLayout.SOUTH);
-          
-//      comBoxExercises.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Exercise", "Pushups", "Crunches", "Pullups", "Squats" }));
-      initComboBox();
       
       appFrame.add(topPanel, BorderLayout.NORTH);
       //appFrame.add(exercisePanel, BorderLayout.);
@@ -70,14 +67,6 @@ public class WorkoutSelectionView implements ActionListener
       appFrame.setLocationRelativeTo(null);
       appFrame.setVisible(true);//Display the window
       
-//      appFrame.addWindowListener(new java.awt.event.WindowAdapter()
-//      {
-//          @Override
-//          public void windowClosing(java.awt.event.WindowEvent windowEvent)
-//          {
-//              myController.selectionViewClosing();
-//          }
-//      });
       appFrame.addWindowListener(new WindowAdapter()
       {
           @Override
@@ -87,21 +76,7 @@ public class WorkoutSelectionView implements ActionListener
           }
       });
    }
-   
-   /**
-      display the exercises in the ETracker application
-      @param output the text that will be "spoken"
-   */
-   public void displayView(String output)
-   {
-       //
-   }
-   
-   public String whichComboSelected()
-   {
-       return comBoxExercises.getSelectedItem().toString();
-   }
-   
+      
    private void initComboBox()
    {
        ArrayList<String> names = ExerciseNames.getAllNames();
@@ -115,34 +90,4 @@ public class WorkoutSelectionView implements ActionListener
        appFrame.setVisible(false);
        appFrame.dispose();
    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void addListener(ActionListener listener) {
-        comBoxExercises.addActionListener(listener);
-    }
-
-   /**
-      Loops reading user input and passes the input to the
-      Connection object's methods dial, record or hangup.
-      @param c the connection that connects this phone to the
-      voice mail system
-   
-   public void run(MailSystemModel c)
-   {
-     this.c = c;//
-   }
-   
-   @Override
-    public void actionPerformed(ActionEvent e) {
-        
-        String input = e.getActionCommand(); //get input from clicked button.
-        System.out.print(input);//for debugging
-        if (input == null) ;//ignore
-         
-            ;//c.record(input);
-    }*/
 }
