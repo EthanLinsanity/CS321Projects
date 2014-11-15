@@ -11,8 +11,8 @@ package model;
  * @author Rawsome
  */
 public class Trainee {
-    private ExerciseHolder myExerHolder;
-    private String myName;
+    private final ExerciseHolder myExerHolder;
+    private final String myName;
     public Trainee(String inName)
     {
         myExerHolder = new ExerciseHolder();

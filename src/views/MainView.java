@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -37,6 +38,17 @@ public class MainView {
         traineePanel.setLayout(new GridLayout(1,3));
         nameComboBox = new JComboBox<>();
         createNameButton = new JButton("Create New User");
+        createNameButton.addActionListener(clicked ->
+        {
+            String response = JOptionPane.showInputDialog(null,
+            "What is your name?", 
+            "Enter your name",
+            JOptionPane.QUESTION_MESSAGE);
+            if(response != null)
+            {
+                myController.addATrainee(response);
+            } 
+        });
         lblName = new JLabel("Name: ");
         traineePanel.add(lblName);
         traineePanel.add(nameComboBox);

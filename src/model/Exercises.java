@@ -16,6 +16,8 @@ public class Exercises {
 	private int actualSets;
 	private int goalReps;
 	private int actualReps;
+        private int lastSets;
+        private int lastReps;
         
         public String getName() {return exerciseName.getName();}
         public String getPicturePath() {return exerciseName.getPicPath();}
@@ -32,6 +34,8 @@ public class Exercises {
             actualSets = 0;
             goalReps = 0;
             actualReps = 0;
+            lastSets = 0;
+            lastReps = 0;
         }
         
         public void setGoalSet(int inNum) { goalSets = inNum;}
@@ -42,7 +46,10 @@ public class Exercises {
         public int getGoalRep() {return goalReps;}
         public void setActualRep(int inNum) {actualReps = inNum;}
         public int getActualRep() {return actualReps;}
-        
+        public void setLastSet(int inNum) {lastSets = inNum;}
+        public int getLastSet() {return lastSets;}
+        public void setLastRep(int inNum) {lastReps = inNum;}
+        public int getLastRep() {return lastReps;}
 	
 
 

@@ -28,7 +28,7 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
      * Creates new form ExerciseDescrptionView
      */
     private OverallControllerCallback controllerCallback;
-    private Exercises exerToDisp;
+    private final Exercises exerToDisp;
     
     public ExerciseDescriptionView(OverallControllerCallback ctl, Exercises inExercise) {
         controllerCallback = ctl;

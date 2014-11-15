@@ -20,4 +20,6 @@ public interface OverallControllerCallback {
      * @return
      */
     List<String> getAllTraineeNames();
+
+    public void addATrainee(String response);
 }

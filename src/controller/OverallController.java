@@ -6,11 +6,8 @@
 
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import model.ExerciseHolder;
 import model.Exercises;
 import model.TraineeHolder;
@@ -22,7 +19,7 @@ import views.WorkoutSelectionView;
  *
  * @author Rawsome
  */
-public class OverallController implements ActionListener, OverallControllerCallback {
+public class OverallController implements OverallControllerCallback {
     
     MainView theMainView;
     JFrame theProgressView;
@@ -41,18 +38,6 @@ public class OverallController implements ActionListener, OverallControllerCallb
         {
                 startExerciseSelection();
                 curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
-        });
-        theMainView.btnNewUserListener(clicked -> 
-        {
-            String response = JOptionPane.showInputDialog(null,
-            "What is your name?", 
-            "Enter your name",
-            JOptionPane.QUESTION_MESSAGE);
-            if(response != null)
-            {
-                allNameHolder.addATrainee(response);
-                theMainView.update(response);
-            } 
         });
     }
     
@@ -84,12 +69,6 @@ public class OverallController implements ActionListener, OverallControllerCallb
         
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        
-    }
-
     @Override
     public void showMainView() {
         theMainView.setVisibility(true);
@@ -98,6 +77,12 @@ public class OverallController implements ActionListener, OverallControllerCallb
     @Override
     public List<String> getAllTraineeNames() {
         return allNameHolder.getTraineeNames();
+    }
+
+    @Override
+    public void addATrainee(String response) {
+        allNameHolder.addATrainee(response);
+        theMainView.update(response);
     }
     
     
