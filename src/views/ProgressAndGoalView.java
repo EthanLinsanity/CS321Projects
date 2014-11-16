@@ -1,6 +1,8 @@
 package views;
  
+import controller.OverallControllerCallback;
 import java.util.Arrays;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -14,15 +16,39 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import javax.swing.JFrame;
 
  
 
-public class JavaFXTableView 
+public class ProgressAndGoalView 
 {
     int i_barbell = 8;
-     
-    private TableView<XYChart.Data> tableView = new TableView<>();
-    private ObservableList<XYChart.Data> dataList =
+    private JFrame swingFrame;
+    private OverallControllerCallback myController;
+    
+    public ProgressAndGoalView(OverallControllerCallback inController)
+    {
+        myController = inController;
+        swingFrame =new JFrame("Progress and Goal View");
+        final JFXPanel fxPanel = new JFXPanel();
+        swingFrame.add(fxPanel);
+        swingFrame.setSize(760,450);
+        swingFrame.setVisible(false);
+        swingFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            Platform.runLater(() -> {
+                this.initialize(fxPanel);
+            }); 
+    }
+    
+    public void setVisibility(boolean input)
+    {
+        swingFrame.setVisible(input);
+    }
+    
+    private void initialize(JFXPanel inputPanel) {
+        Group root = new Group();
+        TableView<XYChart.Data> tableView = new TableView<>();
+        ObservableList<XYChart.Data> dataList =
             FXCollections.observableArrayList(
                 new XYChart.Data("BARBELLCURL", i_barbell),         //exerToDisp.getActualSet()  Changes the Sets ROW in the table
                 new XYChart.Data("BARBELL DEADLIFT", i_barbell),
@@ -39,15 +65,6 @@ public class JavaFXTableView
                 new XYChart.Data("Sets",5),
                 new XYChart.Data("Reps",7));                    //Changs the Reps ROW in the table
 
-//    public void JavaFXTableView()
-//    {
-//        
-//    }
-    
-    
-    public void initialize(JFXPanel inputPanel) {
-        Group root = new Group();
-         
         tableView.setEditable(true);
         tableView.setFixedCellSize(30);     //sets the size of the cell downward
         

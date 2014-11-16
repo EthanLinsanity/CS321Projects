@@ -7,15 +7,12 @@
 package controller;
 
 import java.util.List;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import model.ExerciseHolder;
 import model.Exercises;
 import model.TraineeHolder;
 import views.ExerciseDescriptionView;
-import views.JavaFXTableView;
+import views.ProgressAndGoalView;
 import views.MainView;
 import views.WorkoutSelectionView;
 
@@ -25,37 +22,28 @@ import views.WorkoutSelectionView;
  */
 public class OverallController implements OverallControllerCallback {
     
-    MainView theMainView;
-    JFrame theProgressView;
-    WorkoutSelectionView theSelectionView;
-    ExerciseDescriptionView theDescriptionView;
-    ExerciseHolder curExerHolder;
-    TraineeHolder allNameHolder;
+    private MainView theMainView;
+    private WorkoutSelectionView theSelectionView;
+    private ExerciseDescriptionView theDescriptionView;
+    private ExerciseHolder curExerHolder;
+    private TraineeHolder allNameHolder;
+    private ProgressAndGoalView theProgressView;
     
     public OverallController(TraineeHolder inNameHolder)
     {
         allNameHolder = inNameHolder;
 
         SwingUtilities.invokeLater(() -> {
+            
+            theProgressView = new ProgressAndGoalView(this);
             theMainView = new MainView(this);
-            theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
+            theMainView.btnProgressAndGoalListener( clicked -> this.showProgressGoal());
             theMainView.btnStartExerciseListener(clicked ->
             {
                     startExerciseSelection();
                     curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
             });
-            theProgressView = new JFrame("Progress and Goal View");
-            final JFXPanel fxPanel = new JFXPanel();
-            theProgressView.add(fxPanel);
-            theProgressView.setSize(760,450);
-            theProgressView.setVisible(true);
-            theProgressView.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-            Platform.runLater(() -> {
-                JavaFXTableView progressView = new JavaFXTableView();
-                progressView.initialize(fxPanel);
-            }); 
         });
-        
     }
     
     private void startExerciseSelection()
@@ -65,7 +53,7 @@ public class OverallController implements OverallControllerCallback {
     }
     private void showProgressGoal()
     {
-        theProgressView.setVisible(true);
+        theProgressView.setVisibility(true);
     }
     
     private void startDescriptionView(String inName)
