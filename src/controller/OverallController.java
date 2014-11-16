@@ -49,7 +49,6 @@ public class OverallController implements OverallControllerCallback {
     private void showProgressGoal()
     {
         theProgressView.setVisible(true);
-        
     }
     
     private void startDescriptionView(String inName)

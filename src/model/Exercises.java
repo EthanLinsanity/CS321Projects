@@ -50,7 +50,4 @@ public class Exercises {
         public int getLastSet() {return lastSets;}
         public void setLastRep(int inNum) {lastReps = inNum;}
         public int getLastRep() {return lastReps;}
-	
-
-
 }

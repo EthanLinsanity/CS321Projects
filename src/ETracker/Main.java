@@ -32,7 +32,6 @@ public class Main{
         progressFrame.setSize(760,450);
         progressFrame.setVisible(false);
         progressFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        
         Platform.runLater(() -> {
             JavaFXTableView progressView = new JavaFXTableView();
             progressView.initialize(fxPanel);

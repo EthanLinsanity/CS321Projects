@@ -134,15 +134,6 @@ public class MainView {
     }
     
     /**
-     * Add a listener to the "new user" button.
-     *
-     * @param listener as an ActionListener.
-     */    
-    public void btnNewUserListener(ActionListener listener){
-        createNameButton.addActionListener(listener);
-    }
-    
-    /**
      * Setting Visibility of the mainFrame.
      *
      * @param inputVisBool as an boolean.
