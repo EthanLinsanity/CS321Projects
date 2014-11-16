@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import model.ExerciseHolder;
 import model.Exercises;
+import model.Trainee;
 import model.TraineeHolder;
 import views.ExerciseDescriptionView;
 import views.ProgressAndGoalView;
@@ -34,9 +35,8 @@ public class OverallController implements OverallControllerCallback {
         allNameHolder = inNameHolder;
 
         SwingUtilities.invokeLater(() -> {
-            
-            theProgressView = new ProgressAndGoalView(this);
             theMainView = new MainView(this);
+            theProgressView = new ProgressAndGoalView(this);
             theMainView.btnProgressAndGoalListener( clicked -> this.showProgressGoal());
             theMainView.btnStartExerciseListener(clicked ->
             {
@@ -89,6 +89,10 @@ public class OverallController implements OverallControllerCallback {
         startDescriptionView(exerName);
         theSelectionView.closeThisView();
     }
-    
+
+    @Override
+    public Trainee getCurTrainee() {
+        return allNameHolder.getThisTrainee(theMainView.cboNameSelected());
+    }
     
 }

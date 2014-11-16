@@ -7,6 +7,7 @@
 package controller;
 
 import java.util.List;
+import model.Trainee;
 
 /**
  *
@@ -20,4 +21,6 @@ public interface OverallControllerCallback {
     void addATrainee(String response);
 
     void exerSelectionComplete(String toString);
+
+    public Trainee getCurTrainee();
 }

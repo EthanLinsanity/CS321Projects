@@ -35,22 +35,23 @@ public class MainView {
     {
         myController = inputController;
         JPanel traineePanel = new JPanel();
-        traineePanel.setLayout(new GridLayout(1,3));
+        traineePanel.setLayout(new GridLayout(0,3));
         nameComboBox = new JComboBox<>();
         this.populateNameComboBox();
         createNameButton = new JButton("Create New User");
         createNameButton.addActionListener(clicked ->
         {
             String response = JOptionPane.showInputDialog(null,
-            "What is your name?", 
-            "Enter your name",
-            JOptionPane.QUESTION_MESSAGE);
+                                "What is your name?", 
+                                "Enter your name",
+                                JOptionPane.QUESTION_MESSAGE);
             if(response != null)
             {
                 myController.addATrainee(response);
             } 
         });
         lblName = new JLabel("Name: ");
+        lblName.setHorizontalTextPosition(JLabel.RIGHT);
         traineePanel.add(lblName);
         traineePanel.add(nameComboBox);
         traineePanel.add(createNameButton);

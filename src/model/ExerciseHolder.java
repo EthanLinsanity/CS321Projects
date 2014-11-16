@@ -48,4 +48,8 @@ public class ExerciseHolder {
         return ExerciseNames.getAllNames();
     }
     
+    public ArrayList<Exercises> getAllExercises()
+    {
+        return allExercises;
+    }
 }

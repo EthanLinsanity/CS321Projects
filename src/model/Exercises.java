@@ -6,6 +6,11 @@
 
 package model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author Rawsome
@@ -19,6 +24,10 @@ public class Exercises {
         private int lastSets;
         private int lastReps;
         
+        private final StringProperty pExerName;
+        private IntegerProperty pGoalReps;
+        private IntegerProperty pGoalSets;
+        
         public String getName() {return exerciseName.getName();}
         public String getPicturePath() {return exerciseName.getPicPath();}
         public String getDesciption() {return exerciseName.getDesPath();}
@@ -26,6 +35,7 @@ public class Exercises {
         public Exercises(ExerciseNames inExerName)
         {
             exerciseName = inExerName;
+            this.pExerName = new SimpleStringProperty(inExerName.getName());
             initDefault();
         }
         private void initDefault()
@@ -36,6 +46,9 @@ public class Exercises {
             actualReps = 0;
             lastSets = 0;
             lastReps = 0;
+            
+            this.pGoalReps = new SimpleIntegerProperty(0);
+            this.pGoalSets = new SimpleIntegerProperty(0);
         }
         
         public void setGoalSet(int inNum) { goalSets = inNum;}
@@ -50,4 +63,16 @@ public class Exercises {
         public int getLastSet() {return lastSets;}
         public void setLastRep(int inNum) {lastReps = inNum;}
         public int getLastRep() {return lastReps;}
+        
+        public String getPExerName() { return pExerName.get(); }
+        public void setPExerName(String inName) { this.pExerName.set(inName); }
+        public StringProperty pExerNameProperty() { return pExerName; }
+        public int getPGoalReps() { return pGoalReps.get(); }
+        public void setPGoalReps(int inGoalNum) { this.pGoalReps.set(inGoalNum); }
+        public IntegerProperty pGoalRepsProperty() { return pGoalReps; }
+        public int getPGoalSets() { return pGoalSets.get(); }
+        public void setPGoalSets(int inGoalNum) { this.pGoalSets.set(inGoalNum); }
+        public IntegerProperty pGoalSetsProperty() { return pGoalSets; }
+        
+        
 }
