@@ -39,6 +39,12 @@ public class JavaFXTableView
                 new XYChart.Data("Sets",5),
                 new XYChart.Data("Reps",7));                    //Changs the Reps ROW in the table
 
+//    public void JavaFXTableView()
+//    {
+//        
+//    }
+    
+    
     public void initialize(JFXPanel inputPanel) {
         Group root = new Group();
          

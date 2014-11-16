@@ -31,12 +31,13 @@ public class MainView {
     private final JLabel lblName;
     private OverallControllerCallback myController;
 
-    public MainView()
+    public MainView(OverallControllerCallback inputController)
     {
-
+        myController = inputController;
         JPanel traineePanel = new JPanel();
         traineePanel.setLayout(new GridLayout(1,3));
         nameComboBox = new JComboBox<>();
+        this.populateNameComboBox();
         createNameButton = new JButton("Create New User");
         createNameButton.addActionListener(clicked ->
         {
@@ -66,12 +67,6 @@ public class MainView {
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         
-    }
-    
-    public void setController(OverallControllerCallback inController)
-    {
-        myController = inController;
-        update(null);
     }
     
     public void update(String focusName)

@@ -7,13 +7,7 @@
 package ETracker;
 
 import controller.OverallController;
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import model.TraineeHolder;
-import views.JavaFXTableView;
-import views.MainView;
 
 /**
  *
@@ -21,33 +15,8 @@ import views.MainView;
  */
 public class Main{
     
-    
-    private static JFrame progressFrame;
-    
-    private static void initFXGUI()
-    {
-        progressFrame = new JFrame("Progress and Goal View");
-        final JFXPanel fxPanel = new JFXPanel();
-        progressFrame.add(fxPanel);
-        progressFrame.setSize(760,450);
-        progressFrame.setVisible(false);
-        progressFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        Platform.runLater(() -> {
-            JavaFXTableView progressView = new JavaFXTableView();
-            progressView.initialize(fxPanel);
-        });
-    }
-    
-    
     public static void main(String[] args){
-        SwingUtilities.invokeLater(() -> {
-            initFXGUI();
-        });
         TraineeHolder nameHolder = new TraineeHolder();
-        MainView theView = new MainView();
-        OverallController theController = new OverallController(theView, progressFrame, nameHolder);
-        theView.setController(theController);
-    }
-    
-    
+        OverallController theController = new OverallController(nameHolder);
+    }   
 }

@@ -7,11 +7,15 @@
 package controller;
 
 import java.util.List;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import model.ExerciseHolder;
 import model.Exercises;
 import model.TraineeHolder;
 import views.ExerciseDescriptionView;
+import views.JavaFXTableView;
 import views.MainView;
 import views.WorkoutSelectionView;
 
@@ -28,17 +32,30 @@ public class OverallController implements OverallControllerCallback {
     ExerciseHolder curExerHolder;
     TraineeHolder allNameHolder;
     
-    public OverallController(MainView inputMainView, JFrame inputProgressView, TraineeHolder inNameHolder)
+    public OverallController(TraineeHolder inNameHolder)
     {
-        theProgressView = inputProgressView;
         allNameHolder = inNameHolder;
-        theMainView = inputMainView;
-        theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
-        theMainView.btnStartExerciseListener(clicked ->
-        {
-                startExerciseSelection();
-                curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
+
+        SwingUtilities.invokeLater(() -> {
+            theMainView = new MainView(this);
+            theMainView.btnProgressAndGoalListener( clicked ->showProgressGoal());
+            theMainView.btnStartExerciseListener(clicked ->
+            {
+                    startExerciseSelection();
+                    curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
+            });
+            theProgressView = new JFrame("Progress and Goal View");
+            final JFXPanel fxPanel = new JFXPanel();
+            theProgressView.add(fxPanel);
+            theProgressView.setSize(760,450);
+            theProgressView.setVisible(true);
+            theProgressView.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            Platform.runLater(() -> {
+                JavaFXTableView progressView = new JavaFXTableView();
+                progressView.initialize(fxPanel);
+            }); 
         });
+        
     }
     
     private void startExerciseSelection()
