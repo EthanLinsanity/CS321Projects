@@ -18,7 +18,7 @@ public enum ExerciseNames {
     BENTOVERBARBELROW   ("BentOver Barbell Row","ExerciseImages/BentoverBarbellRow.jpg","ExerciseDescriptions/BentoverBarbellRow.txt"),
     CALFRAISE           ("Calf Raises","ExerciseImages/CalfRaise.jpg","ExerciseDescriptions/CalfRaise.txt"),
     CRUNCHES            ("Crunches","ExerciseImages/Crunches.jpg","ExerciseDescriptions/Crunches.txt"),
-    FRONTDUMBELLRAISE   ("Front Dumbell Raises","ExerciseImages/FrontDumbbellRaise.jpg","ExerciseDescriptions/FrontDumbbellRaise.txt"),
+    FRONTDUMBBELLRAISE  ("Front Dumbbell Raises","ExerciseImages/FrontDumbbellRaise.jpg","ExerciseDescriptions/FrontDumbbellRaise.txt"),
     FULLSQUAT           ("Full Squats","ExerciseImages/FullSquat.jpg","ExerciseDescriptions/FullSquat.txt"),
     ONEARMTRICEP        ("Triceps","ExerciseImages/OneArmTricep.jpg","ExerciseDescriptions/OneArmTricep.txt"),
     SHOULDERPRESS       ("Shoulder Press","ExerciseImages/ShoulderPress.jpg","ExerciseDescriptions/ShoulderPress.txt"),

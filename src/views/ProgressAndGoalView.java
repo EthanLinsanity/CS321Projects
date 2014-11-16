@@ -23,8 +23,8 @@ import javax.swing.JFrame;
 public class ProgressAndGoalView 
 {
     int i_barbell = 8;
-    private JFrame swingFrame;
-    private OverallControllerCallback myController;
+    private final JFrame swingFrame;
+    private final OverallControllerCallback myController;
     
     public ProgressAndGoalView(OverallControllerCallback inController)
     {
