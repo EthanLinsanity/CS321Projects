@@ -34,7 +34,7 @@ public class ExerciseHolder {
         Exercises output = null;
         for(Exercises e : allExercises)
         {
-            if(e.getName().equals(exerciseName))
+            if(e.getExerName().equals(exerciseName))
             {
                 output = e;
                 break;

@@ -54,12 +54,12 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     
     private void fillContents()
     {        
-        lblExerciseName.setText(exerToDisp.getName());
-        lblPrevReps.setText(Integer.toString(exerToDisp.getGoalRep()));
-        lblPrevSets.setText(Integer.toString(exerToDisp.getGoalSet()));
+        lblExerciseName.setText(exerToDisp.getExerName());
+        lblPrevReps.setText(Integer.toString(exerToDisp.getLastReps()));
+        lblPrevSets.setText(Integer.toString(exerToDisp.getLastSets()));
         
-        txtCurReps.setText(Integer.toString(exerToDisp.getActualRep()));
-        txtCurSets.setText(Integer.toString(exerToDisp.getActualSet()));
+        txtCurReps.setText(Integer.toString(exerToDisp.getActualReps()));
+        txtCurSets.setText(Integer.toString(exerToDisp.getActualSets()));
         
         String imageFilePath = exerToDisp.getPicturePath();
         String descriptionPath = exerToDisp.getDesciption();

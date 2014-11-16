@@ -53,13 +53,13 @@ public class ProgressAndGoalView
         tableView.setEditable(true);
         
         TableColumn<Exercises,String> exerNameCol = new TableColumn<>("Work Out Names");
-        exerNameCol.setCellValueFactory(cellData -> cellData.getValue().pExerNameProperty());
+        exerNameCol.setCellValueFactory(cellData -> cellData.getValue().exerNameProperty());
         
         TableColumn<Exercises,Number> goalRepCol = new TableColumn<>("Goal Reps");
-        goalRepCol.setCellValueFactory(cellData -> cellData.getValue().pGoalRepsProperty());
+        goalRepCol.setCellValueFactory(cellData -> cellData.getValue().goalRepsProperty());
         
         TableColumn<Exercises,Number> goalSetCol = new TableColumn<>("Goal Sets");
-        goalSetCol.setCellValueFactory(cellData -> cellData.getValue().pGoalSetsProperty());
+        goalSetCol.setCellValueFactory(cellData -> cellData.getValue().goalSetsProperty());
         
         Callback<TableColumn<Exercises, Number>, TableCell<Exercises, Number>> cellFactory =
             new Callback<TableColumn<Exercises, Number>, TableCell<Exercises, Number>>() {
@@ -74,6 +74,9 @@ public class ProgressAndGoalView
         goalRepCol.setCellFactory(cellFactory);
         goalSetCol.setCellFactory(cellFactory);
         
+        goalSetCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.20));
+        goalRepCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.20));
+        tableView.setPrefWidth(400);
         
         populateData();
         
