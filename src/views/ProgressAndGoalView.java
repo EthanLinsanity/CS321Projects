@@ -1,18 +1,28 @@
 package views;
  
 import controller.OverallControllerCallback;
+import java.util.Arrays;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 import javax.swing.JFrame;
 import model.ExerciseHolder;
@@ -23,10 +33,10 @@ import model.Trainee;
 
 public class ProgressAndGoalView 
 {
-    int i_barbell = 8;
     private final JFrame swingFrame;
     private final OverallControllerCallback myController;
     private TableView<Exercises> tableView;
+    private StackedBarChart<String,Number> stackedBarChart;
     
     public ProgressAndGoalView(OverallControllerCallback inController)
     {
@@ -34,7 +44,7 @@ public class ProgressAndGoalView
         swingFrame =new JFrame("Progress and Goal View");
         final JFXPanel fxPanel = new JFXPanel();
         swingFrame.add(fxPanel);
-        swingFrame.setSize(760,450);
+        swingFrame.setSize(900,450);
         swingFrame.setVisible(false);
         swingFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
             Platform.runLater(() -> {
@@ -55,6 +65,12 @@ public class ProgressAndGoalView
         TableColumn<Exercises,String> exerNameCol = new TableColumn<>("Work Out Names");
         exerNameCol.setCellValueFactory(cellData -> cellData.getValue().exerNameProperty());
         
+        TableColumn<Exercises,Number> actualRepCol = new TableColumn<>("Reps");
+        actualRepCol.setCellValueFactory(cellData -> cellData.getValue().actualRepsProperty());
+        
+        TableColumn<Exercises,Number> actualSetCol = new TableColumn<>("Sets");
+        actualSetCol.setCellValueFactory(cellData -> cellData.getValue().actualSetsProperty());
+        
         TableColumn<Exercises,Number> goalRepCol = new TableColumn<>("Goal Reps");
         goalRepCol.setCellValueFactory(cellData -> cellData.getValue().goalRepsProperty());
         
@@ -73,21 +89,54 @@ public class ProgressAndGoalView
         
         goalRepCol.setCellFactory(cellFactory);
         goalSetCol.setCellFactory(cellFactory);
+        goalRepCol.setOnEditCommit(
+                (TableColumn.CellEditEvent<Exercises,Number> t) -> {
+                    ((Exercises) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setGoalReps((int) t.getNewValue());
+        });
+                
+        goalSetCol.setOnEditCommit(
+                (TableColumn.CellEditEvent<Exercises,Number> t) -> {
+                    ((Exercises) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())).setGoalSets((int) t.getNewValue());
+        });
         
+        actualRepCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.10));
+        actualSetCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.10));
         goalSetCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.20));
         goalRepCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.20));
         tableView.setPrefWidth(400);
         
         populateData();
+        tableView.getColumns().addAll(exerNameCol, actualRepCol, goalRepCol, actualSetCol, goalSetCol);
+        tableView.getSelectionModel().select(0);
         
-        tableView.getColumns().addAll(exerNameCol, goalRepCol, goalSetCol);
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        xAxis.setCategories(FXCollections.<String> observableArrayList(Arrays.asList(
+                "Sets", 
+                "Reps")));
+        
+//        XYChart.Series<String,Number> series1 = new XYChart.Series();
+        Exercises currExer = tableView.getSelectionModel().getSelectedItem();
+        ObservableList<XYChart.Data> dataList = 
+                FXCollections.observableArrayList(
+                        new XYChart.Data("Sets",currExer.getGoalSets()),
+                        new XYChart.Data("Reps",currExer.getGoalReps()));
+        XYChart.Series series1 = new XYChart.Series(dataList);
+//        
+//        
+//        series1.getData().add(new XYChart.Data("Sets",currExer.goalSetsProperty()));
+//        series1.getData().add(new XYChart.Data("Reps",currExer.goalRepsProperty()));
+        stackedBarChart = new StackedBarChart<>(xAxis,yAxis);
+        stackedBarChart.getData().add(series1);
         
         HBox hBox = new HBox();
         hBox.setSpacing(8);
-        hBox.getChildren().addAll(tableView);
+        hBox.getChildren().addAll(tableView,stackedBarChart);
         
         root.getChildren().add(hBox);
-        inputPanel.setScene(new Scene(root,750,400));
+        inputPanel.setScene(new Scene(root,900,450));
         
         
 //        TableView<XYChart.Data> tableView = new TableView<>();  
@@ -166,7 +215,7 @@ public class ProgressAndGoalView
 //        series1.setName("Actual");
 //         
 //        //Series 2--the goals of the workout; the bar graph in the back
-//        int i_barbellGoal = (15-i_barbell);
+//        int i_barbellGoal = (15-8);
 //        
 //        XYChart.Series<String,Number> series2 = new XYChart.Series();
 //        series2.setName("Goals");
@@ -184,7 +233,6 @@ public class ProgressAndGoalView
 //        hBox.getChildren().addAll(tableView, stackedBarChart);
 //         
 //        root.getChildren().add(hBox);
-         
 //        inputPanel.setScene(new Scene(root,750,400));
     }
     
@@ -256,7 +304,21 @@ public class ProgressAndGoalView
                 @Override
                 public void handle(KeyEvent t) {
                     if (t.getCode() == KeyCode.ENTER) {
-                        commitEdit(Double.parseDouble(textField.getText()));
+                        try
+                        {
+                            commitEdit(Integer.parseInt(textField.getText()));
+                        }
+                        catch(NumberFormatException e)
+                        {
+                            Stage dialogStage = new Stage();
+                            dialogStage.initModality(Modality.WINDOW_MODAL);
+                            VBox box = new VBox();
+                            box.setSpacing(10);
+                            box.setPadding(new Insets(0,20,10,20));
+                            box.getChildren().addAll(new Text("Integers Only Please!"));
+                            dialogStage.setScene(new Scene(box,box.getPrefWidth(),box.getPrefHeight()));
+                            dialogStage.show();
+                        }
                     } else if (t.getCode() == KeyCode.ESCAPE) {
                         cancelEdit();
                     }

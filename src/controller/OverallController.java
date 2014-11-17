@@ -53,6 +53,7 @@ public class OverallController implements OverallControllerCallback {
     }
     private void showProgressGoal()
     {
+        theProgressView.populateData();
         theProgressView.setVisibility(true);
     }
     
