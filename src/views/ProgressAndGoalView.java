@@ -3,6 +3,8 @@ package views;
 import controller.OverallControllerCallback;
 import java.util.Arrays;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -37,6 +39,8 @@ public class ProgressAndGoalView
     private final OverallControllerCallback myController;
     private TableView<Exercises> tableView;
     private StackedBarChart<String,Number> stackedBarChart;
+    private ObservableList<XYChart.Data> goalDataList;
+    private ObservableList<XYChart.Data> actualDataList;
     
     public ProgressAndGoalView(OverallControllerCallback inController)
     {
@@ -91,8 +95,9 @@ public class ProgressAndGoalView
         goalSetCol.setCellFactory(cellFactory);
         goalRepCol.setOnEditCommit(
                 (TableColumn.CellEditEvent<Exercises,Number> t) -> {
+                    int numToSetTo = (int) t.getNewValue();
                     ((Exercises) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setGoalReps((int) t.getNewValue());
+                            t.getTablePosition().getRow())).setGoalReps(numToSetTo);
         });
                 
         goalSetCol.setOnEditCommit(
@@ -111,25 +116,49 @@ public class ProgressAndGoalView
         tableView.getColumns().addAll(exerNameCol, actualRepCol, goalRepCol, actualSetCol, goalSetCol);
         tableView.getSelectionModel().select(0);
         
+        //--- Add change listener
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            //Check whether item is selected and set value of selected item to Label
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
+                Exercises currExer = tableView.getSelectionModel().getSelectedItem();
+                NumberBinding diff = Bindings.subtract(currExer.goalSetsProperty(), currExer.getActualSets());
+                goalDataList.get(0).YValueProperty().bind(diff);
+                NumberBinding diff2 = Bindings.subtract(currExer.goalRepsProperty(), currExer.getActualReps());
+                goalDataList.get(1).YValueProperty().bind(diff2);
+                actualDataList.get(0).YValueProperty().bind(currExer.actualSetsProperty());
+                actualDataList.get(1).YValueProperty().bind(currExer.actualRepsProperty());
+                stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
+            }
+        });
+        
+        //--- Prepare StackedBarChart
+        Exercises currExer = tableView.getSelectionModel().getSelectedItem();
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setCategories(FXCollections.<String> observableArrayList(Arrays.asList(
                 "Sets", 
                 "Reps")));
+        yAxis.setLabel("How Many");
         
-//        XYChart.Series<String,Number> series1 = new XYChart.Series();
-        Exercises currExer = tableView.getSelectionModel().getSelectedItem();
-        ObservableList<XYChart.Data> dataList = 
-                FXCollections.observableArrayList(
+        goalDataList = FXCollections.observableArrayList(
                         new XYChart.Data("Sets",currExer.getGoalSets()),
                         new XYChart.Data("Reps",currExer.getGoalReps()));
-        XYChart.Series series1 = new XYChart.Series(dataList);
-//        
-//        
-//        series1.getData().add(new XYChart.Data("Sets",currExer.goalSetsProperty()));
-//        series1.getData().add(new XYChart.Data("Reps",currExer.goalRepsProperty()));
+        NumberBinding diff = Bindings.subtract(currExer.goalSetsProperty(), currExer.getActualSets());
+        goalDataList.get(0).YValueProperty().bind(diff);
+        NumberBinding diff2 = Bindings.subtract(currExer.goalRepsProperty(), currExer.getActualReps());
+        goalDataList.get(1).YValueProperty().bind(diff2);
+        XYChart.Series series1 = new XYChart.Series(goalDataList);
+        series1.setName("Goal");
+        
+        actualDataList = FXCollections.observableArrayList(
+                        new XYChart.Data("Sets",currExer.getActualSets()),
+                        new XYChart.Data("Reps",currExer.getActualReps()));
+        XYChart.Series series2 = new XYChart.Series(actualDataList);
+        series2.setName("Achieved");
+        
         stackedBarChart = new StackedBarChart<>(xAxis,yAxis);
-        stackedBarChart.getData().add(series1);
+        stackedBarChart.getData().addAll(series1,series2);
+        stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
         
         HBox hBox = new HBox();
         hBox.setSpacing(8);
@@ -137,103 +166,6 @@ public class ProgressAndGoalView
         
         root.getChildren().add(hBox);
         inputPanel.setScene(new Scene(root,900,450));
-        
-        
-//        TableView<XYChart.Data> tableView = new TableView<>();  
-//        ObservableList<XYChart.Data> dataList =
-//            FXCollections.observableArrayList(
-////                new XYChart.Data("BARBELLCURL", i_barbell),         //exerToDisp.getActualSet()  Changes the Sets ROW in the table
-////                new XYChart.Data("BARBELL DEADLIFT", i_barbell),
-////                new XYChart.Data("BARBELL ROW", i_barbell),
-////                new XYChart.Data("CALF RAISES", i_barbell),
-////                new XYChart.Data("CRUNCHES", i_barbell),
-////                new XYChart.Data("DUMBELL RAISES", i_barbell),
-////                new XYChart.Data("FULL SQUAT", i_barbell),
-////                new XYChart.Data("TRICEPS", i_barbell),
-////                new XYChart.Data("CALF RAISES", i_barbell),
-////                new XYChart.Data("SHOULDER PRESS", i_barbell),
-////                new XYChart.Data("SITUPS", i_barbell),
-//                new XYChart.Data("LUNGES", 15),
-//                new XYChart.Data("Sets",5),
-//                new XYChart.Data("Reps",7));                    //Changs the Reps ROW in the table
-//
-//        tableView.setEditable(true);
-////        tableView.setFixedCellSize(40);     //sets the size of the cell downward
-//        Callback<TableColumn, TableCell> cellFactory =
-//            new Callback<TableColumn, TableCell>() {
-//                @Override
-//                public TableCell call(TableColumn p) {
-//                    return new EditingCell();
-//                }
-//            };
-//         
-//        TableColumn columnWorkout = new TableColumn("WorkOut");
-//        columnWorkout.setCellValueFactory(
-//            new PropertyValueFactory<XYChart.Data,String>("XValue"));
-//         
-//        TableColumn columnSets = new TableColumn("Sets");
-//        columnSets.setCellValueFactory(
-//            new PropertyValueFactory<XYChart.Data,Number>("YValue"));
-//        
-//        TableColumn columnReps = new TableColumn("Reps");
-//        columnReps.setCellValueFactory(
-//            new PropertyValueFactory<XYChart.Data,Number>("YValue"));
-//         
-//        //--- Add for Editable Cell of Value field, in Number
-////        columnSets.setCellFactory(cellFactory);
-//        columnReps.setCellFactory(cellFactory);
-//         
-////        columnSets.setOnEditCommit(
-////            new EventHandler<TableColumn.CellEditEvent<XYChart.Data, Number>>() {
-////                 
-////                @Override public void handle(TableColumn.CellEditEvent<XYChart.Data, Number> t) {
-////                    ((XYChart.Data)t.getTableView().getItems().get(
-////                            t.getTablePosition().getRow())).setYValue(t.getNewValue());
-////                }
-////            });
-//        columnReps.setOnEditCommit(
-//            new EventHandler<TableColumn.CellEditEvent<XYChart.Data, Number>>() {
-//
-//                @Override public void handle(TableColumn.CellEditEvent<XYChart.Data, Number> t) {
-//                    ((XYChart.Data)t.getTableView().getItems().get(
-//                            t.getTablePosition().getRow())).setYValue(t.getNewValue());
-//                }
-//            });
-//        
-//        
-//        //--- Prepare StackedBarChart
-//        final CategoryAxis xAxis = new CategoryAxis();
-//        final NumberAxis yAxis = new NumberAxis();
-//        xAxis.setLabel("A Screen Like This For Every Type of Exercise");
-//        xAxis.setCategories(FXCollections.<String> observableArrayList(Arrays.asList(
-//                "Sets", 
-//                "Reps")));
-//        yAxis.setLabel("How Many");
-//        final StackedBarChart<String,Number> stackedBarChart = new StackedBarChart<>(xAxis,yAxis);
-//        stackedBarChart.setTitle("Exercise: Ab Crunches");
-//        XYChart.Series series1 = new XYChart.Series(dataList);
-//        series1.setName("Actual");
-//         
-//        //Series 2--the goals of the workout; the bar graph in the back
-//        int i_barbellGoal = (15-8);
-//        
-//        XYChart.Series<String,Number> series2 = new XYChart.Series();
-//        series2.setName("Goals");
-//        series2.getData().add(new XYChart.Data("Sets", i_barbellGoal));  //Changes the goal graph CONSTANT
-//        series2.getData().add(new XYChart.Data("Reps", 30));
-//         
-//        stackedBarChart.getData().addAll(series1, series2);
-//         
-//        //--- Prepare TableView
-//        tableView.setItems(dataList);
-//        tableView.getColumns().addAll(columnWorkout, columnSets, columnReps);
-//         
-//        HBox hBox = new HBox();
-//        hBox.setSpacing(8);
-//        hBox.getChildren().addAll(tableView, stackedBarChart);
-//         
-//        root.getChildren().add(hBox);
-//        inputPanel.setScene(new Scene(root,750,400));
     }
     
     public void populateData()
@@ -241,10 +173,14 @@ public class ProgressAndGoalView
         Trainee currentTrainee = myController.getCurTrainee();
         ExerciseHolder currentExerciseHolder = currentTrainee.getExerciseHolder();
         
-        ObservableList<Exercises> dataList = FXCollections.observableArrayList(currentExerciseHolder.getAllExercises());
-        tableView.setItems(dataList);   
+        ObservableList<Exercises> exerciseList = FXCollections.observableArrayList(currentExerciseHolder.getAllExercises());
+        tableView.setItems(exerciseList);   
     }
     
+    private void setStackBarChart()
+    {
+        
+    }
     
     
     class EditingCell extends TableCell<Exercises, Number> {

@@ -38,8 +38,8 @@ public class Exercises {
         {
             this.goalReps = new SimpleIntegerProperty(10);
             this.goalSets = new SimpleIntegerProperty(5);
-            this.actualSets = new SimpleIntegerProperty(0);
-            this.actualReps = new SimpleIntegerProperty(0);
+            this.actualSets = new SimpleIntegerProperty(2);
+            this.actualReps = new SimpleIntegerProperty(3);
             this.lastSets = new SimpleIntegerProperty(0);
             this.lastReps = new SimpleIntegerProperty(0);
         }
