@@ -4,7 +4,6 @@ import controller.OverallControllerCallback;
 import java.util.Arrays;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.NumberBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -68,16 +67,12 @@ public class ProgressAndGoalView
         
         TableColumn<Exercises,String> exerNameCol = new TableColumn<>("Work Out Names");
         exerNameCol.setCellValueFactory(cellData -> cellData.getValue().exerNameProperty());
-        
         TableColumn<Exercises,Number> actualRepCol = new TableColumn<>("Reps");
         actualRepCol.setCellValueFactory(cellData -> cellData.getValue().actualRepsProperty());
-        
         TableColumn<Exercises,Number> actualSetCol = new TableColumn<>("Sets");
         actualSetCol.setCellValueFactory(cellData -> cellData.getValue().actualSetsProperty());
-        
         TableColumn<Exercises,Number> goalRepCol = new TableColumn<>("Goal Reps");
         goalRepCol.setCellValueFactory(cellData -> cellData.getValue().goalRepsProperty());
-        
         TableColumn<Exercises,Number> goalSetCol = new TableColumn<>("Goal Sets");
         goalSetCol.setCellValueFactory(cellData -> cellData.getValue().goalSetsProperty());
         
@@ -93,19 +88,6 @@ public class ProgressAndGoalView
         
         goalRepCol.setCellFactory(cellFactory);
         goalSetCol.setCellFactory(cellFactory);
-        goalRepCol.setOnEditCommit(
-                (TableColumn.CellEditEvent<Exercises,Number> t) -> {
-                    int numToSetTo = (int) t.getNewValue();
-                    ((Exercises) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setGoalReps(numToSetTo);
-        });
-                
-        goalSetCol.setOnEditCommit(
-                (TableColumn.CellEditEvent<Exercises,Number> t) -> {
-                    ((Exercises) t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())).setGoalSets((int) t.getNewValue());
-        });
-        
         actualRepCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.10));
         actualSetCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.10));
         goalSetCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.20));
@@ -115,21 +97,6 @@ public class ProgressAndGoalView
         populateData();
         tableView.getColumns().addAll(exerNameCol, actualRepCol, goalRepCol, actualSetCol, goalSetCol);
         tableView.getSelectionModel().select(0);
-        
-        //--- Add change listener
-        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            //Check whether item is selected and set value of selected item to Label
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                Exercises currExer = tableView.getSelectionModel().getSelectedItem();
-                NumberBinding diff = Bindings.subtract(currExer.goalSetsProperty(), currExer.getActualSets());
-                goalDataList.get(0).YValueProperty().bind(diff);
-                NumberBinding diff2 = Bindings.subtract(currExer.goalRepsProperty(), currExer.getActualReps());
-                goalDataList.get(1).YValueProperty().bind(diff2);
-                actualDataList.get(0).YValueProperty().bind(currExer.actualSetsProperty());
-                actualDataList.get(1).YValueProperty().bind(currExer.actualRepsProperty());
-                stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
-            }
-        });
         
         //--- Prepare StackedBarChart
         Exercises currExer = tableView.getSelectionModel().getSelectedItem();
@@ -141,12 +108,9 @@ public class ProgressAndGoalView
         yAxis.setLabel("How Many");
         
         goalDataList = FXCollections.observableArrayList(
-                        new XYChart.Data("Sets",currExer.getGoalSets()),
-                        new XYChart.Data("Reps",currExer.getGoalReps()));
-        NumberBinding diff = Bindings.subtract(currExer.goalSetsProperty(), currExer.getActualSets());
-        goalDataList.get(0).YValueProperty().bind(diff);
-        NumberBinding diff2 = Bindings.subtract(currExer.goalRepsProperty(), currExer.getActualReps());
-        goalDataList.get(1).YValueProperty().bind(diff2);
+                        new XYChart.Data("Sets",currExer.getGoalSets()-currExer.getActualSets()),
+                        new XYChart.Data("Reps",currExer.getGoalReps()-currExer.getActualReps()));
+
         XYChart.Series series1 = new XYChart.Series(goalDataList);
         series1.setName("Goal");
         
@@ -157,8 +121,24 @@ public class ProgressAndGoalView
         series2.setName("Achieved");
         
         stackedBarChart = new StackedBarChart<>(xAxis,yAxis);
-        stackedBarChart.getData().addAll(series1,series2);
+        stackedBarChart.getData().addAll(series2,series1);
         stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
+        
+        //--- Add change listener and rebind graph data to the table row selected.
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            //Check whether item is selected and set value of selected item to Label
+            if (tableView.getSelectionModel().getSelectedItem() != null) {
+                Exercises tmpExer = tableView.getSelectionModel().getSelectedItem();
+                goalDataList.get(0).YValueProperty().bind(
+                            Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), currExer.getActualSets()));
+                goalDataList.get(1).YValueProperty().bind(
+                            Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), currExer.getActualReps()));
+                actualDataList.get(0).setYValue(tmpExer.getActualSets());
+                actualDataList.get(1).setYValue(tmpExer.getActualReps());
+                stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
+            }
+        });
+        
         
         HBox hBox = new HBox();
         hBox.setSpacing(8);
@@ -176,12 +156,6 @@ public class ProgressAndGoalView
         ObservableList<Exercises> exerciseList = FXCollections.observableArrayList(currentExerciseHolder.getAllExercises());
         tableView.setItems(exerciseList);   
     }
-    
-    private void setStackBarChart()
-    {
-        
-    }
-    
     
     class EditingCell extends TableCell<Exercises, Number> {
          
