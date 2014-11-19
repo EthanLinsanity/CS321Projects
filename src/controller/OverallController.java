@@ -7,6 +7,7 @@
 package controller;
 
 import java.util.List;
+import javafx.application.Platform;
 import javax.swing.SwingUtilities;
 import model.ExerciseHolder;
 import model.Exercises;
@@ -53,7 +54,10 @@ public class OverallController implements OverallControllerCallback {
     }
     private void showProgressGoal()
     {
-        theProgressView.populateData();
+        Platform.runLater(()->
+        {
+            theProgressView.rePopulateData();
+        });
         theProgressView.setVisibility(true);
     }
     
@@ -94,6 +98,17 @@ public class OverallController implements OverallControllerCallback {
     @Override
     public Trainee getCurTrainee() {
         return allNameHolder.getThisTrainee(theMainView.cboNameSelected());
+    }
+
+    @Override
+    public void mainUserChanged() {
+        if(theProgressView.isVisible())
+        {
+            Platform.runLater(()->
+            {
+                theProgressView.rePopulateData();
+            });
+        }
     }
     
 }

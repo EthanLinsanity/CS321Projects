@@ -23,4 +23,6 @@ public interface OverallControllerCallback {
     void exerSelectionComplete(String toString);
 
     public Trainee getCurTrainee();
+
+    public void mainUserChanged();
 }

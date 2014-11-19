@@ -50,6 +50,12 @@ public class MainView {
                 myController.addATrainee(response);
             } 
         });
+        
+        nameComboBox.addActionListener(selected->
+        {
+            myController.mainUserChanged();
+        });
+        
         lblName = new JLabel("Name: ");
         lblName.setHorizontalTextPosition(JLabel.RIGHT);
         traineePanel.add(lblName);

@@ -60,6 +60,11 @@ public class ProgressAndGoalView
         swingFrame.setVisible(input);
     }
     
+    public boolean isVisible()
+    {
+        return swingFrame.isVisible();
+    }
+    
     private void initialize(JFXPanel inputPanel) {
         Group root = new Group();
         tableView = new TableView<>();
@@ -94,7 +99,11 @@ public class ProgressAndGoalView
         goalRepCol.prefWidthProperty().bind(tableView.widthProperty().multiply(0.20));
         tableView.setPrefWidth(400);
         
-        populateData();
+        Trainee currentTrainee = myController.getCurTrainee();
+        ExerciseHolder currentExerciseHolder = currentTrainee.getExerciseHolder();
+        
+        ObservableList<Exercises> exerciseList = FXCollections.observableArrayList(currentExerciseHolder.getAllExercises());
+        tableView.setItems(exerciseList);
         tableView.getColumns().addAll(exerNameCol, actualRepCol, goalRepCol, actualSetCol, goalSetCol);
         tableView.getSelectionModel().select(0);
         
@@ -125,20 +134,7 @@ public class ProgressAndGoalView
         stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
         
         //--- Add change listener and rebind graph data to the table row selected.
-        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-            //Check whether item is selected and set value of selected item to Label
-            if (tableView.getSelectionModel().getSelectedItem() != null) {
-                Exercises tmpExer = tableView.getSelectionModel().getSelectedItem();
-                goalDataList.get(0).YValueProperty().bind(
-                            Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), currExer.getActualSets()));
-                goalDataList.get(1).YValueProperty().bind(
-                            Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), currExer.getActualReps()));
-                actualDataList.get(0).setYValue(tmpExer.getActualSets());
-                actualDataList.get(1).setYValue(tmpExer.getActualReps());
-                stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
-            }
-        });
-        
+        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> reCalcStackedBar());
         
         HBox hBox = new HBox();
         hBox.setSpacing(8);
@@ -148,13 +144,36 @@ public class ProgressAndGoalView
         inputPanel.setScene(new Scene(root,900,450));
     }
     
-    public void populateData()
+    public void reCalcStackedBar()
+    {
+        //Check whether item is selected and set value of selected item to Label
+        if (tableView.getSelectionModel().getSelectedItem() != null) 
+        {
+            Exercises tmpExer = tableView.getSelectionModel().getSelectedItem();
+            goalDataList.get(0).YValueProperty().bind(
+                        Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), tmpExer.getActualSets()));
+            goalDataList.get(1).YValueProperty().bind(
+                        Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), tmpExer.getActualReps()));
+            actualDataList.get(0).setYValue(tmpExer.getActualSets());
+            actualDataList.get(1).setYValue(tmpExer.getActualReps());
+            stackedBarChart.setTitle("Exercise: " + tmpExer.getExerName());
+        }
+        else
+        {
+            tableView.getSelectionModel().select(0);
+            reCalcStackedBar();
+        }
+    }
+    
+    public void rePopulateData()
     {
         Trainee currentTrainee = myController.getCurTrainee();
         ExerciseHolder currentExerciseHolder = currentTrainee.getExerciseHolder();
         
         ObservableList<Exercises> exerciseList = FXCollections.observableArrayList(currentExerciseHolder.getAllExercises());
-        tableView.setItems(exerciseList);   
+        tableView.setItems(exerciseList);
+        
+        reCalcStackedBar();
     }
     
     class EditingCell extends TableCell<Exercises, Number> {
