@@ -7,6 +7,7 @@
 package controller;
 
 import java.util.List;
+import java.util.Random;
 import javafx.application.Platform;
 import javax.swing.SwingUtilities;
 import model.ExerciseHolder;
@@ -110,5 +111,18 @@ public class OverallController implements OverallControllerCallback {
             });
         }
     }
-    
+
+    @Override
+    public Exercises recommendNext(String inName) {
+        List<String> namePool = curExerHolder.getAllNames();
+        String nameToReturn = inName;
+        Random randomGenerator = new Random();
+        int containerSize = curExerHolder.getSize();
+        while(nameToReturn.equalsIgnoreCase(inName))
+        {
+            int randomInd = randomGenerator.nextInt(containerSize);
+            nameToReturn = curExerHolder.getNameAtIndex(randomInd);
+        }
+        return curExerHolder.getExercise(nameToReturn);
+    }
 }

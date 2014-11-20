@@ -7,6 +7,7 @@
 package controller;
 
 import java.util.List;
+import model.Exercises;
 import model.Trainee;
 
 /**
@@ -25,4 +26,6 @@ public interface OverallControllerCallback {
     public Trainee getCurTrainee();
 
     public void mainUserChanged();
+
+    public Exercises recommendNext(String inName);
 }

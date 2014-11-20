@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ExerciseHolder {
        
     private ArrayList<Exercises> allExercises;
-    
+    private int size;
     public ExerciseHolder()
     {
         startComponents();
@@ -22,7 +22,8 @@ public class ExerciseHolder {
     //this method initializes all exercies and puts them in an array list
     private void startComponents(){
         
-        allExercises = new ArrayList<>(ExerciseNames.getNumEl());
+        size = ExerciseNames.getNumEl();
+        allExercises = new ArrayList<>(size);
         for(ExerciseNames n : ExerciseNames.values())
         {
             Exercises newExer= new Exercises(n);
@@ -51,5 +52,15 @@ public class ExerciseHolder {
     public ArrayList<Exercises> getAllExercises()
     {
         return allExercises;
+    }
+    
+    public String getNameAtIndex(int Index)
+    {
+        return allExercises.get(Index).getExerName();
+    }
+    
+    public int getSize()
+    {
+        return size;
     }
 }

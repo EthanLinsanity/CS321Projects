@@ -16,7 +16,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 import model.Exercises;
 
 /**
@@ -27,11 +30,11 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     /**
      * Creates new form ExerciseDescrptionView
      */
-    private OverallControllerCallback controllerCallback;
-    private final Exercises exerToDisp;
+    private OverallControllerCallback myController;
+    private Exercises exerToDisp;
     
     public ExerciseDescriptionView(OverallControllerCallback ctl, Exercises inExercise) {
-        controllerCallback = ctl;
+        myController = ctl;
         exerToDisp = inExercise;
         initComponents();
         this.setSize(this.getPreferredSize());
@@ -47,7 +50,7 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent windowEvent)
             {
-                controllerCallback.showMainView();
+                GoHomeButtonActionPerformed(null);
             }
         });
     }
@@ -60,6 +63,37 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         
         txtCurReps.setText(Integer.toString(exerToDisp.getActualReps()));
         txtCurSets.setText(Integer.toString(exerToDisp.getActualSets()));
+        
+        txtCurReps.setInputVerifier(new InputVerifier() {
+            @Override
+            public boolean verify(JComponent input) {
+                JTextField text = (JTextField)input;
+                String value = text.getText().trim();
+                try {
+                    Integer.parseInt(value);
+                    txtCurReps.setText(value);
+                } catch (NumberFormatException e) {
+                   txtCurReps.setText("0");
+                   return false;
+                }
+                return true;
+            }
+        });
+        txtCurSets.setInputVerifier(new InputVerifier() {
+            @Override
+            public boolean verify(JComponent input) {
+                JTextField text = (JTextField)input;
+                String value = text.getText().trim();
+                try {
+                    Integer.parseInt(value);
+                    txtCurSets.setText(value);
+                } catch (NumberFormatException e) {
+                   txtCurSets.setText("0");
+                   return false;
+                }
+                return true;
+            }
+        });
         
         String imageFilePath = exerToDisp.getPicturePath();
         String descriptionPath = exerToDisp.getDesciption();
@@ -106,6 +140,16 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         g2d.drawImage(img, 0, 0, w, h, null);
         g2d.dispose();
         return bi;
+    }
+    
+    private void saveUserInputs()
+    {
+        int repNum = Integer.parseInt(txtCurReps.getText().trim());
+        int setNum = Integer.parseInt(txtCurSets.getText().trim());
+        exerToDisp.setActualReps(0);
+        exerToDisp.setActualSets(0);
+        exerToDisp.setLastReps(repNum);
+        exerToDisp.setLastSets(setNum);
     }
     
     /**
@@ -190,6 +234,11 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
 
         RecommendNextButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         RecommendNextButton.setText("RECOMMEND NEXT");
+        RecommendNextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecommendNextButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -278,8 +327,17 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GoHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoHomeButtonActionPerformed
-        // TODO add your handling code here:
+        myController.showMainView();
+        saveUserInputs();
+        this.dispose();
     }//GEN-LAST:event_GoHomeButtonActionPerformed
+
+    private void RecommendNextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecommendNextButtonActionPerformed
+        saveUserInputs();
+        Exercises newExerToDisp = myController.recommendNext(exerToDisp.getExerName());
+        exerToDisp = newExerToDisp;
+        fillContents();
+    }//GEN-LAST:event_RecommendNextButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
