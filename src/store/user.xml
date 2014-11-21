@@ -1,63 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <AllUsers>
 <User id="0">
-<name>Guests</name>
-</User>
-<User id="1">
-<name>Guests</name>
-</User>
-<User id="2">
-<name>Guests</name>
-</User>
-<User id="3">
-<name>Guests</name>
-</User>
-<User id="4">
-<name>Guests</name>
-</User>
-<User id="5">
-<name>Guests</name>
-</User>
-<User id="6">
-<name>Guests</name>
-</User>
-<User id="7">
-<name>Guests</name>
-</User>
-<User id="8">
-<name>Guests</name>
-</User>
-<User id="9">
-<name>Guests</name>
-</User>
-<User id="10">
-<name>Guests</name>
-</User>
-<User id="11">
-<name>Guests</name>
-</User>
-<User id="12">
-<name>Guests</name>
-</User>
-<User id="13">
-<name>Guests</name>
-</User>
-<User id="14">
-<name>Guests</name>
-</User>
-<User id="15">
-<name>Guests</name>
-</User>
-<User id="16">
-<name>Guests</name>
-</User>
-<User id="17">
-<name>Guests</name>
-</User>
-<User id="18">
-<name>Guests</name>
-</User>
-<User id="19">
-<name>Guests</name>
+<name>Guest</name>
+<dataModelName>model.ExerciseHolder@1218025c</dataModelName>
+<exercies>Barbell Curl</exercies>
+<exercies>Barbell Deadlift</exercies>
+<exercies>BentOver Barbell Row</exercies>
+<exercies>Calf Raises</exercies>
+<exercies>Crunches</exercies>
+<exercies>Front Dumbbell Raises</exercies>
+<exercies>Full Squats</exercies>
+<exercies>Triceps</exercies>
+<exercies>Shoulder Press</exercies>
+<exercies>Situps</exercies>
+<exercies>Walking Lunges</exercies>
 </User>
 </AllUsers>

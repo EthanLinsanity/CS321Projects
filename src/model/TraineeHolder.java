@@ -46,4 +46,15 @@ public class TraineeHolder {
         overallNameHolder.add(new Trainee(inTraineeName));
     }
     
+    public Set<Trainee> getTraineeSet()
+    {
+        return overallNameHolder;
+    }
+    
+//    @Override
+//    public String toString()
+//    {
+//        return getTraineeNames();
+//    }
+    
 }

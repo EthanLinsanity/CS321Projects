@@ -13,12 +13,13 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import model.ExerciseHolder;
+import model.Exercises;
 import model.Trainee;
+import model.TraineeHolder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-
-import model.TraineeHolder;
 
 /**
  *
@@ -66,21 +67,25 @@ public class CreateXML
             document.appendChild(rootElement);
 
             // add the data
-            //rootElement.appendChild(getUser(document, "0", "Guest"));
-            //rootElement.appendChild(getUser(document, "1", TraineeHolder.overallNameHolder.getTraineeNames()));
-            for(int i = 0; i < 20; i++)
+            TraineeHolder tmp = new TraineeHolder();
+            receiveData(tmp);
+            
+            
+           
+            for(int i = 0; i < 1; i++)
             {
-                rootElement.appendChild(getUser(document,Integer.toString(i), "Guests"));
+                rootElement.appendChild(getUser(document,Integer.toString(i), name, exerHolder,arrayNames));
             }
           
-            
+            //TraineeHolder.getTraineeNames();
+             
             // creating and writing to xml file
             TransformerFactory transformerFactory = TransformerFactory
                     .newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(document);
 
-            String place = System.getProperty("user.dir") + "\\src\\model\\user.xml";
+            String place = System.getProperty("user.dir") + "\\src\\store\\user.xml";
             System.out.println("place = " + place);
             File filePlace = new File(place);
             StreamResult streamResult = new StreamResult(filePlace);
@@ -96,6 +101,7 @@ public class CreateXML
         }
     }
 
+    
     /**
      * Write a list of students to the xml file.
      *
@@ -130,7 +136,9 @@ public class CreateXML
                 } else {
                     // Append the element making sure that the id is converted
                     // to a string
-                    rootElement.appendChild(getUser(document, Integer.toString(id), us.getName()));
+                    rootElement.appendChild(getUser(document, Integer.toString(id), us.getName(), us.getExerciseHolder(), us.getExerciseHolder().getAllNames()));
+
+                   
                     id++;
                 }
             }
@@ -173,17 +181,27 @@ public class CreateXML
      * @param phone the phone numb er as a string with no validation
      * @return an xml node element
      */
-    private static Node getUser(Document doc, String id, String firstname) {
+    private static Node getUser(Document doc, String id, String firstname,  ExerciseHolder workout, ArrayList<String>arrayNames) {
         Element user = doc.createElement("User");
-
         //set id attribute
         user.setAttribute("id", id);
-
         //create firstname element
         user.appendChild(getUserElements(doc, user, "name", firstname));
+        //create workout routine
+        user.appendChild(getUserElements(doc, user, "dataModelName", workout.toString()));
+        
+        
+        
+        for(int i=0;i<arrayNames.size();i++)
+        {
+            user.appendChild(getUserElements(doc, user, "exercies", arrayNames.get(i)));
+        }
+        
+        
 
         return user;
     }
+
 
     /**
      * Get the student elements to be appended and return an xml node
@@ -197,8 +215,58 @@ public class CreateXML
     private static Node getUserElements(Document doc, Element element, String name, String value) {
         Element node = doc.createElement(name);
         node.appendChild(doc.createTextNode(value));
+        
+        
         return node;
     }
+  
+    
+    
+ 
+    /**
+     * Receive all the data from Trainee Holder to populate the xml database
+     * 
+     * @param tmp a TraineeHolder will all the users and all their workouts
+     * @return holder that can be accessed
+     */
+    String name;
+    ExerciseHolder exerHolder;
+
+    ArrayList<String>arrayNames;
+    
+    
+    public TraineeHolder receiveData(TraineeHolder tmp)
+    {
+        TraineeHolder holder = new TraineeHolder();
+        tmp.getTraineeSet().stream().forEach(t ->
+            {
+                name=t.getName();
+                
+                exerHolder=t.getExerciseHolder();
+                
+                
+                arrayNames=t.getExerciseHolder().getAllNames();
+                //---------------------------------------------------------------------------------
+                
+                
+                t.getExerciseHolder().getAllExercises();
+                //---------------------------------------------------------------------------------
+                
+            });
+        
+        
+        return holder;    
+    }
+    
+    
+    //testing purposes
+    public void print(ArrayList<String>exerNames)
+    {
+        System.out.println("Name of Exercises: " + exerNames );  //testing purposes
+        
+        
+    }
+    
 
 }
 

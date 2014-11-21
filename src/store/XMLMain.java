@@ -6,7 +6,10 @@
 
 package store;
 
-import java.util.List;
+import model.TraineeHolder;
+
+
+
 
 /**
  *
@@ -21,6 +24,11 @@ public class XMLMain
    // create xml file
    CreateXML createXml = new CreateXML();
    createXml.createXML();
+   
+   TraineeHolder tmp=new TraineeHolder();
+   createXml.receiveData(tmp);
+   
+   
    
    // parsing xml
    //ReadXml readXml = new ReadXml();
@@ -40,6 +48,11 @@ public class XMLMain
 //       System.out.println("email: " + stu.getEmail());
 //       System.out.println("Phone: " + stu.getPhone());
        
+   //testing===================================================
+//   TraineeHolder aTrainer = new TraineeHolder();    
+//   System.out.println(aTrainer.getTraineeNames());
+
+   
    }
   }
 
