@@ -146,10 +146,12 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
     {
         int repNum = Integer.parseInt(txtCurReps.getText().trim());
         int setNum = Integer.parseInt(txtCurSets.getText().trim());
-        exerToDisp.setActualReps(0);
-        exerToDisp.setActualSets(0);
+        exerToDisp.setActualReps(repNum);
+        exerToDisp.setActualSets(setNum);
         exerToDisp.setLastReps(repNum);
         exerToDisp.setLastSets(setNum);
+        //this setActualReps and setActualSets fix the progress view!
+        
     }
     
     /**

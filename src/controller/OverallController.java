@@ -68,12 +68,6 @@ public class OverallController implements OverallControllerCallback {
         theDescriptionView = new ExerciseDescriptionView(this, exerToDisp);
     }
     
-    //Individaul Workout View----------------------
-    private void saveSetRepClicked()
-    {
-        
-    }
-
     @Override
     public void showMainView() {
         theMainView.setVisibility(true);

@@ -8,6 +8,7 @@ package ETracker;
 
 import controller.OverallController;
 import model.TraineeHolder;
+import store.CreateXML;
 
 /**
  *
@@ -18,5 +19,11 @@ public class Main{
     public static void main(String[] args){
         TraineeHolder nameHolder = new TraineeHolder();
         OverallController theController = new OverallController(nameHolder);
+        
+        // create xml file
+        CreateXML createXml = new CreateXML();
+        createXml.createXML();
+               
+        createXml.receiveData(nameHolder);
     }   
 }

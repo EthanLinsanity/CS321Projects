@@ -63,4 +63,25 @@ public class ExerciseHolder {
     {
         return size;
     }
+    
+    //code added by jared-------------------------------------------
+    
+    /* The method pulls from the class Exercises the last sets
+    * @parm index <-- this index is the location of the Exercise in
+    * an arraylist
+    * @returns an integer to the caller
+    */
+    
+    public int getSetsAtIndex(int index)
+    {
+        //the set in exercise is stored in getLastSets method call so...
+        return allExercises.get(index).getLastSets();
+    }
+    
+    public int getRepsAtIndex(int index)
+    {
+        return allExercises.get(index).getLastReps();
+    }
+    //---------------------------------------------------------------
+    
 }

@@ -74,7 +74,7 @@ public class CreateXML
            
             for(int i = 0; i < 1; i++)
             {
-                rootElement.appendChild(getUser(document,Integer.toString(i), name, exerHolder,arrayNames));
+                rootElement.appendChild(getUser(document,Integer.toString(i), name, exerHolder,arrayNames,sets, reps));
             }
           
             //TraineeHolder.getTraineeNames();
@@ -136,7 +136,8 @@ public class CreateXML
                 } else {
                     // Append the element making sure that the id is converted
                     // to a string
-                    rootElement.appendChild(getUser(document, Integer.toString(id), us.getName(), us.getExerciseHolder(), us.getExerciseHolder().getAllNames()));
+                    rootElement.appendChild(getUser(document, Integer.toString(id), us.getName(), us.getExerciseHolder(), us.getExerciseHolder().getAllNames(),
+                            us.getExerciseHolder().getSetsAtIndex(id), us.getExerciseHolder().getRepsAtIndex(id)));
 
                    
                     id++;
@@ -181,7 +182,7 @@ public class CreateXML
      * @param phone the phone numb er as a string with no validation
      * @return an xml node element
      */
-    private static Node getUser(Document doc, String id, String firstname,  ExerciseHolder workout, ArrayList<String>arrayNames) {
+    private static Node getUser(Document doc, String id, String firstname,  ExerciseHolder workout, ArrayList<String>arrayNames, int sets, int reps) {
         Element user = doc.createElement("User");
         //set id attribute
         user.setAttribute("id", id);
@@ -191,10 +192,12 @@ public class CreateXML
         user.appendChild(getUserElements(doc, user, "dataModelName", workout.toString()));
         
         
-        
+        //prints out all the exercise names-----------------------------
         for(int i=0;i<arrayNames.size();i++)
         {
             user.appendChild(getUserElements(doc, user, "exercies", arrayNames.get(i)));
+            user.appendChild(getUserElements(doc, user, "Sets", Integer.toString(sets)));
+            user.appendChild(getUserElements(doc, user, "Reps", Integer.toString(reps)));
         }
         
         
@@ -231,8 +234,10 @@ public class CreateXML
      */
     String name;
     ExerciseHolder exerHolder;
-
     ArrayList<String>arrayNames;
+    
+    int sets;
+    int reps;
     
     
     public TraineeHolder receiveData(TraineeHolder tmp)
@@ -241,16 +246,23 @@ public class CreateXML
         tmp.getTraineeSet().stream().forEach(t ->
             {
                 name=t.getName();
-                
                 exerHolder=t.getExerciseHolder();
-                
-                
                 arrayNames=t.getExerciseHolder().getAllNames();
-                //---------------------------------------------------------------------------------
                 
+                //---------------------------------------------------------------------------------
                 
                 t.getExerciseHolder().getAllExercises();
                 //---------------------------------------------------------------------------------
+                sets=t.getExerciseHolder().getSetsAtIndex(1);
+                reps=t.getExerciseHolder().getRepsAtIndex(1);
+                
+                System.out.println(t.getExerciseHolder().getNameAtIndex(1));
+                System.out.println(t.getExerciseHolder().getSetsAtIndex(1));
+                System.out.println(t.getExerciseHolder().getRepsAtIndex(1));
+                
+                //t.getExerciseHolder().getExercise(t.getExerciseHolder().getNameAtIndex(1));
+                
+                
                 
             });
         

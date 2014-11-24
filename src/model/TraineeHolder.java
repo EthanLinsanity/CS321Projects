@@ -51,10 +51,5 @@ public class TraineeHolder {
         return overallNameHolder;
     }
     
-//    @Override
-//    public String toString()
-//    {
-//        return getTraineeNames();
-//    }
-    
+   
 }
