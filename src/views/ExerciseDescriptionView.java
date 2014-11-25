@@ -151,7 +151,8 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         exerToDisp.setLastReps(repNum);
         exerToDisp.setLastSets(setNum);
         //this setActualReps and setActualSets fix the progress view!
-        
+        //This sysout test passed
+        //System.out.println("This is save User inputs test: "+repNum);
     }
     
     /**

@@ -56,8 +56,17 @@ public class Exercises {
         public void setGoalSets(int inGoalNum) { this.goalSets.set(inGoalNum); }
         public IntegerProperty goalSetsProperty() { return goalSets; }
                 
-        public int getActualSets() { return actualSets.get(); }
-        public void setActualSets(int inGoalNum) { this.actualSets.set(inGoalNum); }
+        public int getActualSets() 
+        { 
+            //System.out.println("This is GET : "+actualSets.get());
+            return actualSets.get(); 
+            
+        }
+        public void setActualSets(int inGoalNum) 
+        { 
+            //System.out.println("This is SET : "+inGoalNum);
+            this.actualSets.set(inGoalNum); 
+        }
         public IntegerProperty actualSetsProperty() { return actualSets; }
                 
         public int getActualReps() { return actualReps.get(); }

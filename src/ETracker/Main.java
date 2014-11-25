@@ -20,10 +20,10 @@ public class Main{
         TraineeHolder nameHolder = new TraineeHolder();
         OverallController theController = new OverallController(nameHolder);
         
-        // create xml file
         CreateXML createXml = new CreateXML();
         createXml.createXML();
                
+        
         createXml.receiveData(nameHolder);
     }   
 }

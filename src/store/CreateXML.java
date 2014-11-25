@@ -136,9 +136,15 @@ public class CreateXML
                 } else {
                     // Append the element making sure that the id is converted
                     // to a string
-                    rootElement.appendChild(getUser(document, Integer.toString(id), us.getName(), us.getExerciseHolder(), us.getExerciseHolder().getAllNames(),
-                            us.getExerciseHolder().getSetsAtIndex(id), us.getExerciseHolder().getRepsAtIndex(id)));
-
+                    for(int i=0;i<us.getExerciseHolder().getSize();i++)
+                    {
+                    rootElement.appendChild(getUser(document, Integer.toString(id),
+                            us.getName(),
+                            us.getExerciseHolder(),
+                            us.getExerciseHolder().getAllNames(),
+                            us.getExerciseHolder().getRepsAtIndex(id),
+                            us.getExerciseHolder().getRepsAtIndex(id)));
+                    }
                    
                     id++;
                 }
@@ -235,7 +241,7 @@ public class CreateXML
     String name;
     ExerciseHolder exerHolder;
     ArrayList<String>arrayNames;
-    
+    int arraySets[];
     int sets;
     int reps;
     
@@ -253,14 +259,19 @@ public class CreateXML
                 
                 t.getExerciseHolder().getAllExercises();
                 //---------------------------------------------------------------------------------
-                sets=t.getExerciseHolder().getSetsAtIndex(1);
+                //sets=t.getExerciseHolder().getSetsAtIndex(1);
                 reps=t.getExerciseHolder().getRepsAtIndex(1);
                 
-                System.out.println(t.getExerciseHolder().getNameAtIndex(1));
+                System.out.println(t.getExerciseHolder().getNameAtIndex(5));
+                
                 System.out.println(t.getExerciseHolder().getSetsAtIndex(1));
                 System.out.println(t.getExerciseHolder().getRepsAtIndex(1));
                 
                 //t.getExerciseHolder().getExercise(t.getExerciseHolder().getNameAtIndex(1));
+                for(int i=0; i<t.getExerciseHolder().getSize();i++)
+                {
+                    sets=t.getExerciseHolder().getSetsAtIndex(i);
+                }
                 
                 
                 
