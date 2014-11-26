@@ -58,8 +58,12 @@ public class Exercises {
                 
         public int getActualSets() 
         { 
-            //System.out.println("This is GET : "+actualSets.get());
-            return actualSets.get(); 
+           //this is working!
+            int sets=actualSets.get();
+            //System.out.println("This is GET in exercises: "+actualSets.get());
+            
+            System.out.println("exersceClass: "+sets);
+            return sets; 
             
         }
         public void setActualSets(int inGoalNum) 

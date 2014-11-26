@@ -2,7 +2,7 @@
 <AllUsers>
 <User id="0">
 <name>Guest</name>
-<dataModelName>model.ExerciseHolder@4dd8dc3</dataModelName>
+<exerciseHolder>model.ExerciseHolder@4dd8dc3</exerciseHolder>
 <exercies>Barbell Curl</exercies>
 <Sets>0</Sets>
 <Reps>0</Reps>

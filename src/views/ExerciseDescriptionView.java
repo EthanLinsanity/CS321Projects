@@ -21,6 +21,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import model.Exercises;
+import store.CreateXML;
 
 /**
  *
@@ -150,9 +151,10 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         exerToDisp.setActualSets(setNum);
         exerToDisp.setLastReps(repNum);
         exerToDisp.setLastSets(setNum);
-        //this setActualReps and setActualSets fix the progress view!
+        
         //This sysout test passed
         //System.out.println("This is save User inputs test: "+repNum);
+       
     }
     
     /**
