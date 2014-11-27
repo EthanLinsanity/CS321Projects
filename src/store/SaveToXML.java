@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
  *
  * @author Rawsome
  */
-public class SaveToXML {
+class SaveToXML {
 
     static boolean saveThis(TraineeHolder inTrainHolder) {
         try{
@@ -81,17 +81,10 @@ public class SaveToXML {
             StreamResult streamResult = new StreamResult(filePlace);
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(source, streamResult);
-            
-            
         }
-        catch (ParserConfigurationException pce) 
+        catch (ParserConfigurationException | TransformerException pce) 
         {
             pce.printStackTrace();
-            return false;
-        }
-        catch (TransformerException tfe) 
-        {
-            tfe.printStackTrace();
             return false;
         }
         return true;

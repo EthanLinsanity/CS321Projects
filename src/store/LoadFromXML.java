@@ -12,7 +12,7 @@ import model.TraineeHolder;
  *
  * @author Rawsome
  */
-public class LoadFromXML {
+class LoadFromXML {
 
     static TraineeHolder loadXMLNow() {
         return null;
