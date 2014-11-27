@@ -269,7 +269,7 @@ public class CreateXML
                 
 //                System.out.println(t.getExerciseHolder().getNameAtIndex(1));
 //                
-//                System.out.println("xml: "+t.getExerciseHolder().getSetsAtIndex(1));
+               System.out.println("xml: "+t.getExerciseHolder().getSetsAtIndex(1));
                 //System.out.println(t.getExerciseHolder().getRepsAtIndex(1));
                 
                 //t.getExerciseHolder().getExercise(t.getExerciseHolder().getNameAtIndex(1));

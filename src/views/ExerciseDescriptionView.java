@@ -20,8 +20,11 @@ import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import model.ExerciseHolder;
 import model.Exercises;
+import model.TraineeHolder;
 import store.CreateXML;
+import store.ModifyXML;
 
 /**
  *
@@ -154,8 +157,16 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         
         //This sysout test passed
         //System.out.println("This is save User inputs test: "+repNum);
-       
+        //
+        //Got to put something here that updates the xml files-----------------------------------
+        //ModifyXML bam = new ModifyXML();
+        //bam.printModify();
+        ExerciseHolder bam = new ExerciseHolder();
+        bam.updateExerciseHolder(exerToDisp.getExerName(), setNum, repNum);
+        System.out.println("update------------------------");
+        
     }
+  
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -333,11 +344,13 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
 
     private void GoHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoHomeButtonActionPerformed
         myController.showMainView();
+        
         saveUserInputs();
         this.dispose();
     }//GEN-LAST:event_GoHomeButtonActionPerformed
 
     private void RecommendNextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecommendNextButtonActionPerformed
+       
         saveUserInputs();
         Exercises newExerToDisp = myController.recommendNext(exerToDisp.getExerName());
         exerToDisp = newExerToDisp;

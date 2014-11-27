@@ -26,9 +26,9 @@ public class Main{
         createXml.receiveData(nameHolder);
         
         //modify xml
-        ModifyXML modXml = new ModifyXML();
-        modXml.modifyXmlFile();
-               
+        //ModifyXML modXml = new ModifyXML();
+        //modXml.receiveData(nameHolder);
+        //modXml.modifyXmlFile();       
         
         
     }   

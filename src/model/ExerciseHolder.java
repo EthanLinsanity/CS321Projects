@@ -2,6 +2,7 @@
 package model;
 
 import java.util.ArrayList;
+import store.ModifyXML;
 
 /**
  *
@@ -66,7 +67,19 @@ public class ExerciseHolder {
     }
     
     //code added by jared-------------------------------------------
-    
+ 
+    public void updateExerciseHolder(String name, int sets, int reps)
+    {
+        getExercise(name).setActualSets(sets);
+        getExercise(name).setActualReps(reps);
+        //this sysout works
+        //System.out.println("This is EHolderSets: "+ getExercise(name).getActualSets());
+        //System.out.println("------------testing allExercises: "+allExercises.get(1).getActualSets()+"-------------");
+        ModifyXML foo = new ModifyXML();
+        foo.updateModifyXML(allExercises);
+        foo.modifyXmlFile();  
+    }
+       
     /* The method pulls from the class Exercises the last sets
     * @parm index <-- this index is the location of the Exercise in
     * an arraylist
@@ -75,19 +88,20 @@ public class ExerciseHolder {
     
     public int getSetsAtIndex(int index)
     {
-       
-        
-        System.out.println("exercise holder: "+allExercises.get(index).getActualSets());
+       //System.out.println("exercise holder: "+getExercise(getNameAtIndex(index)).getActualSets());
    
-        return allExercises.get(index).getActualSets();
-        
+        return getExercise(getNameAtIndex(index)).getActualSets();
     }
         
     
     public int getRepsAtIndex(int index)
     {
-        return allExercises.get(index).getLastReps();
+        return getExercise(getNameAtIndex(index)).getActualReps();
     }
+    
+    
+    
+    
     //---------------------------------------------------------------
     
 }

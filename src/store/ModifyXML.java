@@ -8,6 +8,7 @@ package store;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,6 +18,9 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import model.ExerciseHolder;
+import model.Exercises;
+import model.TraineeHolder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -29,7 +33,39 @@ import org.xml.sax.SAXException;
  */
 public class ModifyXML 
 {
+    ArrayList<Exercises>booyah;    
+    ExerciseHolder fight;
+//    public void receiveData(TraineeHolder tmp)
+//    {
+//        //TraineeHolder holder = new TraineeHolder();
+//        tmp.getTraineeSet().stream().forEach(t ->
+//        {
+//                fight=t.getExerciseHolder().getAllExercises();
+//        });
+//        
+//        //System.out.println("This is receiveData: ");
+//    }   
+    public void updateModifyXML(ArrayList<Exercises> watchThis)
+    {
 
+        //(ArrayList<Object>)myTempObject.clone();
+       booyah=(ArrayList<Exercises>)watchThis.clone();
+       System.out.println("===============updateModifyXML: "+watchThis.get(1).getActualSets()+"========================");
+       
+        
+    }
+    
+    
+    public void printModify()
+    {
+        System.out.println("This is printModify: ");
+//        System.out.println("sets: "+fight.getSetsAtIndex(1));
+//        System.out.println("reps: "+fight.getRepsAtIndex(1));
+        
+    }
+    
+    
+    
     public void modifyXmlFile() {
         
         String place = System.getProperty("user.dir") + "\\src\\store\\user.xml";
@@ -43,11 +79,17 @@ public class ModifyXML
             Document doc = dBuilder.parse(xmlFile);
             doc.getDocumentElement().normalize();
 
+            
+            //updateFight();
             //update attribute value
-            updateAttributeValue(doc);
+            updateReps(doc);
 
             //update sets value
-            updateSets(doc);
+            //param one doc, index of array that holds an exercise object
+            updateSets(doc, 1);
+            System.out.println("===============updateModifyXMLbooyah: "+booyah.get(1).getActualSets()+"========================");
+            //printModify();
+            //System.out.println("This is updateSets: "+Integer.toString(fight.get(2).getActualSets()));
 
             //delete element
             //deleteElement(doc);
@@ -98,19 +140,37 @@ public class ModifyXML
 
     }
 
-    private static void updateSets(Document doc) {
+    public void updateSets(Document doc, int index)
+    {
         NodeList user = doc.getElementsByTagName("User");
-        Element stu = null;
+        Element ptr = null;
         //loop for each employee
         for (int i = 0; i < user.getLength(); i++) {
-            stu = (Element) user.item(i);
-            Node emailElement = stu.getElementsByTagName("Sets").item(0).getFirstChild();
-            emailElement.setNodeValue("This is how we do it!");
+            ptr = (Element) user.item(i);
+            Node setsElement = ptr.getElementsByTagName("Sets").item(index).getFirstChild();//item is location
+            setsElement.setNodeValue(Integer.toString(booyah.get(index).getActualSets()));     //text works
+            //System.out.println("This is updateSets: "+Integer.toString(fight.get(index).getActualSets()));
         }
-//        stu = (Element) user.item(1);
-//        Node workoutFirst = stu.getElementsByTagName("sets").item(0).getFirstChild();
-//        workoutFirst.setNodeValue(workoutFirst.getNodeValue());
     }
+    
+    
+    private static void updateReps(Document doc) {
+        NodeList user = doc.getElementsByTagName("User");
+        Element ptr = null;
+        //loop for each employee
+        for (int i = 0; i < user.getLength(); i++) {
+            ptr = (Element) user.item(i);
+            Node repsElement = ptr.getElementsByTagName("Reps").item(9).getFirstChild();
+            repsElement.setNodeValue("Work those Reps out!");   //this works
+        }
+    }
+    
+    public void updateXml(int sets)
+    {
+        
+        
+    }
+    
 
     private static void updateAttributeValue(Document doc) {
         NodeList students = doc.getElementsByTagName("Student");

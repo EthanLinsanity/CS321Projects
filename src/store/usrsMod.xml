@@ -4,10 +4,10 @@
 <name>Guest</name>
 <exerciseHolder>model.ExerciseHolder@4dd8dc3</exerciseHolder>
 <exercies>Barbell Curl</exercies>
-<Sets>This is how we do it!</Sets>
+<Sets>0</Sets>
 <Reps>0</Reps>
 <exercies>Barbell Deadlift</exercies>
-<Sets>0</Sets>
+<Sets>30</Sets>
 <Reps>0</Reps>
 <exercies>BentOver Barbell Row</exercies>
 <Sets>0</Sets>
@@ -32,7 +32,7 @@
 <Reps>0</Reps>
 <exercies>Situps</exercies>
 <Sets>0</Sets>
-<Reps>0</Reps>
+<Reps>Work those Reps out!</Reps>
 <exercies>Walking Lunges</exercies>
 <Sets>0</Sets>
 <Reps>0</Reps>
