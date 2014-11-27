@@ -74,7 +74,7 @@ public class CreateXML
            
             for(int i = 0; i < 1; i++)
             {
-                rootElement.appendChild(getUser(document,Integer.toString(i), name, exerHolder,arrayNames,sets, reps));
+                rootElement.appendChild(getUser(document,Integer.toString(i), name, exerHolder,arrayNames,fight));
             }
           
             //TraineeHolder.getTraineeNames();
@@ -142,8 +142,7 @@ public class CreateXML
                             us.getName(),
                             us.getExerciseHolder(),
                             us.getExerciseHolder().getAllNames(),
-                            us.getExerciseHolder().getRepsAtIndex(id),
-                            us.getExerciseHolder().getRepsAtIndex(id)));
+                            us.getExerciseHolder().getAllExercises()));
                     }
                    
                     id++;
@@ -188,22 +187,24 @@ public class CreateXML
      * @param phone the phone numb er as a string with no validation
      * @return an xml node element
      */
-    private static Node getUser(Document doc, String id, String firstname,  ExerciseHolder workout, ArrayList<String>arrayNames, int sets, int reps) {
+    private static Node getUser(Document doc, String id, String firstname,  ExerciseHolder workout,
+            ArrayList<String>arrayNames, ArrayList<Exercises> fight)
+    {
         Element user = doc.createElement("User");
         //set id attribute
         user.setAttribute("id", id);
         //create firstname element
         user.appendChild(getUserElements(doc, user, "name", firstname));
         //create workout routine
-        user.appendChild(getUserElements(doc, user, "dataModelName", workout.toString()));
+        user.appendChild(getUserElements(doc, user, "exerciseHolder", workout.toString()));
         
         
         //prints out all the exercise names-----------------------------
         for(int i=0;i<arrayNames.size();i++)
         {
             user.appendChild(getUserElements(doc, user, "exercies", arrayNames.get(i)));
-            user.appendChild(getUserElements(doc, user, "Sets", Integer.toString(sets)));
-            user.appendChild(getUserElements(doc, user, "Reps", Integer.toString(reps)));
+            user.appendChild(getUserElements(doc, user, "Sets", Integer.toString(fight.get(i).getActualSets())));
+            user.appendChild(getUserElements(doc, user, "Reps", Integer.toString(fight.get(i).getActualReps())));
         }
         
         
@@ -241,45 +242,59 @@ public class CreateXML
     String name;
     ExerciseHolder exerHolder;
     ArrayList<String>arrayNames;
-    int arraySets[];
-    int sets;
-    int reps;
+    ArrayList<Exercises> fight;
     
+  
     
-    public TraineeHolder receiveData(TraineeHolder tmp)
+    public void receiveData(TraineeHolder tmp)
     {
-        TraineeHolder holder = new TraineeHolder();
+        //TraineeHolder holder = new TraineeHolder();
         tmp.getTraineeSet().stream().forEach(t ->
             {
                 name=t.getName();
                 exerHolder=t.getExerciseHolder();
                 arrayNames=t.getExerciseHolder().getAllNames();
-                
+                fight=t.getExerciseHolder().getAllExercises();
                 //---------------------------------------------------------------------------------
                 
-                t.getExerciseHolder().getAllExercises();
+                
+//                for(int i=0; i<t.getExerciseHolder().getSize();i++)
+//                {
+//                    arraySets[i]=workout.get(i).getActualSets();
+//                }
+                
+                //workout.get(1).getActualSets();
                 //---------------------------------------------------------------------------------
-                //sets=t.getExerciseHolder().getSetsAtIndex(1);
-                reps=t.getExerciseHolder().getRepsAtIndex(1);
+               
                 
-                System.out.println(t.getExerciseHolder().getNameAtIndex(5));
-                
-                System.out.println(t.getExerciseHolder().getSetsAtIndex(1));
-                System.out.println(t.getExerciseHolder().getRepsAtIndex(1));
+//                System.out.println(t.getExerciseHolder().getNameAtIndex(1));
+//                
+//                System.out.println("xml: "+t.getExerciseHolder().getSetsAtIndex(1));
+                //System.out.println(t.getExerciseHolder().getRepsAtIndex(1));
                 
                 //t.getExerciseHolder().getExercise(t.getExerciseHolder().getNameAtIndex(1));
-                for(int i=0; i<t.getExerciseHolder().getSize();i++)
-                {
-                    sets=t.getExerciseHolder().getSetsAtIndex(i);
-                }
-                
-                
+//                for(int i=0; i<t.getExerciseHolder().getSize();i++)
+//                {
+//                    sets=t.getExerciseHolder().getSetsAtIndex(i);
+//                }
                 
             });
-        
-        
-        return holder;    
+      
     }
+    /*
+    * This function will upload the xml file when the user selects their name
+    * so that their progress can be seen after they close the program
+    *
+    *
+    */
+    
+    public TraineeHolder loadData()
+    {
+        TraineeHolder holder = new TraineeHolder();
+        //jjust for now==================================
+        return holder;
+    }
+    
     
     
     //testing purposes

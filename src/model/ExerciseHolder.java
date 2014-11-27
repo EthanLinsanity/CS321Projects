@@ -41,6 +41,7 @@ public class ExerciseHolder {
                 break;
             }
         }
+        
         return output;
     }
     
@@ -74,14 +75,14 @@ public class ExerciseHolder {
     
     public int getSetsAtIndex(int index)
     {
-        //the set in exercise is stored in getLastSets method call so...
-        System.out.println("This is the index :"+index);
+       
         
-        System.out.println("This is the last sets at this index :");
-        System.out.println(allExercises.get(index).getActualSets());
+        System.out.println("exercise holder: "+allExercises.get(index).getActualSets());
+   
         return allExercises.get(index).getActualSets();
         
     }
+        
     
     public int getRepsAtIndex(int index)
     {
