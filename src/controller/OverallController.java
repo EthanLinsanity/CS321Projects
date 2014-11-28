@@ -14,6 +14,7 @@ import model.ExerciseHolder;
 import model.Exercises;
 import model.Trainee;
 import model.TraineeHolder;
+import store.StoreOp;
 import views.ExerciseDescriptionView;
 import views.ProgressAndGoalView;
 import views.MainView;
@@ -46,6 +47,7 @@ public class OverallController implements OverallControllerCallback {
                     curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
             });
         });
+        StoreOp.saveAll(inNameHolder);
     }
     
     private void startExerciseSelection()
