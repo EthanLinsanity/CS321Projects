@@ -72,10 +72,9 @@ public class CreateXML
             
             
            
-            for(int i = 0; i < 1; i++)
-            {
-                rootElement.appendChild(getUser(document,Integer.toString(i), name, exerHolder,arrayNames,fight));
-            }
+            //# of users in the xml
+            rootElement.appendChild(getUser(document,Integer.toString(1), name, exerHolder,arrayNames,fight));
+            
           
             //TraineeHolder.getTraineeNames();
              
@@ -203,7 +202,7 @@ public class CreateXML
         for(int i=0;i<arrayNames.size();i++)
         {
             user.appendChild(getUserElements(doc, user, "exercies", arrayNames.get(i)));
-            user.appendChild(getUserElements(doc, user, "Sets", Integer.toString(fight.get(i).getActualSets())));
+            user.appendChild(getUserElements(doc, user, "Sets", "this is different"));//ok here is the problem
             user.appendChild(getUserElements(doc, user, "Reps", Integer.toString(fight.get(i).getActualReps())));
         }
         
@@ -269,7 +268,7 @@ public class CreateXML
                 
 //                System.out.println(t.getExerciseHolder().getNameAtIndex(1));
 //                
-               System.out.println("xml: "+t.getExerciseHolder().getSetsAtIndex(1));
+               //System.out.println("xml: "+t.getExerciseHolder().getSetsAtIndex(1));
                 //System.out.println(t.getExerciseHolder().getRepsAtIndex(1));
                 
                 //t.getExerciseHolder().getExercise(t.getExerciseHolder().getNameAtIndex(1));
@@ -300,7 +299,7 @@ public class CreateXML
     //testing purposes
     public void print(ArrayList<String>exerNames)
     {
-        System.out.println("Name of Exercises: " + exerNames );  //testing purposes
+        //System.out.println("Name of Exercises: " + exerNames );  //testing purposes
         
         
     }

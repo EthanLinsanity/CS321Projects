@@ -67,7 +67,7 @@ public class ExerciseHolder {
     }
     
     //code added by jared-------------------------------------------
- 
+    ModifyXML foo = new ModifyXML();
     public void updateExerciseHolder(String name, int sets, int reps)
     {
         getExercise(name).setActualSets(sets);
@@ -75,10 +75,18 @@ public class ExerciseHolder {
         //this sysout works
         //System.out.println("This is EHolderSets: "+ getExercise(name).getActualSets());
         //System.out.println("------------testing allExercises: "+allExercises.get(1).getActualSets()+"-------------");
-        ModifyXML foo = new ModifyXML();
+        
         foo.updateModifyXML(allExercises);
+        foo.getIndex(name);
         foo.modifyXmlFile();  
     }
+    
+//    public int getIndexAtName(String name)
+//    {
+//        //int index=allExercises;
+//        System.out.println("===========THis is index: "+ index+"==================");
+//        return index;
+//    }
        
     /* The method pulls from the class Exercises the last sets
     * @parm index <-- this index is the location of the Exercise in

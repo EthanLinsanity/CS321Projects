@@ -145,7 +145,7 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         g2d.dispose();
         return bi;
     }
-    
+    ExerciseHolder bam = new ExerciseHolder();
     private void saveUserInputs()
     {
         int repNum = Integer.parseInt(txtCurReps.getText().trim());
@@ -161,9 +161,9 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         //Got to put something here that updates the xml files-----------------------------------
         //ModifyXML bam = new ModifyXML();
         //bam.printModify();
-        ExerciseHolder bam = new ExerciseHolder();
+        
         bam.updateExerciseHolder(exerToDisp.getExerName(), setNum, repNum);
-        System.out.println("update------------------------");
+        //System.out.println("update------------------------");
         
     }
   

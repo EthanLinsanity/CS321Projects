@@ -41,7 +41,7 @@ public class ModifyXML
 
         //(ArrayList<Object>)myTempObject.clone();
        booyah=(ArrayList<Exercises>)watchThis.clone();
-       System.out.println("===============updateModifyXML: "+watchThis.get(1).getActualSets()+"========================");
+       //System.out.println("===============updateModifyXML: "+watchThis.get(1).getActualSets()+"========================");
        
         
     }
@@ -51,6 +51,22 @@ public class ModifyXML
         return booyah.get(index).getExerName();
         
     }
+    int index;
+    public int getIndex(String name)
+    {
+        for (int i = 0; i < booyah.size(); i++)
+        {
+            Exercises thisName = booyah.get(i);
+            if (name.equals(thisName.getExerName()))
+            {
+                index=i;
+                return i;
+            }
+        } 
+
+        return -1;
+    }
+       
     
     
     public void modifyXmlFile() {
@@ -74,16 +90,17 @@ public class ModifyXML
             //update sets value
             //param one doc, index of array that holds an exercise object
             //updateSets(doc, 1);
-            System.out.println("===============updateModifyXMLbooyah: "+booyah.get(1).getActualSets()+"========================");
+            //System.out.println("===============updateModifyXMLbooyah: "+booyah.get(1).getActualSets()+"========================");
            
             //System.out.println("This is updateSets: "+Integer.toString(fight.get(2).getActualSets()));
-            for (int i=0;i<11;i++)
-            {
-                
-                updateSets(doc, i);
-                updateReps(doc, i);
-            }
-            
+//            for (int i=0;i<11;i++)
+//           {
+//                
+//                updateSets(doc, i);
+//                updateReps(doc, i);
+//            }
+            updateSets(doc,index);
+            updateReps(doc,index);
             
             //delete element
             //deleteElement(doc);
@@ -143,7 +160,7 @@ public class ModifyXML
             ptr = (Element) user.item(i);
             Node setsElement = ptr.getElementsByTagName("Sets").item(index).getFirstChild();//item is location
             setsElement.setNodeValue(Integer.toString(booyah.get(index).getActualSets()));     //text works
-            //System.out.println("This is updateSets: "+Integer.toString(fight.get(index).getActualSets()));
+            System.out.println("---------------updateSets: "+Integer.toString(booyah.get(index).getActualSets())+"------------");
         }
     }
     
