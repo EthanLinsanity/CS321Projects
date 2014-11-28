@@ -71,7 +71,7 @@ public class ModifyXML
     
     public void modifyXmlFile() {
         
-        String place = System.getProperty("user.dir") + "\\src\\store\\user.xml";
+        String place = System.getProperty("user.dir") + "\\src\\store\\usrsMod.xml";
         
         System.out.println("read place of original = " + place);
         File xmlFile = new File(place);

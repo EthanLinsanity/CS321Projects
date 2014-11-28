@@ -2,6 +2,7 @@
 package model;
 
 import java.util.ArrayList;
+import store.CreateXML;
 import store.ModifyXML;
 
 /**
@@ -68,6 +69,7 @@ public class ExerciseHolder {
     
     //code added by jared-------------------------------------------
     ModifyXML foo = new ModifyXML();
+    CreateXML pooh = new CreateXML();
     public void updateExerciseHolder(String name, int sets, int reps)
     {
         getExercise(name).setActualSets(sets);
@@ -78,7 +80,8 @@ public class ExerciseHolder {
         
         foo.updateModifyXML(allExercises);
         foo.getIndex(name);
-        foo.modifyXmlFile();  
+        foo.modifyXmlFile(); 
+        pooh.updateCreateXML(allExercises);
     }
     
 //    public int getIndexAtName(String name)

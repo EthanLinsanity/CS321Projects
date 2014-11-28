@@ -27,6 +27,20 @@ import org.w3c.dom.Node;
  */
 public class CreateXML 
 {
+    ArrayList<Exercises> fight;
+    public void updateCreateXML(ArrayList<Exercises> watchThis)
+    {
+
+        //(ArrayList<Object>)myTempObject.clone();
+       fight=(ArrayList<Exercises>)watchThis.clone();
+       //System.out.println("===============updateModifyXML: "+watchThis.get(1).getActualSets()+"========================");
+       
+        
+    }
+    
+    
+    
+    
     
     public void docBuilder()
     {
@@ -202,8 +216,9 @@ public class CreateXML
         for(int i=0;i<arrayNames.size();i++)
         {
             user.appendChild(getUserElements(doc, user, "exercies", arrayNames.get(i)));
-            user.appendChild(getUserElements(doc, user, "Sets", "this is different"));//ok here is the problem
-            user.appendChild(getUserElements(doc, user, "Reps", Integer.toString(fight.get(i).getActualReps())));
+        
+            user.appendChild(getUserElements(doc, user, "Sets","0"));//ok here is the problem
+            user.appendChild(getUserElements(doc, user, "Reps","0"));
         }
         
         
@@ -228,7 +243,13 @@ public class CreateXML
         
         return node;
     }
-  
+    private static Node getUserSetsReps(Document doc, Element element, String name) {
+        Element node = doc.createElement(name);
+        //node.appendChild(doc.createTextNode(value));
+        
+        
+        return node;
+    }
     
     
  
@@ -241,7 +262,7 @@ public class CreateXML
     String name;
     ExerciseHolder exerHolder;
     ArrayList<String>arrayNames;
-    ArrayList<Exercises> fight;
+   
     
   
     
