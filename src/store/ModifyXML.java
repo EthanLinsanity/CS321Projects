@@ -35,16 +35,7 @@ public class ModifyXML
 {
     ArrayList<Exercises>booyah;    
     ExerciseHolder fight;
-//    public void receiveData(TraineeHolder tmp)
-//    {
-//        //TraineeHolder holder = new TraineeHolder();
-//        tmp.getTraineeSet().stream().forEach(t ->
-//        {
-//                fight=t.getExerciseHolder().getAllExercises();
-//        });
-//        
-//        //System.out.println("This is receiveData: ");
-//    }   
+  
     public void updateModifyXML(ArrayList<Exercises> watchThis)
     {
 
@@ -55,15 +46,11 @@ public class ModifyXML
         
     }
     
-    
-    public void printModify()
+    public String inHouseName(int index)
     {
-        System.out.println("This is printModify: ");
-//        System.out.println("sets: "+fight.getSetsAtIndex(1));
-//        System.out.println("reps: "+fight.getRepsAtIndex(1));
+        return booyah.get(index).getExerName();
         
     }
-    
     
     
     public void modifyXmlFile() {
@@ -82,15 +69,22 @@ public class ModifyXML
             
             //updateFight();
             //update attribute value
-            updateReps(doc);
+            //updateReps(doc, 1);
 
             //update sets value
             //param one doc, index of array that holds an exercise object
-            updateSets(doc, 1);
+            //updateSets(doc, 1);
             System.out.println("===============updateModifyXMLbooyah: "+booyah.get(1).getActualSets()+"========================");
-            //printModify();
+           
             //System.out.println("This is updateSets: "+Integer.toString(fight.get(2).getActualSets()));
-
+            for (int i=0;i<11;i++)
+            {
+                
+                updateSets(doc, i);
+                updateReps(doc, i);
+            }
+            
+            
             //delete element
             //deleteElement(doc);
 
@@ -154,14 +148,15 @@ public class ModifyXML
     }
     
     
-    private static void updateReps(Document doc) {
+    private void updateReps(Document doc,int index)
+    {
         NodeList user = doc.getElementsByTagName("User");
         Element ptr = null;
         //loop for each employee
         for (int i = 0; i < user.getLength(); i++) {
             ptr = (Element) user.item(i);
-            Node repsElement = ptr.getElementsByTagName("Reps").item(9).getFirstChild();
-            repsElement.setNodeValue("Work those Reps out!");   //this works
+            Node repsElement = ptr.getElementsByTagName("Reps").item(index).getFirstChild();
+            repsElement.setNodeValue(Integer.toString(booyah.get(index).getActualReps()));   //this works
         }
     }
     
