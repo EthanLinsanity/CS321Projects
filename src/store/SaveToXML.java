@@ -79,7 +79,9 @@ class SaveToXML {
             String place = System.getProperty("user.dir") + "/resources/userData.xml";
             File filePlace = new File(place);
             StreamResult streamResult = new StreamResult(filePlace);
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(source, streamResult);
         }
         catch (ParserConfigurationException | TransformerException pce) 
