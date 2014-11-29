@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AllTrainee>
+<Trainee name="Guest">
+<Exercises name="Barbell Curl">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Barbell Deadlift">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="BentOver Barbell Row">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Calf Raises">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Crunches">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Front Dumbbell Raises">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Full Squats">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Triceps">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Shoulder Press">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Situps">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+<Exercises name="Walking Lunges">
+<LastRep>0</LastRep>
+<LastSet>0</LastSet>
+<GoalRep>10</GoalRep>
+<GoalSet>5</GoalSet>
+</Exercises>
+</Trainee>
+</AllTrainee>

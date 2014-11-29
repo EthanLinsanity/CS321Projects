@@ -5,9 +5,8 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Ben
+ * @author Rawsome
  */
-//String exerices;
 
 //This class holds the exercies
 public class ExerciseHolder {

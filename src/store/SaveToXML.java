@@ -76,7 +76,7 @@ class SaveToXML {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
             
-            String place = System.getProperty("user.dir") + "storage.xml";
+            String place = System.getProperty("user.dir") + "/resources/userData.xml";
             File filePlace = new File(place);
             StreamResult streamResult = new StreamResult(filePlace);
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
