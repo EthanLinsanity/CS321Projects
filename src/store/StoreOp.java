@@ -18,7 +18,7 @@ public class StoreOp {
         return SaveToXML.saveThis(inTrainHolder);
     }
     
-    public static TraineeHolder loading()
+    public static TraineeHolder loadSaved()
     {
         return LoadFromXML.loadXMLNow();
     }

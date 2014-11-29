@@ -33,9 +33,9 @@ public class OverallController implements OverallControllerCallback {
     private TraineeHolder allNameHolder;
     private ProgressAndGoalView theProgressView;
     
-    public OverallController(TraineeHolder inNameHolder)
+    public OverallController()
     {
-        allNameHolder = inNameHolder;
+        allNameHolder = StoreOp.loadSaved();
 
         SwingUtilities.invokeLater(() -> {
             theMainView = new MainView(this);
