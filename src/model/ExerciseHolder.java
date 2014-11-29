@@ -2,6 +2,8 @@
 package model;
 
 import java.util.ArrayList;
+import store.CreateXML;
+import store.ModifyXML;
 
 /**
  *
@@ -65,7 +67,29 @@ public class ExerciseHolder {
     }
     
     //code added by jared-------------------------------------------
+    ModifyXML foo = new ModifyXML();
+    CreateXML pooh = new CreateXML();
+    public void updateExerciseHolder(String name, int sets, int reps)
+    {
+        getExercise(name).setActualSets(sets);
+        getExercise(name).setActualReps(reps);
+        //this sysout works
+        //System.out.println("This is EHolderSets: "+ getExercise(name).getActualSets());
+        //System.out.println("------------testing allExercises: "+allExercises.get(1).getActualSets()+"-------------");
+        
+        foo.updateModifyXML(allExercises);
+        foo.getIndex(name);
+        foo.modifyXmlFile(); 
+        pooh.updateCreateXML(allExercises);
+    }
     
+//    public int getIndexAtName(String name)
+//    {
+//        //int index=allExercises;
+//        System.out.println("===========THis is index: "+ index+"==================");
+//        return index;
+//    }
+       
     /* The method pulls from the class Exercises the last sets
     * @parm index <-- this index is the location of the Exercise in
     * an arraylist
@@ -74,19 +98,20 @@ public class ExerciseHolder {
     
     public int getSetsAtIndex(int index)
     {
-       
-        
-        System.out.println("exercise holder: "+allExercises.get(index).getActualSets());
+       //System.out.println("exercise holder: "+getExercise(getNameAtIndex(index)).getActualSets());
    
-        return allExercises.get(index).getActualSets();
-        
+        return getExercise(getNameAtIndex(index)).getActualSets();
     }
         
     
     public int getRepsAtIndex(int index)
     {
-        return allExercises.get(index).getLastReps();
+        return getExercise(getNameAtIndex(index)).getActualReps();
     }
+    
+    
+    
+    
     //---------------------------------------------------------------
     
 }

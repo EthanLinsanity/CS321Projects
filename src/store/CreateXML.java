@@ -27,6 +27,20 @@ import org.w3c.dom.Node;
  */
 public class CreateXML 
 {
+    ArrayList<Exercises> fight;
+    public void updateCreateXML(ArrayList<Exercises> watchThis)
+    {
+
+        //(ArrayList<Object>)myTempObject.clone();
+       fight=(ArrayList<Exercises>)watchThis.clone();
+       //System.out.println("===============updateModifyXML: "+watchThis.get(1).getActualSets()+"========================");
+       
+        
+    }
+    
+    
+    
+    
     
     public void docBuilder()
     {
@@ -72,10 +86,9 @@ public class CreateXML
             
             
            
-            for(int i = 0; i < 1; i++)
-            {
-                rootElement.appendChild(getUser(document,Integer.toString(i), name, exerHolder,arrayNames,fight));
-            }
+            //# of users in the xml
+            rootElement.appendChild(getUser(document,Integer.toString(1), name, exerHolder,arrayNames,fight));
+            
           
             //TraineeHolder.getTraineeNames();
              
@@ -203,8 +216,9 @@ public class CreateXML
         for(int i=0;i<arrayNames.size();i++)
         {
             user.appendChild(getUserElements(doc, user, "exercies", arrayNames.get(i)));
-            user.appendChild(getUserElements(doc, user, "Sets", Integer.toString(fight.get(i).getActualSets())));
-            user.appendChild(getUserElements(doc, user, "Reps", Integer.toString(fight.get(i).getActualReps())));
+        
+            user.appendChild(getUserElements(doc, user, "Sets","0"));//ok here is the problem
+            user.appendChild(getUserElements(doc, user, "Reps","0"));
         }
         
         
@@ -229,7 +243,13 @@ public class CreateXML
         
         return node;
     }
-  
+    private static Node getUserSetsReps(Document doc, Element element, String name) {
+        Element node = doc.createElement(name);
+        //node.appendChild(doc.createTextNode(value));
+        
+        
+        return node;
+    }
     
     
  
@@ -242,7 +262,7 @@ public class CreateXML
     String name;
     ExerciseHolder exerHolder;
     ArrayList<String>arrayNames;
-    ArrayList<Exercises> fight;
+   
     
   
     
@@ -269,7 +289,7 @@ public class CreateXML
                 
 //                System.out.println(t.getExerciseHolder().getNameAtIndex(1));
 //                
-//                System.out.println("xml: "+t.getExerciseHolder().getSetsAtIndex(1));
+               //System.out.println("xml: "+t.getExerciseHolder().getSetsAtIndex(1));
                 //System.out.println(t.getExerciseHolder().getRepsAtIndex(1));
                 
                 //t.getExerciseHolder().getExercise(t.getExerciseHolder().getNameAtIndex(1));
@@ -300,7 +320,7 @@ public class CreateXML
     //testing purposes
     public void print(ArrayList<String>exerNames)
     {
-        System.out.println("Name of Exercises: " + exerNames );  //testing purposes
+        //System.out.println("Name of Exercises: " + exerNames );  //testing purposes
         
         
     }

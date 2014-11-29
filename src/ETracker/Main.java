@@ -9,6 +9,7 @@ package ETracker;
 import controller.OverallController;
 import model.TraineeHolder;
 import store.CreateXML;
+import store.ModifyXML;
 
 /**
  *
@@ -22,8 +23,13 @@ public class Main{
         
         CreateXML createXml = new CreateXML();
         createXml.createXML();
-               
+        //createXml.receiveData(nameHolder);
         
-        createXml.receiveData(nameHolder);
+        //modify xml
+        //ModifyXML modXml = new ModifyXML();
+        //modXml.receiveData(nameHolder);
+        //modXml.modifyXmlFile();       
+        
+        
     }   
 }

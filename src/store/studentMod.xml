@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <AllUsers>
-<User id="1">
+<User id="0">
 <name>Guest</name>
-<exerciseHolder>model.ExerciseHolder@6acbcfc0</exerciseHolder>
+<exerciseHolder>model.ExerciseHolder@4dd8dc3</exerciseHolder>
 <exercies>Barbell Curl</exercies>
 <Sets>0</Sets>
 <Reps>0</Reps>

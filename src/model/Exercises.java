@@ -60,9 +60,9 @@ public class Exercises {
         { 
            //this is working!
             int sets=actualSets.get();
-            //System.out.println("This is GET in exercises: "+actualSets.get());
+            //System.out.println("This is GETACTUAL in exercises: "+actualSets.get());
             
-            System.out.println("exersceClass: "+sets);
+            //System.out.println("exersceClass: "+sets);
             return sets; 
             
         }
