@@ -28,4 +28,6 @@ public interface OverallControllerCallback {
     public void mainUserChanged();
 
     public Exercises recommendNext(String inName);
+
+    public void closingProgram();
 }
