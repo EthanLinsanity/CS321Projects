@@ -119,8 +119,8 @@ public class ProgressAndGoalView
         yAxis.setLabel("How Many");
         
         goalDataList = FXCollections.observableArrayList(
-                        new XYChart.Data("Sets",currExer.getGoalSets()-currExer.getLastSets()),
-                        new XYChart.Data("Reps",currExer.getGoalReps()-currExer.getLastReps()));
+                        new XYChart.Data("Sets",Math.max(currExer.getGoalSets()-currExer.getLastSets(),0)),
+                        new XYChart.Data("Reps",Math.max(currExer.getGoalReps()-currExer.getLastReps(),0)));
 
         XYChart.Series series1 = new XYChart.Series(goalDataList);
         series1.setName("Goal");
@@ -155,10 +155,12 @@ public class ProgressAndGoalView
         }
             
         Exercises tmpExer = tableView.getSelectionModel().getSelectedItem();
-        goalDataList.get(0).YValueProperty().bind(
-                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), tmpExer.getLastSets()));
-        goalDataList.get(1).YValueProperty().bind(
-                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), tmpExer.getLastReps()));
+        goalDataList.get(0).setYValue(Math.max(tmpExer.getGoalSets()-tmpExer.getLastSets(), 0));
+        goalDataList.get(1).setYValue(Math.max(tmpExer.getGoalReps()-tmpExer.getLastReps(), 0));
+//        goalDataList.get(0).YValueProperty().bind(
+//                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), tmpExer.getLastSets()));
+//        goalDataList.get(1).YValueProperty().bind(
+//                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), tmpExer.getLastReps()));
         actualDataList.get(0).setYValue(tmpExer.getLastSets());
         actualDataList.get(1).setYValue(tmpExer.getLastReps());
         stackedBarChart.setTitle("Exercise: " + tmpExer.getExerName());
@@ -175,6 +177,10 @@ public class ProgressAndGoalView
         reCalcStackedBar();
     }
     
+    /*
+    The following class of EditingCell is taken from website with slight modification.
+    http://java-buddy.blogspot.com/2013/02/create-dynamic-stackedbarchart-of.html
+    */
     class EditingCell extends TableCell<Exercises, Number> {
          
         private TextField textField;
