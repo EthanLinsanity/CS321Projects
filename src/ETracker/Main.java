@@ -22,8 +22,9 @@ public class Main{
         OverallController theController = new OverallController(nameHolder);
         
         CreateXML createXml = new CreateXML();
-        createXml.createXML();
-        //createXml.receiveData(nameHolder);
+        //createXml.createXML();
+//        createXml.getTrainees(nameHolder.getTraineeSet());
+        createXml.receiveData(nameHolder);
         
         //modify xml
         //ModifyXML modXml = new ModifyXML();

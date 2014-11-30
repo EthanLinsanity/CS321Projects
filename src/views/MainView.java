@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import store.CreateXML;
 
 /**
  *
@@ -30,6 +31,9 @@ public class MainView {
     private final JButton createNameButton;
     private final JLabel lblName;
     private OverallControllerCallback myController;
+    CreateXML createXml = new CreateXML();
+       
+    
 
     public MainView(OverallControllerCallback inputController)
     {
@@ -48,12 +52,20 @@ public class MainView {
             if(response != null)
             {
                 myController.addATrainee(response);
+                
+                System.out.println("============comboSelected:"+response+"====================");
+                
+       
+                createXml.getNewUser(response);
+                
             } 
         });
         
         nameComboBox.addActionListener(selected->
         {
             myController.mainUserChanged();
+            
+            
         });
         
         lblName = new JLabel("Name: ");
@@ -80,6 +92,8 @@ public class MainView {
     {
         populateNameComboBox();
         focusNameComboBox(focusName);
+        
+        
     }
     
     /**
@@ -113,7 +127,11 @@ public class MainView {
      */     
     public String cboNameSelected()
     {
+        CreateXML why = new CreateXML();
+        why.getNewUser(nameComboBox.getSelectedItem().toString());
+        //System.out.println("============comboSelected: "+nameComboBox.getSelectedItem().toString()+"====================");
         return nameComboBox.getSelectedItem().toString();
+        
     }
     
     /**

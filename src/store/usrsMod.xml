@@ -4,11 +4,11 @@
 <name>Guest</name>
 <exerciseHolder>model.ExerciseHolder@6acbcfc0</exerciseHolder>
 <exercies>Barbell Curl</exercies>
-<Sets>1</Sets>
-<Reps>1</Reps>
+<Sets>7</Sets>
+<Reps>878</Reps>
 <exercies>Barbell Deadlift</exercies>
-<Sets>6</Sets>
-<Reps>60</Reps>
+<Sets>4</Sets>
+<Reps>40</Reps>
 <exercies>BentOver Barbell Row</exercies>
 <Sets>7</Sets>
 <Reps>71</Reps>
@@ -16,8 +16,8 @@
 <Sets>2</Sets>
 <Reps>2</Reps>
 <exercies>Crunches</exercies>
-<Sets>0</Sets>
-<Reps>0</Reps>
+<Sets>7</Sets>
+<Reps>70</Reps>
 <exercies>Front Dumbbell Raises</exercies>
 <Sets>5</Sets>
 <Reps>5</Reps>

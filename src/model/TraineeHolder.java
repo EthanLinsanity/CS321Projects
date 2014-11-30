@@ -9,6 +9,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import store.CreateXML;
 
 /**
  *
@@ -16,10 +17,14 @@ import java.util.Set;
  */
 public class TraineeHolder {
     Set<Trainee> overallNameHolder;
+    
+    
+    
     public TraineeHolder()
     {
         overallNameHolder = new HashSet<>();
         overallNameHolder.add(new Trainee("Guest"));
+        
     }
     
     public ArrayList<String> getTraineeNames()

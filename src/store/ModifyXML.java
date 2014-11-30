@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package store;
 
 import java.io.File;
@@ -20,7 +14,6 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import model.ExerciseHolder;
 import model.Exercises;
-import model.TraineeHolder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -38,18 +31,12 @@ public class ModifyXML
   
     public void updateModifyXML(ArrayList<Exercises> watchThis)
     {
-
-        //(ArrayList<Object>)myTempObject.clone();
        booyah=(ArrayList<Exercises>)watchThis.clone();
-       //System.out.println("===============updateModifyXML: "+watchThis.get(1).getActualSets()+"========================");
-       
-        
     }
     
     public String inHouseName(int index)
     {
         return booyah.get(index).getExerName();
-        
     }
     int index;
     public int getIndex(String name)
@@ -82,32 +69,9 @@ public class ModifyXML
             Document doc = dBuilder.parse(xmlFile);
             doc.getDocumentElement().normalize();
 
-            
-            //updateFight();
-            //update attribute value
-            //updateReps(doc, 1);
-
-            //update sets value
-            //param one doc, index of array that holds an exercise object
-            //updateSets(doc, 1);
-            //System.out.println("===============updateModifyXMLbooyah: "+booyah.get(1).getActualSets()+"========================");
-           
-            //System.out.println("This is updateSets: "+Integer.toString(fight.get(2).getActualSets()));
-//            for (int i=0;i<11;i++)
-//           {
-//                
-//                updateSets(doc, i);
-//                updateReps(doc, i);
-//            }
             updateSets(doc,index);
             updateReps(doc,index);
             
-            //delete element
-            //deleteElement(doc);
-
-            //add new element
-            //addElement(doc);
-
             //write the updated document to file or console
             doc.getDocumentElement().normalize();
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -125,32 +89,7 @@ public class ModifyXML
             e1.printStackTrace();
         }
     }
-
-    private static void addElement(Document doc) {
-        NodeList students = doc.getElementsByTagName("Student");
-        Element stu = null;
-
-        //loop for each student
-        for (int i = 0; i < students.getLength(); i++) {
-            stu = (Element) students.item(i);
-            Element roleElement = doc.createElement("role");
-            roleElement.appendChild(doc.createTextNode("willing participant"));
-            stu.appendChild(roleElement);
-        }
-    }
-
-    private static void deleteElement(Document doc) {
-        NodeList students = doc.getElementsByTagName("Student");
-        Element stu = null;
-        //loop for each employee
-        for (int i = 0; i < students.getLength(); i++) {
-            stu = (Element) students.item(i);
-            Node phoneElement = stu.getElementsByTagName("phone").item(0);
-            stu.removeChild(phoneElement);
-        }
-
-    }
-
+    
     public void updateSets(Document doc, int index)
     {
         NodeList user = doc.getElementsByTagName("User");
@@ -164,7 +103,6 @@ public class ModifyXML
         }
     }
     
-    
     private void updateReps(Document doc,int index)
     {
         NodeList user = doc.getElementsByTagName("User");
@@ -176,29 +114,4 @@ public class ModifyXML
             repsElement.setNodeValue(Integer.toString(booyah.get(index).getActualReps()));   //this works
         }
     }
-    
-    public void updateXml(int sets)
-    {
-        
-        
-    }
-    
-
-    private static void updateAttributeValue(Document doc) {
-        NodeList students = doc.getElementsByTagName("Student");
-        Element stu = null;
-        //loop for each employee
-        for (int i = 0; i < students.getLength(); i++) {
-            stu = (Element) students.item(i);
-            String fname = stu.getElementsByTagName("firstname").item(0).getFirstChild().getNodeValue();
-            if (fname.equalsIgnoreCase("will")) {
-                //prefix id attribute with M
-                stu.setAttribute("id", "M" + stu.getAttribute("id"));
-            } else {
-                //prefix id attribute with F
-                stu.setAttribute("id", "F" + stu.getAttribute("id"));
-            }
-        }
-    }
-
 }
