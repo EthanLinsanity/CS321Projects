@@ -22,9 +22,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import model.ExerciseHolder;
 import model.Exercises;
-import model.TraineeHolder;
-import store.CreateXML;
-import store.ModifyXML;
 
 /**
  *

@@ -15,17 +15,12 @@ import model.Trainee;
  * @author Rawsome
  */
 public interface OverallControllerCallback {
-    void showMainView();
-    
-    List<String> getAllTraineeNames();
-
-    void addATrainee(String response);
-
-    void exerSelectionComplete(String toString);
-
+    public void showMainView();
+    public List<String> getAllTraineeNames();
+    public void addATrainee(String response);
+    public void exerSelectionComplete(String toString);
     public Trainee getCurTrainee();
-
     public void mainUserChanged();
-
     public Exercises recommendNext(String inName);
+    public void closingProgram();
 }

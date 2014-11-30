@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
  *
  * @author Rawsome
  */
-public class SaveToXML {
+class SaveToXML {
 
     static boolean saveThis(TraineeHolder inTrainHolder) {
         try{
@@ -76,22 +76,17 @@ public class SaveToXML {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
             
-            String place = System.getProperty("user.dir") + "storage.xml";
+            String place = System.getProperty("user.dir") + "/resources/userData.xml";
             File filePlace = new File(place);
             StreamResult streamResult = new StreamResult(filePlace);
+            transformer.setOutputProperty(OutputKeys.METHOD, "xml");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
             transformer.transform(source, streamResult);
-            
-            
         }
-        catch (ParserConfigurationException pce) 
+        catch (ParserConfigurationException | TransformerException pce) 
         {
             pce.printStackTrace();
-            return false;
-        }
-        catch (TransformerException tfe) 
-        {
-            tfe.printStackTrace();
             return false;
         }
         return true;

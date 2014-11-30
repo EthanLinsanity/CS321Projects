@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import model.ExerciseNames;
 /**
  *
- * @author Ben
+ * @author Rawsome
  */
 
 /**

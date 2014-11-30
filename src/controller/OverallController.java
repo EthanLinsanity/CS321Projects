@@ -33,9 +33,9 @@ public class OverallController implements OverallControllerCallback {
     private TraineeHolder allNameHolder;
     private ProgressAndGoalView theProgressView;
     
-    public OverallController(TraineeHolder inNameHolder)
+    public OverallController()
     {
-        allNameHolder = inNameHolder;
+        allNameHolder = StoreOp.loadSaved();
 
         SwingUtilities.invokeLater(() -> {
             theMainView = new MainView(this);
@@ -47,7 +47,6 @@ public class OverallController implements OverallControllerCallback {
                     curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
             });
         });
-        StoreOp.saveAll(inNameHolder);
     }
     
     private void startExerciseSelection()
@@ -120,5 +119,10 @@ public class OverallController implements OverallControllerCallback {
             nameToReturn = curExerHolder.getNameAtIndex(randomInd);
         }
         return curExerHolder.getExercise(nameToReturn);
+    }
+
+    @Override
+    public void closingProgram() {
+        StoreOp.saveAll(allNameHolder);
     }
 }

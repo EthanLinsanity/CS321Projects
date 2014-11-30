@@ -7,9 +7,8 @@ import store.ModifyXML;
 
 /**
  *
- * @author Ben
+ * @author Rawsome
  */
-//String exerices;
 
 //This class holds the exercies
 public class ExerciseHolder {

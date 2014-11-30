@@ -30,8 +30,10 @@ import model.ExerciseHolder;
 import model.Exercises;
 import model.Trainee;
 
- 
-//this is a test comment.
+/**
+ *
+ * @author Rawsome
+ */
 public class ProgressAndGoalView 
 {
     private final JFrame swingFrame;

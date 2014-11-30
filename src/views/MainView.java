@@ -10,6 +10,8 @@ import controller.OverallControllerCallback;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -79,6 +81,16 @@ public class MainView {
         
         mainFrame = new JFrame();
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        mainFrame.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent windowEvent)
+            {
+                myController.closingProgram();
+            }
+        });
+        
         mainFrame.add(traineePanel,BorderLayout.NORTH);
         mainFrame.add(startExerciseButton, BorderLayout.CENTER);
         mainFrame.add(progressAndGoalViewButton, BorderLayout.SOUTH);
