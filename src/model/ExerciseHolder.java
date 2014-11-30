@@ -40,7 +40,6 @@ public class ExerciseHolder {
                 break;
             }
         }
-        
         return output;
     }
     

@@ -8,8 +8,6 @@ package store;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -62,8 +60,8 @@ class LoadFromXML {
         } 
         catch (ParserConfigurationException | SAXException | IOException ex) 
         {
-            Logger.getLogger(LoadFromXML.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+//            Logger.getLogger(LoadFromXML.class.getName()).log(Level.SEVERE, null, ex);
+//            ex.printStackTrace();
             return tHolderToRtn;
         }
         return tHolderToRtn;

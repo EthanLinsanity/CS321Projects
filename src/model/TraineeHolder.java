@@ -16,14 +16,10 @@ import java.util.Set;
  */
 public class TraineeHolder {
     Set<Trainee> overallNameHolder;
-    
-    
-    
     public TraineeHolder()
     {
         overallNameHolder = new HashSet<>();
         overallNameHolder.add(new Trainee("Guest"));
-        
     }
     
     public ArrayList<String> getTraineeNames()

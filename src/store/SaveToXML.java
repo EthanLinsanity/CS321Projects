@@ -86,7 +86,7 @@ class SaveToXML {
         }
         catch (ParserConfigurationException | TransformerException pce) 
         {
-            pce.printStackTrace();
+//            pce.printStackTrace();
             return false;
         }
         return true;
