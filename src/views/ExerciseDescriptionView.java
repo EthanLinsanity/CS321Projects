@@ -20,7 +20,6 @@ import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import model.ExerciseHolder;
 import model.Exercises;
 
 /**
@@ -62,8 +61,8 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         lblPrevReps.setText(Integer.toString(exerToDisp.getLastReps()));
         lblPrevSets.setText(Integer.toString(exerToDisp.getLastSets()));
         
-        txtCurReps.setText(Integer.toString(exerToDisp.getActualReps()));
-        txtCurSets.setText(Integer.toString(exerToDisp.getActualSets()));
+        txtCurReps.setText("0");
+        txtCurSets.setText("0");
         
         txtCurReps.setInputVerifier(new InputVerifier() {
             @Override
@@ -142,13 +141,13 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         g2d.dispose();
         return bi;
     }
-    ExerciseHolder bam = new ExerciseHolder();
+//    ExerciseHolder bam = new ExerciseHolder();
     private void saveUserInputs()
     {
         int repNum = Integer.parseInt(txtCurReps.getText().trim());
         int setNum = Integer.parseInt(txtCurSets.getText().trim());
-        exerToDisp.setActualReps(repNum);
-        exerToDisp.setActualSets(setNum);
+//        exerToDisp.setActualReps(repNum);
+//        exerToDisp.setActualSets(setNum);
         exerToDisp.setLastReps(repNum);
         exerToDisp.setLastSets(setNum);
         
@@ -159,7 +158,7 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         //ModifyXML bam = new ModifyXML();
         //bam.printModify();
         
-        bam.updateExerciseHolder(exerToDisp.getExerName(), setNum, repNum);
+//        bam.updateExerciseHolder(exerToDisp.getExerName(), setNum, repNum);
         //System.out.println("update------------------------");
         
     }

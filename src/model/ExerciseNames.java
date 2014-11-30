@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public enum ExerciseNames {
     BARBELLCURL         ("Barbell Curl","ExerciseImages/barbellCurl.jpg","ExerciseDescriptions/barbellCurl.txt"),
     BARBELLDEADLIFT     ("Barbell Deadlift","ExerciseImages/BarbellDeadlift.jpg","ExerciseDescriptions/BarbellDeadlift.txt"),
-    BENTOVERBARBELROW   ("BentOver Barbell Row","ExerciseImages/BentoverBarbellRow.jpg","ExerciseDescriptions/BentoverBarbellRow.txt"),
+    BENTOVERBARBELROW   ("Bentover Barbell Row","ExerciseImages/BentoverBarbellRow.jpg","ExerciseDescriptions/BentoverBarbellRow.txt"),
     CALFRAISE           ("Calf Raises","ExerciseImages/CalfRaise.jpg","ExerciseDescriptions/CalfRaise.txt"),
     CRUNCHES            ("Crunches","ExerciseImages/Crunches.jpg","ExerciseDescriptions/Crunches.txt"),
     FRONTDUMBBELLRAISE  ("Front Dumbbell Raises","ExerciseImages/FrontDumbbellRaise.jpg","ExerciseDescriptions/FrontDumbbellRaise.txt"),

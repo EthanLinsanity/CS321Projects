@@ -75,9 +75,9 @@ public class ProgressAndGoalView
         TableColumn<Exercises,String> exerNameCol = new TableColumn<>("Work Out Names");
         exerNameCol.setCellValueFactory(cellData -> cellData.getValue().exerNameProperty());
         TableColumn<Exercises,Number> actualRepCol = new TableColumn<>("Reps");
-        actualRepCol.setCellValueFactory(cellData -> cellData.getValue().actualRepsProperty());
+        actualRepCol.setCellValueFactory(cellData -> cellData.getValue().lastRepsProperty());
         TableColumn<Exercises,Number> actualSetCol = new TableColumn<>("Sets");
-        actualSetCol.setCellValueFactory(cellData -> cellData.getValue().actualSetsProperty());
+        actualSetCol.setCellValueFactory(cellData -> cellData.getValue().lastSetsProperty());
         TableColumn<Exercises,Number> goalRepCol = new TableColumn<>("Goal Reps");
         goalRepCol.setCellValueFactory(cellData -> cellData.getValue().goalRepsProperty());
         TableColumn<Exercises,Number> goalSetCol = new TableColumn<>("Goal Sets");
@@ -119,15 +119,15 @@ public class ProgressAndGoalView
         yAxis.setLabel("How Many");
         
         goalDataList = FXCollections.observableArrayList(
-                        new XYChart.Data("Sets",currExer.getGoalSets()-currExer.getActualSets()),
-                        new XYChart.Data("Reps",currExer.getGoalReps()-currExer.getActualReps()));
+                        new XYChart.Data("Sets",currExer.getGoalSets()-currExer.getLastSets()),
+                        new XYChart.Data("Reps",currExer.getGoalReps()-currExer.getLastReps()));
 
         XYChart.Series series1 = new XYChart.Series(goalDataList);
         series1.setName("Goal");
         
         actualDataList = FXCollections.observableArrayList(
-                        new XYChart.Data("Sets",currExer.getActualSets()),
-                        new XYChart.Data("Reps",currExer.getActualReps()));
+                        new XYChart.Data("Sets",currExer.getLastSets()),
+                        new XYChart.Data("Reps",currExer.getLastReps()));
         XYChart.Series series2 = new XYChart.Series(actualDataList);
         series2.setName("Achieved");
         
@@ -149,22 +149,19 @@ public class ProgressAndGoalView
     public void reCalcStackedBar()
     {
         //Check whether item is selected and set value of selected item to Label
-        if (tableView.getSelectionModel().getSelectedItem() != null) 
-        {
-            Exercises tmpExer = tableView.getSelectionModel().getSelectedItem();
-            goalDataList.get(0).YValueProperty().bind(
-                        Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), tmpExer.getActualSets()));
-            goalDataList.get(1).YValueProperty().bind(
-                        Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), tmpExer.getActualReps()));
-            actualDataList.get(0).setYValue(tmpExer.getActualSets());
-            actualDataList.get(1).setYValue(tmpExer.getActualReps());
-            stackedBarChart.setTitle("Exercise: " + tmpExer.getExerName());
-        }
-        else
+        if (tableView.getSelectionModel().getSelectedItem() == null) 
         {
             tableView.getSelectionModel().select(0);
-            reCalcStackedBar();
         }
+            
+        Exercises tmpExer = tableView.getSelectionModel().getSelectedItem();
+        goalDataList.get(0).YValueProperty().bind(
+                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), tmpExer.getLastSets()));
+        goalDataList.get(1).YValueProperty().bind(
+                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), tmpExer.getLastReps()));
+        actualDataList.get(0).setYValue(tmpExer.getLastSets());
+        actualDataList.get(1).setYValue(tmpExer.getLastReps());
+        stackedBarChart.setTitle("Exercise: " + tmpExer.getExerName());
     }
     
     public void rePopulateData()

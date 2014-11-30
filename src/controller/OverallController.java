@@ -116,7 +116,7 @@ public class OverallController implements OverallControllerCallback {
         while(nameToReturn.equalsIgnoreCase(inName))
         {
             int randomInd = randomGenerator.nextInt(containerSize);
-            nameToReturn = curExerHolder.getNameAtIndex(randomInd);
+            nameToReturn = curExerHolder.getAllNames().get(randomInd);
         }
         return curExerHolder.getExercise(nameToReturn);
     }

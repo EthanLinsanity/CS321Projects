@@ -23,8 +23,8 @@ public class Exercises {
         private final StringProperty exerName;
         private IntegerProperty goalReps;
         private IntegerProperty goalSets;
-        private IntegerProperty actualSets;
-        private IntegerProperty actualReps;
+//        private IntegerProperty actualSets;
+//        private IntegerProperty actualReps;
         private IntegerProperty lastSets;
         private IntegerProperty lastReps;
         
@@ -38,8 +38,8 @@ public class Exercises {
         {
             this.goalReps = new SimpleIntegerProperty(10);
             this.goalSets = new SimpleIntegerProperty(5);
-            this.actualSets = new SimpleIntegerProperty(0);
-            this.actualReps = new SimpleIntegerProperty(0);
+//            this.actualSets = new SimpleIntegerProperty(0);
+//            this.actualReps = new SimpleIntegerProperty(0);
             this.lastSets = new SimpleIntegerProperty(0);
             this.lastReps = new SimpleIntegerProperty(0);
         }
@@ -56,27 +56,33 @@ public class Exercises {
         public void setGoalSets(int inGoalNum) { this.goalSets.set(inGoalNum); }
         public IntegerProperty goalSetsProperty() { return goalSets; }
                 
-        public int getActualSets() 
-        { 
-           //this is working!
-            int sets=actualSets.get();
-            //System.out.println("This is GETACTUAL in exercises: "+actualSets.get());
-            
-            //System.out.println("exersceClass: "+sets);
-            return sets; 
-            
-        }
-        public void setActualSets(int inGoalNum) 
-        { 
-            //System.out.println("This is SET : "+inGoalNum);
-            this.actualSets.set(inGoalNum); 
-        }
-        public IntegerProperty actualSetsProperty() { return actualSets; }
-                
-        public int getActualReps() { return actualReps.get(); }
-        public void setActualReps(int inGoalNum) { this.actualReps.set(inGoalNum); }
-        public IntegerProperty actualRepsProperty() { return actualReps; }
-                
+        //******************************************************************************
+        //******************************************************************************
+//        actual sets and reps are not necessary anymore...
+//        
+//        public int getActualSets() 
+//        { 
+//           //this is working!
+//            int sets=actualSets.get();
+//            //System.out.println("This is GETACTUAL in exercises: "+actualSets.get());
+//            
+//            //System.out.println("exersceClass: "+sets);
+//            return sets; 
+//            
+//        }
+//        public void setActualSets(int inGoalNum) 
+//        { 
+//            //System.out.println("This is SET : "+inGoalNum);
+//            this.actualSets.set(inGoalNum); 
+//        }
+//        public IntegerProperty actualSetsProperty() { return actualSets; }
+//        public int getActualReps() { return actualReps.get(); }
+//        public void setActualReps(int inGoalNum) { this.actualReps.set(inGoalNum); }
+//        public IntegerProperty actualRepsProperty() { return actualReps; }
+                //******************************************************************************
+        //******************************************************************************
+        //******************************************************************************
+        
         public int getLastSets() { return lastSets.get(); }
         public void setLastSets(int inGoalNum) { this.lastSets.set(inGoalNum); }
         public IntegerProperty lastSetsProperty() { return lastSets; }
