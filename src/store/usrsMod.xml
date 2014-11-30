@@ -4,8 +4,8 @@
 <name>Guest</name>
 <exerciseHolder>model.ExerciseHolder@6acbcfc0</exerciseHolder>
 <exercies>Barbell Curl</exercies>
-<Sets>7</Sets>
-<Reps>878</Reps>
+<Sets>200</Sets>
+<Reps>200</Reps>
 <exercies>Barbell Deadlift</exercies>
 <Sets>4</Sets>
 <Reps>40</Reps>

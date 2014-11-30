@@ -21,7 +21,7 @@ public class Main{
         CreateXML createXml = new CreateXML();
         //createXml.createXML();
 //        createXml.getTrainees(nameHolder.getTraineeSet());
-        createXml.receiveData(nameHolder);
+        //createXml.receiveData(nameHolder);
         
         //modify xml
         //ModifyXML modXml = new ModifyXML();
