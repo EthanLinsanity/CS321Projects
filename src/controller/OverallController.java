@@ -6,6 +6,7 @@
 
 package controller;
 
+import java.awt.SplashScreen;
 import java.util.List;
 import java.util.Random;
 import javafx.application.Platform;
@@ -35,6 +36,8 @@ public class OverallController implements OverallControllerCallback {
     
     public OverallController()
     {
+        SplashScreen mySplash = SplashScreen.getSplashScreen();
+        
         allNameHolder = StoreOp.loadSaved();
 
         SwingUtilities.invokeLater(() -> {
@@ -46,6 +49,8 @@ public class OverallController implements OverallControllerCallback {
                     startExerciseSelection();
                     curExerHolder = allNameHolder.getThisTrainee(theMainView.cboNameSelected()).getExerciseHolder();
             });
+            mySplash.close();
+            theMainView.setVisibility(true);
         });
     }
     

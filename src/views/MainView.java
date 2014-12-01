@@ -99,7 +99,7 @@ public class MainView {
         mainFrame.add(progressAndGoalViewButton, BorderLayout.SOUTH);
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
-        mainFrame.setVisible(true);
+//        mainFrame.setVisible(true);
     }
     
     public void update(String focusName)

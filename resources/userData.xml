@@ -8,8 +8,8 @@
             <GoalSet>5</GoalSet>
         </Exercises>
         <Exercises name="Barbell Deadlift">
-            <LastRep>0</LastRep>
-            <LastSet>0</LastSet>
+            <LastRep>3</LastRep>
+            <LastSet>3</LastSet>
             <GoalRep>10</GoalRep>
             <GoalSet>5</GoalSet>
         </Exercises>
@@ -44,15 +44,15 @@
             <GoalSet>5</GoalSet>
         </Exercises>
         <Exercises name="Triceps">
-            <LastRep>0</LastRep>
-            <LastSet>0</LastSet>
+            <LastRep>5</LastRep>
+            <LastSet>3</LastSet>
             <GoalRep>10</GoalRep>
-            <GoalSet>5</GoalSet>
+            <GoalSet>8</GoalSet>
         </Exercises>
         <Exercises name="Shoulder Press">
-            <LastRep>0</LastRep>
-            <LastSet>0</LastSet>
-            <GoalRep>10</GoalRep>
+            <LastRep>6</LastRep>
+            <LastSet>13</LastSet>
+            <GoalRep>12</GoalRep>
             <GoalSet>5</GoalSet>
         </Exercises>
         <Exercises name="Situps">
