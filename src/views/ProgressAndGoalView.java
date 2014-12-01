@@ -148,7 +148,7 @@ public class ProgressAndGoalView
         inputPanel.setScene(new Scene(root,900,450));
     }
     
-    public final void reCalcStackedBar()
+    private void reCalcStackedBar()
     {
         //Check whether item is selected and set value of selected item to Label
         if (tableView.getSelectionModel().getSelectedItem() == null) 

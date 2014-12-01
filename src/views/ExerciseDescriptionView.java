@@ -148,8 +148,11 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         int setNum = Integer.parseInt(txtCurSets.getText().trim());
 //        exerToDisp.setActualReps(repNum);
 //        exerToDisp.setActualSets(setNum);
-        exerToDisp.setLastReps(repNum);
-        exerToDisp.setLastSets(setNum);
+        if(repNum > 0 && setNum > 0 )
+        {
+            exerToDisp.setLastReps(repNum);
+            exerToDisp.setLastSets(setNum);
+        }
         
         //This sysout test passed
         //System.out.println("This is save User inputs test: "+repNum);
