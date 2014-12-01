@@ -41,6 +41,15 @@ public class TraineeHolder {
         }
         return output;
     }
+    
+    public void removeThisTrainee(String trainName)
+    {
+        overallNameHolder.remove(this.getThisTrainee(trainName));
+        if(overallNameHolder.size() < 1)
+        {
+            overallNameHolder.add(new Trainee("Guest"));
+        }
+    }
 
     public void addATrainee(String inTraineeName) {
         overallNameHolder.add(new Trainee(inTraineeName));

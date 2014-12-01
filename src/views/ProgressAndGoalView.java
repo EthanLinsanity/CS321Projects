@@ -41,7 +41,7 @@ public class ProgressAndGoalView
     private TableView<Exercises> tableView;
     private StackedBarChart<String,Number> stackedBarChart;
     private ObservableList<XYChart.Data> goalDataList;
-    private ObservableList<XYChart.Data> actualDataList;
+    private ObservableList<XYChart.Data> recoDataList;
     
     public ProgressAndGoalView(OverallControllerCallback inController)
     {
@@ -119,24 +119,26 @@ public class ProgressAndGoalView
         yAxis.setLabel("How Many");
         
         goalDataList = FXCollections.observableArrayList(
-                        new XYChart.Data("Sets",Math.max(currExer.getGoalSets()-currExer.getLastSets(),0)),
-                        new XYChart.Data("Reps",Math.max(currExer.getGoalReps()-currExer.getLastReps(),0)));
+                        new XYChart.Data("Sets",0),
+                        new XYChart.Data("Reps",0));
 
         XYChart.Series series1 = new XYChart.Series(goalDataList);
         series1.setName("Goal");
         
-        actualDataList = FXCollections.observableArrayList(
-                        new XYChart.Data("Sets",currExer.getLastSets()),
-                        new XYChart.Data("Reps",currExer.getLastReps()));
-        XYChart.Series series2 = new XYChart.Series(actualDataList);
+        recoDataList = FXCollections.observableArrayList(
+                        new XYChart.Data("Sets",0),
+                        new XYChart.Data("Reps",0));
+        XYChart.Series series2 = new XYChart.Series(recoDataList);
         series2.setName("Achieved");
         
         stackedBarChart = new StackedBarChart<>(xAxis,yAxis);
         stackedBarChart.getData().addAll(series2,series1);
         stackedBarChart.setTitle("Exercise: " + currExer.getExerName());
         
+        reCalcStackedBar();
         //--- Add change listener and rebind graph data to the table row selected.
-        tableView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> reCalcStackedBar());
+        tableView.getSelectionModel().selectedItemProperty().addListener(
+                (observableValue, oldValue, newValue) -> reCalcStackedBar());
         
         HBox hBox = new HBox();
         hBox.setSpacing(8);
@@ -146,7 +148,7 @@ public class ProgressAndGoalView
         inputPanel.setScene(new Scene(root,900,450));
     }
     
-    public void reCalcStackedBar()
+    public final void reCalcStackedBar()
     {
         //Check whether item is selected and set value of selected item to Label
         if (tableView.getSelectionModel().getSelectedItem() == null) 
@@ -155,14 +157,12 @@ public class ProgressAndGoalView
         }
             
         Exercises tmpExer = tableView.getSelectionModel().getSelectedItem();
-        goalDataList.get(0).setYValue(Math.max(tmpExer.getGoalSets()-tmpExer.getLastSets(), 0));
-        goalDataList.get(1).setYValue(Math.max(tmpExer.getGoalReps()-tmpExer.getLastReps(), 0));
-//        goalDataList.get(0).YValueProperty().bind(
-//                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalSetsProperty(), tmpExer.getLastSets()));
-//        goalDataList.get(1).YValueProperty().bind(
-//                    Bindings.subtract(tableView.getSelectionModel().selectedItemProperty().get().goalRepsProperty(), tmpExer.getLastReps()));
-        actualDataList.get(0).setYValue(tmpExer.getLastSets());
-        actualDataList.get(1).setYValue(tmpExer.getLastReps());
+        goalDataList.get(0).YValueProperty().bind(
+                Bindings.max(tmpExer.goalSetsProperty().subtract(tmpExer.lastSetsProperty()), 0));
+        goalDataList.get(1).YValueProperty().bind(
+                Bindings.max(tmpExer.goalRepsProperty().subtract(tmpExer.lastRepsProperty()), 0));
+        recoDataList.get(0).YValueProperty().bind(tmpExer.lastSetsProperty());
+        recoDataList.get(1).YValueProperty().bind(tmpExer.lastRepsProperty());
         stackedBarChart.setTitle("Exercise: " + tmpExer.getExerName());
     }
     

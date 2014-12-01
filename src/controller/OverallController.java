@@ -125,4 +125,9 @@ public class OverallController implements OverallControllerCallback {
     public void closingProgram() {
         StoreOp.saveAll(allNameHolder);
     }
+
+    @Override
+    public void removeThisUser(String cboNameSelected) {
+        allNameHolder.removeThisTrainee(cboNameSelected);
+    }
 }

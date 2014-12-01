@@ -30,6 +30,7 @@ public class MainView {
     private final JButton startExerciseButton;
     private final JButton progressAndGoalViewButton;
     private final JButton createNameButton;
+    private final JButton removeNameButton;
     private final JLabel lblName;
     private OverallControllerCallback myController;
 //    CreateXML createXml = new CreateXML();
@@ -40,7 +41,7 @@ public class MainView {
     {
         myController = inputController;
         JPanel traineePanel = new JPanel();
-        traineePanel.setLayout(new GridLayout(0,3));
+        traineePanel.setLayout(new GridLayout(0,4));
         nameComboBox = new JComboBox<>();
         this.populateNameComboBox();
         createNameButton = new JButton("Create New User");
@@ -57,6 +58,15 @@ public class MainView {
             } 
         });
         
+        removeNameButton = new JButton("Remove This User");
+        removeNameButton.addActionListener(clicked ->{
+            if(nameComboBox.getSelectedIndex() >= 0)
+            {
+                myController.removeThisUser(this.cboNameSelected());
+                this.populateNameComboBox();
+            }
+        });
+        
         nameComboBox.addActionListener(selected->
         {
             myController.mainUserChanged();
@@ -67,6 +77,7 @@ public class MainView {
         traineePanel.add(lblName);
         traineePanel.add(nameComboBox);
         traineePanel.add(createNameButton);
+        traineePanel.add(removeNameButton);
         
         startExerciseButton = new JButton("Start Exercise");
         progressAndGoalViewButton = new JButton("Progress and Goal");
@@ -123,14 +134,18 @@ public class MainView {
         }
     }
    /**
-     *
+     * @precondition nameComboBox cannot be empty
      * @return the selected name from the name selection combo box.
      */     
-    public String cboNameSelected()
+    public final String cboNameSelected()
     {
 //        CreateXML why = new CreateXML();
 //        why.getNewUser(nameComboBox.getSelectedItem().toString());
 //        System.out.println("============comboSelected: "+nameComboBox.getSelectedItem().toString()+"====================");
+        if(nameComboBox.getSelectedIndex() < 0)
+        {
+            nameComboBox.setSelectedIndex(0);
+        }
         return nameComboBox.getSelectedItem().toString();
         
     }
