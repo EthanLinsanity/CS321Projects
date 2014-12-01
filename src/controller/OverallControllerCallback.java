@@ -11,7 +11,9 @@ import model.Exercises;
 import model.Trainee;
 
 /**
- *
+ * This interface is main controller for the entire program
+ * All function calls are sent to the overall controller class
+ * 
  * @author Rawsome
  */
 public interface OverallControllerCallback {
