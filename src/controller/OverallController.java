@@ -126,22 +126,35 @@ public class OverallController implements OverallControllerCallback {
         theMainView.update(response);
     }
     /**
-     * Displays the main view
+     * Closes the exercise selection view and 
+     * presents the exercise description view
      * This method is called by the OverallControllerCallback
      * @pre main view already created
      * @post the main view is displayed
+     * @param exerName name of the exercise to be presented
      */
     @Override
     public void exerSelectionComplete(String exerName) {
         startDescriptionView(exerName);
         theSelectionView.closeThisView();
     }
-
+    /**
+     * Return method to get current user
+     * This method is called by the OverallControllerCallback
+     * @pre name in combo box is selected
+     * @post current user is returned to caller
+     */
     @Override
     public Trainee getCurTrainee() {
         return allNameHolder.getThisTrainee(theMainView.cboNameSelected());
     }
-
+     /**
+     * Updates the progress view if the main user is changed
+     * This method is called by the OverallControllerCallback
+     * @pre the progress view must be visible
+     * @post the progress view re animates 
+     */
+    
     @Override
     public void mainUserChanged() {
         if(theProgressView.isVisible())
@@ -152,7 +165,16 @@ public class OverallController implements OverallControllerCallback {
             });
         }
     }
-
+    /**
+     * Used to direct the recommend next exercise button
+     * Randomizes the next exercise to be displayed
+     * This method is called by the OverallControllerCallback
+     * @pre exercise description view must be displayed
+     * @post the next exercise is presented
+     * @param inName string used to generated another random exercise
+     * @return name of exercise so that the caller can populate next exercise
+     * 
+     */
     @Override
     public Exercises recommendNext(String inName) {
         List<String> namePool = curExerHolder.getAllNames();
@@ -166,12 +188,23 @@ public class OverallController implements OverallControllerCallback {
         }
         return curExerHolder.getExercise(nameToReturn);
     }
-
+     /**
+     * Closes the program by saving the users to the xml file
+     * This method is called by the OverallControllerCallback
+     * @pre program must be running
+     * @post users are saved to xml
+     */
     @Override
     public void closingProgram() {
         StoreOp.saveAll(allNameHolder);
     }
-
+     /**
+     * Deletes the user from the combo box and from the xml file
+     * This method is called by the OverallControllerCallback
+     * @pre name must be found in the combo box found in main view
+     * @post user name is removed from the combo box
+     * @param cboNameSelected name selected from combo box
+     */
     @Override
     public void removeThisUser(String cboNameSelected) {
         allNameHolder.removeThisTrainee(cboNameSelected);
