@@ -1,9 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * CS 321 Team 7 Project
+ * Team Members: Ethan Lin, Jared Paul, Ian Matteson, Ben Mwangi
+ * Date: 1 Dec 2014
  */
-
 package store;
 
 import java.io.File;
@@ -20,10 +19,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-/**
- *
- * @author Rawsome
- */
+ /**
+  * Class that loads from the xml file located in the resource package
+  * @pre xml exists
+  * @post data from the xml file is sent to the views
+  * @return a trainee holder containing information about the users last visit
+  * @author Rawsome
+  */
 class LoadFromXML {
 
     static TraineeHolder loadXMLNow() {
@@ -60,8 +62,6 @@ class LoadFromXML {
         } 
         catch (ParserConfigurationException | SAXException | IOException ex) 
         {
-//            Logger.getLogger(LoadFromXML.class.getName()).log(Level.SEVERE, null, ex);
-//            ex.printStackTrace();
             return tHolderToRtn;
         }
         return tHolderToRtn;

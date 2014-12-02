@@ -22,10 +22,14 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/**
- *
- * @author Rawsome
- */
+ /**
+  * Class that saves to the xml file located in the resource package
+  * @pre xml exists
+  * @post data from the trainee holder is pulled to populate the xml file
+  * @return true if data was saved and false with exception thrown if data
+  * wasn't saved
+  * @author Rawsome
+  */
 class SaveToXML {
 
     static boolean saveThis(TraineeHolder inTrainHolder) {
@@ -86,7 +90,6 @@ class SaveToXML {
         }
         catch (ParserConfigurationException | TransformerException pce) 
         {
-//            pce.printStackTrace();
             return false;
         }
         return true;

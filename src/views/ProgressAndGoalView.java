@@ -48,7 +48,12 @@ public class ProgressAndGoalView
     private StackedBarChart<String,Number> stackedBarChart;
     private ObservableList<XYChart.Data> goalDataList;
     private ObservableList<XYChart.Data> recoDataList;
-    
+    /**
+     * A function that creates the progress and goal view
+     * @pre controller calls this function
+     * @post the progress and goal view is formed
+     * @param inController to hide and present the view
+     */
     public ProgressAndGoalView(OverallControllerCallback inController)
     {
         myController = inController;
@@ -62,22 +67,37 @@ public class ProgressAndGoalView
                 this.initialize(fxPanel);
             }); 
     }
-    
+    /**
+     * Unhides the progress and goal view
+     * @pre progress and goal view already generated
+     * @post the view is displayed
+     * @param input boolean parameter to hide or present the view
+     */
     public void setVisibility(boolean input)
     {
         swingFrame.setVisible(input);
     }
-    
+     /**
+     * A action listener on the Go Home button
+     * @pre user clicks button
+     * @post the main view is displayed
+     */
     public boolean isVisible()
     {
         return swingFrame.isVisible();
     }
+     /**
+     * Initializes the bar graph presented in the progress and goal view
+     * @pre exercises exists, controller calls this view
+     * @post the progress and goal view are populated
+     */
+    
     
     private void initialize(JFXPanel inputPanel) {
         Group root = new Group();
         tableView = new TableView<>();
         tableView.setEditable(true);
-        
+        //populates the table on the left
         TableColumn<Exercises,String> exerNameCol = new TableColumn<>("Work Out Names");
         exerNameCol.setCellValueFactory(cellData -> cellData.getValue().exerNameProperty());
         TableColumn<Exercises,Number> actualRepCol = new TableColumn<>("Reps");
@@ -153,7 +173,11 @@ public class ProgressAndGoalView
         root.getChildren().add(hBox);
         inputPanel.setScene(new Scene(root,900,450));
     }
-    
+    /**
+     * Animates the stack bar chart
+     * @pre user updates their goals or performs an exercise
+     * @post the bar charts repaint to present the information
+     */
     private void reCalcStackedBar()
     {
         //Check whether item is selected and set value of selected item to Label
@@ -171,7 +195,11 @@ public class ProgressAndGoalView
         recoDataList.get(1).YValueProperty().bind(tmpExer.lastRepsProperty());
         stackedBarChart.setTitle("Exercise: " + tmpExer.getExerName());
     }
-    
+    /**
+     * Updated the table and animates the bar chart
+     * @pre list of exercises are populated
+     * @post the table and the chart are updated
+     */
     public void rePopulateData()
     {
         Trainee currentTrainee = myController.getCurTrainee();

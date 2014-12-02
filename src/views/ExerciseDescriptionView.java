@@ -23,16 +23,20 @@ import javax.swing.JTextField;
 import model.Exercises;
 
 /**
- *
+ * Creates new form ExerciseDescrptionView
  * @author imm0022
  */
 public class ExerciseDescriptionView extends javax.swing.JFrame {
-    /**
-     * Creates new form ExerciseDescrptionView
-     */
+ 
     private OverallControllerCallback myController;
     private Exercises exerToDisp;
-    
+    /**
+     * A function that creates the exercise description view
+     * @pre exercises are created
+     * @post this view is created
+     * @param inExercise the exercise to be displayed
+     * @param ctl a controller to present and hide the view
+    */
     public ExerciseDescriptionView(OverallControllerCallback ctl, Exercises inExercise) {
         myController = ctl;
         exerToDisp = inExercise;
@@ -54,7 +58,11 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
             }
         });
     }
-    
+     /**
+     * A function that fills the contents of this view
+     * @pre the exercise to display exists
+     * @post the view is populated
+     */
     private void fillContents()
     {        
         lblExerciseName.setText(exerToDisp.getExerName());
@@ -130,7 +138,15 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         }
         
     }
-
+     /**
+     * A function that scales the Image to make it presentable
+     * @pre image exists
+     * @post image is displayed
+     * @return the buffered image
+     * @param img image to be buffered
+     * @param w width of the image
+     * @param h height of the image
+     */
     private BufferedImage scaleImage(int w, int h, BufferedImage img) throws Exception {
         BufferedImage bi;
         bi = new BufferedImage(w, h, BufferedImage.TRANSLUCENT);
@@ -141,29 +157,21 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         g2d.dispose();
         return bi;
     }
-//    ExerciseHolder bam = new ExerciseHolder();
+     /**
+     * A function that saves the sets and reps that the user typed in
+     * @pre user types amount of sets and reps
+     * @post input is parsed and set to local variables
+     */
     private void saveUserInputs()
     {
         int repNum = Integer.parseInt(txtCurReps.getText().trim());
         int setNum = Integer.parseInt(txtCurSets.getText().trim());
-//        exerToDisp.setActualReps(repNum);
-//        exerToDisp.setActualSets(setNum);
+
         if(repNum > 0 && setNum > 0 )
         {
             exerToDisp.setLastReps(repNum);
             exerToDisp.setLastSets(setNum);
         }
-        
-        //This sysout test passed
-        //System.out.println("This is save User inputs test: "+repNum);
-        //
-        //Got to put something here that updates the xml files-----------------------------------
-        //ModifyXML bam = new ModifyXML();
-        //bam.printModify();
-        
-//        bam.updateExerciseHolder(exerToDisp.getExerName(), setNum, repNum);
-        //System.out.println("update------------------------");
-        
     }
   
     
@@ -341,13 +349,22 @@ public class ExerciseDescriptionView extends javax.swing.JFrame {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+     * A action listener on the Go Home button
+     * @pre user clicks button
+     * @post the main view is displayed
+     */
     private void GoHomeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoHomeButtonActionPerformed
         myController.showMainView();
         
         saveUserInputs();
         this.dispose();
     }//GEN-LAST:event_GoHomeButtonActionPerformed
-
+    /**
+     * A action listener on the recommend next button
+     * @pre user clicks button
+     * @post another workout selection view is displayed
+     */
     private void RecommendNextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecommendNextButtonActionPerformed
        
         saveUserInputs();

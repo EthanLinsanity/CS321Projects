@@ -3,7 +3,6 @@
  * Team Members: Ethan Lin, Jared Paul, Ian Matteson, Ben Mwangi
  * Date: 1 Dec 2014
  */
-
 package views;
 
 import controller.OverallControllerCallback;
@@ -33,10 +32,12 @@ public class MainView {
     private final JButton removeNameButton;
     private final JLabel lblName;
     private OverallControllerCallback myController;
-//    CreateXML createXml = new CreateXML();
-       
-    
-
+    /**
+     * A function that creates the main view
+     * @pre none
+     * @post the main view is populated
+     * @param inputController used to display and hide the main view
+     */
     public MainView(OverallControllerCallback inputController)
     {
         myController = inputController;
@@ -99,9 +100,13 @@ public class MainView {
         mainFrame.add(progressAndGoalViewButton, BorderLayout.SOUTH);
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
-//        mainFrame.setVisible(true);
     }
-    
+    /**
+     * Updates the main view by populating the combo box
+     * @pre main view is created
+     * @post the combo box in main view is updated
+     * @param focusName name that becomes highlighted
+     */
     public void update(String focusName)
     {
         populateNameComboBox();
@@ -109,8 +114,9 @@ public class MainView {
     }
     
     /**
-     * get all existing user names from the model and set it to the NameComboBox
-     *
+     * Gets all existing user names from the model and set it to the NameComboBox
+     * @pre the combo box exists/main view is populated
+     * @post the combo box is filled with user names
      */
     private void populateNameComboBox()
     {
@@ -122,9 +128,10 @@ public class MainView {
     }
     
     /**
-     * focus to a specific name
-     *
-     * @param inFocusName as an String.
+     * Focuses to a specific name
+     * @pre combo box is selected
+     * @post name is highlighted
+     * @param inFocusName as a string.
      */  
     public void focusNameComboBox(String inFocusName)
     {
@@ -133,15 +140,14 @@ public class MainView {
             nameComboBox.setSelectedItem(inFocusName);
         }
     }
-   /**
-     * @precondition nameComboBox cannot be empty
+    /**
+     * Closes the combo box once a user is selected
+     * @pre nameComboBox cannot be empty
+     * @post name selected is on display in main view
      * @return the selected name from the name selection combo box.
      */     
     public final String cboNameSelected()
     {
-//        CreateXML why = new CreateXML();
-//        why.getNewUser(nameComboBox.getSelectedItem().toString());
-//        System.out.println("============comboSelected: "+nameComboBox.getSelectedItem().toString()+"====================");
         if(nameComboBox.getSelectedIndex() < 0)
         {
             nameComboBox.setSelectedIndex(0);
@@ -149,29 +155,29 @@ public class MainView {
         return nameComboBox.getSelectedItem().toString();
         
     }
-    
     /**
      * Add a listener to the "Start Exercise" button.
-     *
+     * @pre user clicks start exercise button
+     * @post the caller will be notified when clicked
      * @param listener as an ActionListener.
      */    
     public void btnStartExerciseListener(ActionListener listener){
         startExerciseButton.addActionListener(listener);
     }
-    
     /**
      * Add a listener to the "Progress and Goal" button.
-     *
+     * @pre user clicks progress and goal button
+     * @post the caller will be notified when clicked
      * @param listener as an ActionListener.
      */    
     public void btnProgressAndGoalListener(ActionListener listener){
-        progressAndGoalViewButton.addActionListener(listener);
-            
+        progressAndGoalViewButton.addActionListener(listener);    
     }
     
     /**
      * Setting Visibility of the mainFrame.
-     *
+     * @pre the program has started
+     * @post the main frame is presented
      * @param inputVisBool as an boolean.
      */    
     public void setVisibility(boolean inputVisBool)

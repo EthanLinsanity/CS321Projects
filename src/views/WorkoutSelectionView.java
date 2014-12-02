@@ -18,24 +18,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import model.ExerciseNames;
 /**
- *
+ * Workout selection view provides user with exercises to pick from
  * @author Rawsome
  */
-
-/**
-   Workout selection view provides user with exercises to pick from
-*/
 public class WorkoutSelectionView
 {
     
-    //declare container variables
-    private final JFrame appFrame;
-    private final JPanel topPanel;
-     private final JPanel exercisePanel;
-    private final JComboBox comBoxExercises;
-    private final JLabel viewname;
-    private final OverallControllerCallback myController;
-  
+   //declare container variables
+   private final JFrame appFrame;
+   private final JPanel topPanel;
+   private final JPanel exercisePanel;
+   private final JComboBox comBoxExercises;
+   private final JLabel viewname;
+   private final OverallControllerCallback myController;
+   /**
+     * A view called workout selection view is formed
+     * @pre controller calls the function
+     * @post the selection view is displayed
+     * @param inputController hides and presents the view
+     */
    public WorkoutSelectionView(OverallControllerCallback inputController)
    {
       myController = inputController;
@@ -76,7 +77,11 @@ public class WorkoutSelectionView
           }
       });
    }
-      
+    /**
+     * Initializes the combo box
+     * @pre the combo box has exercises to populate it
+     * @post the combo box is filled with exercises
+     */  
    private void initComboBox()
    {
        ArrayList<String> names = ExerciseNames.getAllNames();
@@ -84,7 +89,11 @@ public class WorkoutSelectionView
             comBoxExercises.addItem(n);
         });
    }
-   
+    /**
+     * Closes the workout selection view
+     * @pre workout selection view is opened
+     * @post the view is hidden and disposed of
+     */ 
    public void closeThisView()
    {
        appFrame.setVisible(false);

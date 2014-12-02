@@ -29,7 +29,7 @@ public class TraineeHolder {
     /**
      * Retrieves all the names of the users
      * @pre the overall name holder has names within it
-     * @post 
+     * @post an array list is created and sent
      * @return an array list of names
      */
     public ArrayList<String> getTraineeNames()
@@ -41,7 +41,13 @@ public class TraineeHolder {
         });
         return output;
     }
-    
+    /**
+     * A getter that pulls from the overall name holder
+     * @pre overall name holder has names in it
+     * @post trainee(user) is pulled sent to caller
+     * @return a trainee(user) 
+     * @param inName name of the user that the caller wants
+     */
     public Trainee getThisTrainee(String inName)
     {
         Trainee output = null;
@@ -51,7 +57,13 @@ public class TraineeHolder {
         }
         return output;
     }
-    
+    /**
+     * Removes the trainee(user) from the overall name holder
+     * if the last user is removed it add a "Guest" user
+     * @pre trainee(user) must exist in name holder
+     * @post trainee(user) is deleted
+     * @param trainName name to be removed
+     */
     public void removeThisTrainee(String trainName)
     {
         overallNameHolder.remove(this.getThisTrainee(trainName));
@@ -60,11 +72,22 @@ public class TraineeHolder {
             overallNameHolder.add(new Trainee("Guest"));
         }
     }
-
+    /**
+     * Adds the trainee(user) to the overall name holder
+     * @pre overall name holder exists
+     * @post name is added to the holder
+     * @param inTraineeName name of trainee(user)added
+     */
+    
     public void addATrainee(String inTraineeName) {
         overallNameHolder.add(new Trainee(inTraineeName));
     }
-    
+    /**
+     * Returns the overall name holder to the caller
+     * @pre the overall name holder has names within it
+     * @post overall name holder is sent to caller
+     * @return a set of objects called Trainee(users)
+     */
     public Set<Trainee> getTraineeSet()
     {
         return overallNameHolder;
