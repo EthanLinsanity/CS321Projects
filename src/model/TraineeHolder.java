@@ -11,17 +11,27 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
+ * 
  * @author Rawsome
  */
 public class TraineeHolder {
     Set<Trainee> overallNameHolder;
+    /**
+     * Creates a Trainee holder-holds all the users
+     * @pre overall name holder is created 
+     * @post a user called Guest is added the the name holder
+     */
     public TraineeHolder()
     {
         overallNameHolder = new HashSet<>();
         overallNameHolder.add(new Trainee("Guest"));
     }
-    
+    /**
+     * Retrieves all the names of the users
+     * @pre the overall name holder has names within it
+     * @post 
+     * @return an array list of names
+     */
     public ArrayList<String> getTraineeNames()
     {
         ArrayList<String> output = new ArrayList<>(overallNameHolder.size());
