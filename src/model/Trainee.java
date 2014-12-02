@@ -51,7 +51,12 @@ public class Trainee {
     {
         return myName.toLowerCase().hashCode();
     }
-
+    /**
+     * To see if an object is equal to another
+     * @pre object must exist
+     * @post the object tested is either true or false
+     * @return true or false
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
